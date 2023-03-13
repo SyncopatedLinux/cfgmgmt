@@ -59,8 +59,28 @@ gaps outer -2
 smart_gaps on
 smart_borders on
 
-# class                 border      bground       text            indicat          child_border
-client.focused  {{ colors.focused.border }} {{ colors.focused.background }} {{ colors.focused.text }} {{ colors.focused.indicator }} {{ colors.focused.child_border }}
+set $border-color {{ colors.focused.border }}
+set $inactive-border-color {{ colors.inactive.border }}
+
+set $child-border {{ colors.focused.child_border }}
+set $inactive-child-border {{ colors.inactive.child_border }}
+
+set $bg-color {{ colors.focused.background }}
+set $inactive-bg-color {{ colors.inactive.background }}
+
+set $text-color {{ colors.focused.text }}
+set $inactive-text-color {{ colors.inactive.text }}
+
+set $urgent-bg-color {{ colors.urgent.background }}
+
+set $indicator {{ colors.focused.indicator }}
+
+###############################################################
+##-------------------- Colors    ---------------------------##
+###############################################################
+
+# class             border      bground    text      indicat    child_border
+client.focused  $border-color $bg-color $text-color $indicator $child-border
 
 client.focused_inactive  {{ colors.inactive.border }} {{ colors.inactive.background }} {{ colors.inactive.text }} {{ colors.inactive.indicator }} {{ colors.inactive.child_border }}
 
@@ -71,6 +91,10 @@ client.urgent {{ colors.urgent.border }} {{ colors.urgent.background }} {{ color
 client.placeholder {{ colors.placeholder.border }} {{ colors.placeholder.background }} {{ colors.placeholder.text }} {{ colors.placeholder.indicator }} {{ colors.placeholder.child_border }}
 
 client.background {{ colors.primary.background }}
+
+###############################################################
+##-------------------- Bar        ---------------------------##
+###############################################################
 
 bar {
         id bar-primary

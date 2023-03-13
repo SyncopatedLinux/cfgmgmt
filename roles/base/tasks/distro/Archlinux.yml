@@ -34,7 +34,7 @@
 
 - name: Adjust pacman, paru and makepkg configs
   template:
-    src: "roles/system/templates/etc/{{ item }}.j2"
+    src: "etc/{{ item }}.j2"
     dest: "/etc/{{ item }}"
     owner: root
     group: root
@@ -138,7 +138,7 @@
 
     - name: Include package vars
       include_vars:
-        dir: ../../vars/packages/{{ ansible_distribution }}
+        dir: packages/{{ ansible_distribution }}
         name: packages
 
     - name: Installing packages

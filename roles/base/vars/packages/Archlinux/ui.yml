@@ -17,6 +17,7 @@ theme:
   - gtk-engine-murrine
 font:
   - gnu-free-fonts
+  - noto-fonts-emoji
   - ttf-devicons
   - ttf-font-awesome
   - ttf-input

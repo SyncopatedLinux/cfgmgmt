@@ -34,6 +34,9 @@ in order of least to greatest precedence:
 
 group_vars and host_vars are managed with yadm and are symlinked to $ANSIBLE_HOME
 
+## misc
+
+Using `include_vars` will load variables at the time of the task, whereas `vars_files` will load all the variables at the start of the play.
 
 
 # Running Tasks with Tags

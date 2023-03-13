@@ -1,5 +1,3 @@
 ---
 
-admin_group: wheel
-
 autofs_dir: /etc/autofs

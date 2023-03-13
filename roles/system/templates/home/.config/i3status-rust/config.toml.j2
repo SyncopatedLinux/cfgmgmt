@@ -3,12 +3,12 @@ theme = "syncopated"
 [icons]
 icons = "awesome6"
 [icons.overrides]
-weather_clouds = "\uf0c2"
-weather_default = "\uf0c2"        # Cloud symbol as default
-weather_rain = "\uf043"
-weather_snow = "\uf2dc"
-weather_sun = "\uf185"
-weather_thunder = "\uf0e7"
+weather_clouds = " "
+weather_default = " "        # Cloud symbol as default
+weather_rain = " "
+weather_snow = " "
+weather_sun = " "
+weather_thunder = " "
 
 [[block]]
 block = "sound"
@@ -45,7 +45,7 @@ cmd = "alacritty --class 'htop' --title 'htop' -e htop"
 
 [[block]]
 block = "menu"
-text = " \uf0c3 "
+text = "  "
 [[block.items]]
 display = " -&gt;   noteinfo   &lt;-"
 cmd = "kitty --class 'noteinfo' -e /usr/local/bin/noteinfo.rb"
@@ -60,8 +60,11 @@ cmd = "kitty --class 'brightness' -e /usr/local/bin/brightness.rb"
 
 [[block]]
 block = "custom"
-command = "sed 's/  //' <(curl 'https://wttr.in/?format=1' -s)"
-interval = 1800
+command = "sed 's/  / /' <(curl 'https://wttr.in/?format=1' -s)"
+interval = 600
+[[block.click]]
+button = "left"
+cmd = "alacritty -e curl 'https://wttr.in/'"
 
 [[block]]
 block = "time"

@@ -1,0 +1,39 @@
+---
+
+- name: Include distro vars
+  include_vars:
+    file: vars/{{ ansible_distribution }}.yml
+
+- import_tasks: user.yml
+  tags: ['user']
+
+- import_tasks: sudoers.yml
+  tags: ['sudoers']
+
+- import_tasks: ruby.yml
+  tags: ['ruby']
+
+- import_tasks: zshell.yml
+  tags: ['zsh']
+
+- include_tasks: "distro/Archlinux.yml"
+  when: ansible_distribution == 'Archlinux'
+  tags: ['repo', 'packages', 'mirrors']
+
+- import_tasks: firewall.yml
+  tags: ['firewall']
+
+- import_tasks: filesystem.yml
+  tags: ['filesystem']
+
+- import_tasks: utils.yml
+  tags: ['utils']
+
+- import_tasks: updatedb.yml
+  tags: ['updatedb']
+
+- import_tasks: autologin.yml
+  tags: ['autologin']
+
+- import_tasks: grub.yml
+  tags: ['grub']

@@ -1,8 +1,6 @@
 ---
 
-autologin: True
-shell_login: True
-journal_level: notice
+backgrounds: /usr/share/backgrounds/ohmannium
 
 font:
   primary:
