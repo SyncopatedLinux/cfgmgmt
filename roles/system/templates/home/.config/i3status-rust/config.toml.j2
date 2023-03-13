@@ -1,5 +1,11 @@
 [theme]
 theme = "syncopated"
+[theme.overrides]
+separator_bg = "{{ colors.primary.background }}"
+separator_fg = "{{ colors.workspace.text }}"
+separator = " ┆ "
+end_separator = "┃"
+
 [icons]
 icons = "awesome6"
 [icons.overrides]
@@ -9,10 +15,27 @@ weather_rain = " "
 weather_snow = " "
 weather_sun = " "
 weather_thunder = " "
+cogs = " "
+
+[[block]]
+block = "menu"
+text = ""
+[[block.items]]
+display = " -&gt;   noteinfo   &lt;-"
+cmd = "kitty --class 'noteinfo' -e /usr/local/bin/noteinfo.rb"
+[[block.items]]
+display = " -&gt; brightness &lt;-"
+cmd = "kitty --class 'brightness' -e /usr/local/bin/brightness.rb"
+#confirm_msg = "Are you sure you want to power off?"
+# [[block.items]]
+# display = " -&gt;  Reboot   &lt;-"
+# cmd = "/usr/bin/uxterm"
+# confirm_msg = "Are you sure you want to reboot?"
+
 
 [[block]]
 block = "sound"
-format = " $icon $output_name{ $volume|} "
+format = " $icon { $volume|} "
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
@@ -22,8 +45,10 @@ cmd = "alacritty --class 'alsamixer' --title 'alsamixer' -e alsamixer -D hw:0"
 
 [[block]]
 block = "load"
-format = " $icon $1m.eng(w:4) "
-interval = 1
+format = " $icon $5m.eng(w:4)  "
+interval = 3
+warning = 0.8
+critical = 2.0
 [[block.click]]
 button = "left"
 cmd = "kitty --class 'govna' -e /usr/local/bin/set-govna.sh performance"
@@ -44,23 +69,8 @@ cmd = "alacritty --class 'htop' --title 'htop' -e htop"
 # cmd = "<command>"
 
 [[block]]
-block = "menu"
-text = "  "
-[[block.items]]
-display = " -&gt;   noteinfo   &lt;-"
-cmd = "kitty --class 'noteinfo' -e /usr/local/bin/noteinfo.rb"
-[[block.items]]
-display = " -&gt; brightness &lt;-"
-cmd = "kitty --class 'brightness' -e /usr/local/bin/brightness.rb"
-#confirm_msg = "Are you sure you want to power off?"
-# [[block.items]]
-# display = " -&gt;  Reboot   &lt;-"
-# cmd = "/usr/bin/uxterm"
-# confirm_msg = "Are you sure you want to reboot?"
-
-[[block]]
 block = "custom"
-command = "sed 's/  / /' <(curl 'https://wttr.in/?format=1' -s)"
+command = "curl 'https://wttr.in/?format=1' -s"
 interval = 600
 [[block.click]]
 button = "left"
