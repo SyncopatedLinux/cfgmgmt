@@ -1,9 +1,5 @@
 ---
 
-- name: Include distro vars
-  include_vars:
-    file: vars/{{ ansible_distribution }}.yml
-
 - name: Set autofs config folder
   set_fact:
     _autofs_dir: "{{ autofs_dir }}"
