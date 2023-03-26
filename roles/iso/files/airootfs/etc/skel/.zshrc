@@ -1,194 +1,107 @@
-if [[ $- != *i* ]]; then
-	return
-fi
 
-# completion cache path setup
-typeset -g comppath="$HOME/.cache"
-typeset -g compfile="$comppath/.zcompdump"
+export ZSH="/usr/local/share/oh-my-zsh"
 
-if [[ -d "$comppath" ]]; then
-	[[ -w "$compfile" ]] || rm -rf "$compfile" >/dev/null 2>&1
-else
-	mkdir -p "$comppath"
-fi
+ZSH_THEME="minimal-terminal-prompt"
 
-# zsh internal stuff
-SHELL=$(which zsh || echo '/bin/zsh')
-KEYTIMEOUT=1
-SAVEHIST=10000
+CASE_SENSITIVE="true"
+ENABLE_CORRECTION="false"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+ZSH_CUSTOM="/usr/local/share/zsh"
+plugins=(ansible fd fzf ripgrep zsh-navigation-tools ruby history systemd)
+
+source $ZSH/oh-my-zsh.sh
+
+for function in $ZSH_CUSTOM/functions/*; do
+  source $function
+done
+
+autoload -U colors
+colors
+
+export CLICOLOR=1
+
+setopt hist_ignore_all_dups inc_append_history
+setopt share_history
+
+HISTFILE=~/.zhistory
 HISTSIZE=10000
-HISTFILE="$HOME/.cache/.zsh_history"
+SAVEHIST=10000
 
-alias la='ls -Ah'
-alias ll='ls -lAh'
-alias grep='grep --color=auto'
-alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias mirror-update='sudo reflector --verbose --score 100 -l 50 -f 10 --sort rate --save /etc/pacman.d/mirrorlist'
+export ERL_AFLAGS="-kernel shell_history enabled"
 
-ls() # ls with preferred arguments
-{
-	command ls --color=auto -F1 "$@"
-}
+stty -ixon
 
-cd() # cd and ls after
-{
-	builtin cd "$@" && command ls --color=auto -F
-}
+bindkey -v
+bindkey "^F" vi-cmd-mode
 
-src() # recompile completion and reload zsh
-{
-	autoload -U zrecompile
-	rm -rf "$compfile"*
-	compinit -u -d "$compfile"
-	zrecompile -p "$compfile"
-	exec zsh
-}
+bindkey "^A" beginning-of-line
+bindkey '^[[3~' delete-char
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey "^Q" push-line-or-edit
+bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
-# less/manpager colours
-export MANWIDTH=80
-export LESS='-R'
-export LESSHISTFILE=-
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[32m'
-export LESS_TERMCAP_mb=$'\e[31m'
-export LESS_TERMCAP_md=$'\e[31m'
-export LESS_TERMCAP_so=$'\e[47;30m'
-export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+DIRSTACKSIZE=5
 
-# completion
-setopt CORRECT
-setopt NO_NOMATCH
-setopt LIST_PACKED
-setopt ALWAYS_TO_END
-setopt GLOB_COMPLETE
-setopt COMPLETE_ALIASES
-setopt COMPLETE_IN_WORD
+setopt extendedglob
+unsetopt nomatch
 
-# builtin command behaviour
-setopt AUTO_CD
+# load custom completion functions
+fpath=(/usr/local/share/zsh/completion /usr/local/share/zsh/site-functions $fpath)
 
-# job control
-setopt AUTO_CONTINUE
-setopt LONG_LIST_JOBS
+# completion; use cache if updated within 24h
+autoload -Uz compinit
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+ compinit -d $HOME/.zcompdump;
+else
+ compinit -C;
+fi;
 
-# history control
-setopt HIST_VERIFY
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_SPACE
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
+setopt nobeep
 
-# misc
-setopt EXTENDED_GLOB
-setopt TRANSIENT_RPROMPT
-setopt INTERACTIVE_COMMENTS
+# automatically find new executables in path
+zstyle ':completion:*' rehash true
 
+eval "$(zoxide init zsh)"
 
-autoload -U compinit     # completion
-autoload -U terminfo     # terminfo keys
-zmodload -i zsh/complist # menu completion
-autoload -U promptinit   # prompt
+# Color man pages
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-R
 
-# better history navigation, matching currently typed text
-autoload -U up-line-or-beginning-search; zle -N up-line-or-beginning-search
-autoload -U down-line-or-beginning-search; zle -N down-line-or-beginning-search
+# set home bin directory to load first
+PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
-# set the terminal mode when entering or exiting zle, otherwise terminfo keys are not loaded
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	zle-line-init() { echoti smkx; }; zle -N zle-line-init
-	zle-line-finish() { echoti rmkx; }; zle -N zle-line-finish
+if [ -d $HOME/.cargo/bin ]; then
+  PATH="$PATH:$HOME/.cargo/bin"
 fi
 
-exp_alias() # expand aliases to the left (if any) before inserting the key pressed
-{ # expand aliases
-	zle _expand_alias
-	zle self-insert
-}; zle -N exp_alias
+export -U PATH
 
-# bind keys not in terminfo
-bindkey -- ' '     exp_alias
-bindkey -- '^P'    up-history
-bindkey -- '^N'    down-history
-bindkey -- '^E'    end-of-line
-bindkey -- '^A'    beginning-of-line
-bindkey -- '^[^M'  self-insert-unmeta # alt-enter to insert a newline/carriage return
-bindkey -- '^[05M' accept-line # fix for enter key on some systems
+if ! pgrep -a "keyring" > /dev/null; then
+	eval "$(/usr/bin/gnome-keyring-daemon --replace --daemonize --components=pkcs11,secrets,ssh,gpg)"
+fi
 
-# default shell behaviour using terminfo keys
-[[ -n ${terminfo[kdch1]} ]] && bindkey -- "${terminfo[kdch1]}" delete-char                   # delete
-[[ -n ${terminfo[kend]}  ]] && bindkey -- "${terminfo[kend]}"  end-of-line                   # end
-[[ -n ${terminfo[kcuf1]} ]] && bindkey -- "${terminfo[kcuf1]}" forward-char                  # right arrow
-[[ -n ${terminfo[kcub1]} ]] && bindkey -- "${terminfo[kcub1]}" backward-char                 # left arrow
-[[ -n ${terminfo[kich1]} ]] && bindkey -- "${terminfo[kich1]}" overwrite-mode                # insert
-[[ -n ${terminfo[khome]} ]] && bindkey -- "${terminfo[khome]}" beginning-of-line             # home
-[[ -n ${terminfo[kbs]}   ]] && bindkey -- "${terminfo[kbs]}"   backward-delete-char          # backspace
-[[ -n ${terminfo[kcbt]}  ]] && bindkey -- "${terminfo[kcbt]}"  reverse-menu-complete         # shift-tab
-[[ -n ${terminfo[kcuu1]} ]] && bindkey -- "${terminfo[kcuu1]}" up-line-or-beginning-search   # up arrow
-[[ -n ${terminfo[kcud1]} ]] && bindkey -- "${terminfo[kcud1]}" down-line-or-beginning-search # down arrow
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
-# correction
-zstyle ':completion:*:correct:*' original true
-zstyle ':completion:*:correct:*' insert-unambiguous true
-zstyle ':completion:*:approximate:*' max-errors 'reply=($(( ($#PREFIX + $#SUFFIX) / 3 )) numeric)'
 
-# completion
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$comppath"
-zstyle ':completion:*' rehash true
-zstyle ':completion:*' verbose true
-zstyle ':completion:*' insert-tab false
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' squeeze-slashes true
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:-command-:*:' verbose false
-zstyle ':completion::complete:*' gain-privileges 1
-zstyle ':completion:*:manuals.*' insert-sections true
-zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*' completer _complete _match _approximate _ignored
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+# Local config
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# labels and categories
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{green}->%F{yellow} %d%f'
-zstyle ':completion:*:messages' format ' %F{green}->%F{purple} %d%f'
-zstyle ':completion:*:descriptions' format ' %F{green}->%F{yellow} %d%f'
-zstyle ':completion:*:warnings' format ' %F{green}->%F{red} no matches%f'
-zstyle ':completion:*:corrections' format ' %F{green}->%F{green} %d: %e%f'
+# default aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
 
-# menu colours
-eval "$(dircolors)"
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01'
+# additional aliases
+[[ -f ~/.ualiases ]] && source ~/.ualiases
 
-# command parameters
-zstyle ':completion:*:functions' ignored-patterns '(prompt*|_*|*precmd*|*preexec*)'
-zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':completion:*:processes-names' command 'ps c -u ${USER} -o command | uniq'
-zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
-
-# hostnames and addresses
-zstyle ':completion:*:ssh:*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
-zstyle ':completion:*:ssh:*' group-order users hosts-domain hosts-host users hosts-ipaddr
-zstyle ':completion:*:(scp|rsync):*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
-zstyle ':completion:*:(scp|rsync):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
-zstyle -e ':completion:*:hosts' hosts 'reply=( ${=${=${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ } ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2>/dev/null))"}%%\#*} ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}})'
-ttyctl -f
-
-# initialize completion
-compinit -u -d "$compfile"
-
-# initialize prompt with a decent built-in theme
-promptinit
-prompt adam1
+tput cup 1
