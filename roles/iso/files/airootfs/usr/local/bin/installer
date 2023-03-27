@@ -1936,6 +1936,8 @@ install_packages()
 	chrun "pacman -Syyu $KERNEL $UCODE iputils --noconfirm" 2> "$ERR" 2>&1
 	errshow 1 "chrun 'pacman -Syyu $KERNEL $UCODE iputils --noconfirm'"
 
+ # TODO: Install paru
+
 	# install the packages chosen throughout the install plus any extras added
 	# check that packages we're trying to install are available, slow as shit
 	# but I'm done doing this manually every time the arch repos change
