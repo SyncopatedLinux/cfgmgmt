@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: workstation
   gather_subset:
     - hardware
     - network

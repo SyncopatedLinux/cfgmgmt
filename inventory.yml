@@ -13,7 +13,7 @@ all:
     nas:
       hosts:
         bender:
-    devel:
+    workstation:
       hosts:
         ninjabot:
           ansible_connection: local

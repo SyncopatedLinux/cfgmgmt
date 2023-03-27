@@ -6,22 +6,25 @@
     groups: "audio"
     append: yes
 
-- name: Ensure /etc/security/limits.d directory exists
+- name: Ensure limits.d and sysctl.d directories exist
   file:
-    path: /etc/security/limits.d
+    path: "{{ item }}"
     state: directory
     owner: root
     group: root
     mode: '0755'
+  with_items:
+    - /etc/security/limits.d
+    - /etc/sysctl.d
 
-- name: Install jack limits file
-  copy:
-    src: etc/security/limits.d/41-realtime.conf
-    dest: /etc/security/limits.d/41-realtime.conf
-    owner: root
-    group: root
+- name: Set rtprio, memlock and nice for audio group
+  lineinfile:
+    path: /etc/security/limits.d/41-realtime.conf
+    line: |
+      @audio - rtprio 98
+      @audio - memlock unlimited
+      @audio - nice -20
     mode: '0644'
-    backup: yes
 
 - name: Install timer permissions file
   copy:
@@ -31,20 +34,11 @@
     group: root
     mode: '0644'
 
-- block:
-    - name: Set vm.swappiness to 10 to Ensure swap isn't overly used
-      sysctl: name=vm.swappiness value=10 state=present reload=yes
-
-    - name: Set vm.dirty_background_bytes to 100000000
-      sysctl: name=vm.dirty_background_bytes value=100000000 state=present reload=yes
-
-    - name: Set fs.inotify.max_user_watches
-      sysctl: name=fs.inotify.max_user_watches value=524288 state=present reload=yes
-
-    - name: Set dev.hpet.max-user-freq=3072
-      sysctl: name=dev.hpet.max-user-freq value=3072 state=present reload=yes
-
-  ignore_errors: yes
+- name: Set sysctl params
+  copy:
+    src: etc/sysctl.d/99-cachyos-settings.conf
+    dest: /etc/sysctl.d/99-cachyos-settings.conf
+    mode: '0644'
   tags: ['sysctl']
 
 - block:
@@ -91,9 +85,6 @@
       register: rtirq_config
 
     # rtkit package should be Installed before this happens
-    # otherwise, if it sees this systemd file, it'll report
-    # being already Installed and error out
-
     - name: Install rtkit.conf
       copy:
         src: etc/rtkit.conf
