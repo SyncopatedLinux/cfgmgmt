@@ -1,6 +1,7 @@
 ---
 
 backgrounds: /usr/share/backgrounds/ohmannium
+use_nvidia: false
 
 font:
   primary:

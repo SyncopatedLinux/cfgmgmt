@@ -18,12 +18,12 @@
     - /etc/sysctl.d
 
 - name: Set rtprio, memlock and nice for audio group
-  lineinfile:
-    path: /etc/security/limits.d/41-realtime.conf
-    line: |
-      @audio - rtprio 98
-      @audio - memlock unlimited
-      @audio - nice -20
+  copy:
+    content: |
+      @audio  - rtprio  98
+      @audio  - memlock unlimited
+      @audio  - nice    -20
+    dest: "/etc/security/limits.d/41-realtime.conf"
     mode: '0644'
 
 - name: Install timer permissions file

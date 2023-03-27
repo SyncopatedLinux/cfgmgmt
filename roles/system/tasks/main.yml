@@ -46,8 +46,6 @@
 - import_tasks: menu.yml
   tags: ['menu']
 
-
-
 - name: Enable input-remapper service
   systemd:
     name: input-remapper
