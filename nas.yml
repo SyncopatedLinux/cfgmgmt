@@ -2,7 +2,6 @@
 
 - name: setup nas
   hosts: nas
-  become: True
   gather_subset:
     - hardware
     - network
