@@ -47,5 +47,7 @@
 
       when: ansible_system_vendor != "QEMU"
 
-  when: ansible_processor[1] == "GenuineIntel"
+  when:
+    - ansible_processor[1] == "GenuineIntel"
+    - use_nvidia|default(false)|bool == false
   tags: ['intel', 'i965']
