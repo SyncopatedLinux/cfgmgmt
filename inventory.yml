@@ -19,6 +19,7 @@ all:
           ansible_connection: local
         soundbot:
         lapbot:
+        crambot:
     webhost:
       vars:
         webroot: /usr/share/nginx/html

@@ -1,9 +1,5 @@
 ---
 
-kernel:
-  - linux-rt-lts
-  - linux-rt-lts-headers
-  - dkms
 networkmanager:
   - network-manager-applet
   - networkmanager

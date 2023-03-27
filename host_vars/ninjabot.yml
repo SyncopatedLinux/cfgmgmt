@@ -1,6 +1,7 @@
 ---
 
 use_nvidia: true
+use_rt_kernel: false
 
 i3:
   autostart:

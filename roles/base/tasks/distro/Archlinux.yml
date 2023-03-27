@@ -135,6 +135,20 @@
 
 - block:
 
+    - name: install mainline kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.mainline }}"
+        state: present
+      when: use_rt_kernel|default(true)|bool == false
+
+    - name: install realtime kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.rt }}"
+        state: present
+      when: use_rt_kernel|default(true)|bool == true
+
     - name: Include package vars
       include_vars:
         dir: packages/{{ ansible_distribution }}

@@ -3,3 +3,13 @@
 autologin: True
 shell_login: True
 journal_level: notice
+
+kernel:
+  mainline:
+    - linux
+    - linux-headers
+    - dkms
+  rt:
+    - linux-rt-lts
+    - linux-rt-lts-headers
+    - dkms
