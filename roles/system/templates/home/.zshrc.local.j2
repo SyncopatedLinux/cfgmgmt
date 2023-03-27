@@ -4,7 +4,7 @@ export WORKSPACE="$HOME/Workspace"
 export SOUNDS="$HOME/Library/sounds"
 export SOUNDFONTS="$HOME/Library/soundfonts"
 
-{% if inventory_hostname in groups.get('devel', []) %}
+{% if inventory_hostname in groups.get('workstation', []) %}
 export ANSIBLE_HOME="$WORKSPACE/ohmannium"
 export ANSIBLE_CONFIG="$ANSIBLE_HOME/ansible.cfg"
 export INVENTORY="$ANSIBLE_HOME/inventory.yml"

@@ -19,6 +19,14 @@
     - "/usr/share/backgrounds/ohmannium"
   tags: ['theme']
 
+- name: install i3autolayout.py
+  copy:
+    src: home/.local/bin/i3autolayout.py
+    dest: "{{ user.home }}/.local/bin/i3autolayout.py"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    mode: '0755'
+
 # - import_tasks: skel.yml
 #   when: build_iso is defined
 #   tags: ['iso']
@@ -37,6 +45,8 @@
 
 - import_tasks: menu.yml
   tags: ['menu']
+
+
 
 - name: Enable input-remapper service
   systemd:

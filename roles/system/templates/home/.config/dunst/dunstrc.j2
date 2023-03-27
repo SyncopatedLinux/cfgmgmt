@@ -12,7 +12,7 @@
     #
     # for a complete reference see http://developer.gnome.org/pango/stable/PangoMarkupFormat.html
     # If markup is not allowed, those tags will be stripped out of the message.
-    allow_markup = yes
+    # allow_markup = yes
 
     # The format of the message. Possible variables are:
     #   %a  appname
@@ -38,7 +38,7 @@
     # window allows bounces back and forth.
     # This option conflicts with 'word_wrap'.
     # Set to 0 to disable
-    bounce_freq = 0
+    #bounce_freq = 0
 
     # show age of message if message is older than show_age_threshold seconds.
     # set to -1 to disable
@@ -62,7 +62,7 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+40"
+    #geometry = "300x5-30+40"
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -74,7 +74,7 @@
     idle_threshold = 120
 
     # Which monitor should the notifications be displayed on.
-    monitor = wayland-0
+    monitor = 0
 
     # Display notification on focused monitor. Possible modes are:
     # mouse: follow mouse pointer
@@ -118,7 +118,7 @@
     # print a notification on startup
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = true
+    # startup_notification = true
 
     # dmenu path
     dmenu = /usr/bin/dmenu -p dunst:
@@ -126,27 +126,9 @@
     # browser for opening urls in context menu
     browser = /usr/bin/qutebrowser
 
-[frame]
-    width = 0
-    color = "#000000"
-
-[shortcuts]
-    # shortcuts are specified as [modifier+][modifier+]...key
-    # available modifiers are 'ctrl', 'mod1' (the alt-key), 'mod2', 'mod3'
-    # and 'mod4' (windows-key)
-    # xev might be helpful to find names for keys
-
-    # close notification
-    close = mod4+m
-
-    # close all notifications
-    close_all = mod4+shift+m
-
-    # redisplay last message(s)
-    history = mod4+n
-
-    # context menu
-    context = mod4+shift+i
+    icon_path = /usr/share/icons
+    icon_theme = "ArchLabs-Dark"
+    enable_recursive_icon_lookup = true
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
