@@ -19,9 +19,9 @@ alias mv="mv -iv"
 alias df='df -h'
 
 # use exa for directory listing
+alias ll="exa --sort=ext --sort=modified --long --tree --level=2 --no-filesize"
 alias ls="exa -alh --group-directories-first -g --no-filesize -s modified"
-alias ll="printf '\n' && exa -lH -g --group-directories-first --icons"
-alias llh="printf '\n' && exa -alH -g --group-directories-first --icons"
+alias llh="exa -a --sort=ext --sort=modified --long --tree --level=2 --no-filesize"
 
 # if available use bat instead of cat
 if [ -x "$(command -v bat)" ]; then
@@ -64,7 +64,7 @@ alias gc="env GIT_EDITOR=micro git commit -a && gum confirm "push changes" && gi
 alias gfp="git fetch && git pull"
 alias gp="git push"
 alias glog="git log --oneline --decorate --graph --all"
-alias gs="git status"
+alias gs="gitui"
 
 #turn off pcspkr
 alias beepoff="rmmod pcspkr"

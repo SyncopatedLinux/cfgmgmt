@@ -1,6 +1,6 @@
 ---
 
-- hosts: devel
+- hosts: all
   become: True
   gather_subset:
     - hardware
@@ -20,7 +20,7 @@
 
     - name: Include distro vars
       include_vars:
-        file: vars/distro/{{ ansible_distribution }}.yml
+        file: vars/{{ ansible_distribution }}.yml
       tags: ['base']
 
     - name: Symlink os-release
@@ -96,41 +96,10 @@
       check_mode: False
       tags: ['base', 'repo', 'packages']
 
-    - name: Ensure usr local directories exist
-      file:
-        path: "{{ item  }}"
-        state: directory
-        mode: '0755'
-        recurse: False
-      with_items:
-        - "/usr/local/share/fonts/"
-        - "/usr/local/share/icons"
-        - "/usr/local/share/pixmaps/"
-        - "/usr/local/share/themes"
-        - "/usr/share/backgrounds/ohmannium"
-      tags: ['theme']
-
-    - name: Set background location variable
-      set_fact:
-        backgrounds: "/usr/share/backgrounds/ohmannium"
-      tags: ['x11', 'theme']
-
-    - import_tasks: tasks/user.yml
-      tags: ['base', 'user']
-
-    - import_tasks: tasks/sudoers.yml
-      tags: ['base', 'sudoers']
-
-    - import_tasks: tasks/ruby.yml
-      tags: ['base', 'ruby']
-
-    - import_tasks: tasks/zshell.yml
-      tags: ['zsh']
-
-    - include_tasks: "tasks/distro/{{ ansible_distribution }}.yml"
-      tags: ['base', 'repo', 'packages', 'mirrors']
-
   roles:
+
+    - role: base
+      tags: ['base']
 
     - role: network
       tags: ['netork']

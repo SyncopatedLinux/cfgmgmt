@@ -34,7 +34,32 @@ in order of least to greatest precedence:
 
 group_vars and host_vars are managed with yadm and are symlinked to $ANSIBLE_HOME
 
+## misc
 
+Using `include_vars` will load variables at the time of the task, whereas `vars_files` will load all the variables at the start of the play.
+
+```bash
+cat << EOF > inventory.yml
+all:
+    hosts:
+        ansibletest01.fqdn.tld:
+vars:
+    ansible_user: "{{ lookup('env','USER') }}"
+    ansible_connection: ssh
+    admin_group: wheel
+EOF
+```
+
+
+```bash
+cat << EOF > vars.yml
+config: "Release"
+packages:
+  synths:
+    - helm-synth
+    - sonic-pi-git
+EOF
+```
 
 # Running Tasks with Tags
 

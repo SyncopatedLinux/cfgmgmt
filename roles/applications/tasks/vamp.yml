@@ -27,6 +27,9 @@
     # when running this in multi-user mode
     - name: run vamp plugin pack installer
       script: "/usr/bin/uxterm -class 'backup' -e /usr/bin/env DISPLAY=:0 /tmp/vamp-plugin-pack-installer-1.0"
+      become_user: "{{ user.name }}"
+      delegate_to: 127.0.0.1
+      run_once: True
       ignore_errors: True
 
   when: not vamp_installed.stat.exists

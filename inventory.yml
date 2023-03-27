@@ -6,9 +6,10 @@ all:
     ansible_connection: ssh
 
   children:
-    virt:
+    pi:
       hosts:
-        soundbot:
+        pibot:
+          ansible_user: pi
     nas:
       hosts:
         bender:

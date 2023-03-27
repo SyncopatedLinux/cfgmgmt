@@ -1,0 +1,5 @@
+---
+
+autologin: True
+shell_login: True
+journal_level: notice

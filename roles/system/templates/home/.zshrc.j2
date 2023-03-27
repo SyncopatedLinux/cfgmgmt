@@ -88,6 +88,13 @@ fi
 
 export -U PATH
 
+if ! pgrep -a "keyring" > /dev/null; then
+	eval "$(/usr/bin/gnome-keyring-daemon --replace --daemonize --components=pkcs11,secrets,ssh,gpg)"
+fi
+
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+
+
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
@@ -97,4 +104,4 @@ export -U PATH
 # additional aliases
 [[ -f ~/.ualiases ]] && source ~/.ualiases
 
-tput cup 0
+tput cup 1
