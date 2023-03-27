@@ -35,5 +35,9 @@
 - import_tasks: autologin.yml
   tags: ['autologin']
 
+- import_tasks: nvidia.yml
+  when: use_nvidia|default(false)|bool == true
+  tags: ['nvidia']
+
 - import_tasks: grub.yml
   tags: ['grub']

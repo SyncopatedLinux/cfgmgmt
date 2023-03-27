@@ -19,9 +19,9 @@
     - "/usr/share/backgrounds/ohmannium"
   tags: ['theme']
 
-- import_tasks: skel.yml
-  when: build_iso is defined
-  tags: ['iso']
+# - import_tasks: skel.yml
+#   when: build_iso is defined
+#   tags: ['iso']
 
 - import_tasks: home.yml
   tags: ['home']
