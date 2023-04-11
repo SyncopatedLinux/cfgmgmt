@@ -3,11 +3,13 @@
 use_nvidia: true
 use_rt_kernel: false
 install_pulsar: true
+
 i3:
   autostart:
     - "/usr/bin/barriers -f --no-tray --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
+    # - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
     - "hexchat --minimize=2"
-  tray_output: "HDMI1"
+  tray_output: "DVI-I-1"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
@@ -17,13 +19,13 @@ i3:
     - '[class="Jalv.select"] $ws10'
     - '[class="^RaySession$"] $ws10'
   workspaces:
-    - "$ws1 output DVI-I-1-1"
-    - "$ws2 output DVI-I-1-1"
-    - "$ws3 output DVI-I-1-1"
-    - "$ws4 output DVI-I-1-1"
-    - "$ws5 output HDMI1"
-    - "$ws6 output HDMI1"
-    - "$ws7 output HDMI1"
-    - "$ws8 output HDMI1"
-    - "$ws9 output HDMI1"
-    - "$ws10 output HDMI1"
+    - "$ws1 output DVI-I-1"
+    - "$ws2 output DVI-I-1"
+    - "$ws3 output DVI-I-1"
+    - "$ws4 output DVI-I-1"
+    - "$ws5 output DVI-D-0"
+    - "$ws6 output DVI-D-0"
+    - "$ws7 output DVI-D-0"
+    - "$ws8 output DVI-D-0"
+    - "$ws9 output DVI-D-0"
+    - "$ws10 output DVI-D-0"

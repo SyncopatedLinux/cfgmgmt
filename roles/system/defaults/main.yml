@@ -21,6 +21,9 @@ theme:
   kvantum: KvGnomeDark
   qtstyle: fusion
 
+ohmyzsh:
+  theme: minimal-terminal-prompt
+
 i3:
   tray_output: default
   workspaces: default

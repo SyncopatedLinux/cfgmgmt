@@ -4,7 +4,9 @@ theme = "syncopated"
 separator_bg = "{{ colors.primary.background }}"
 separator_fg = "{{ colors.workspace.text }}"
 separator = " ┆ "
-end_separator = "┃"
+end_separator_bg = "{{ colors.primary.background }}"
+end_separator_fg = "{{ colors.workspace.text }}"
+end_separator = "┆"
 
 [icons]
 icons = "awesome6"
@@ -70,11 +72,11 @@ cmd = "alacritty --class 'htop' --title 'htop' -e htop"
 
 [[block]]
 block = "custom"
-command = "curl 'https://wttr.in/?format=1' -s"
-interval = 600
+command = "curl 'https://wttr.in/?format=1' -s | xargs"
+interval = 300
 [[block.click]]
 button = "left"
-cmd = "alacritty -e curl 'https://wttr.in/'"
+cmd = "google-chrome-stable --new-window 'https://www.wunderground.com/weather/us/oh/columbus/KOHCOLUM564?utm_source=HomeCard&utm_content=Button&cm_ven=HomeCardButton'"
 
 [[block]]
 block = "time"

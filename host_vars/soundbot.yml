@@ -3,9 +3,14 @@
 install:
   libvirt:
     qemu_full: True
+
+ohmyzsh:
+  theme: kphoen
+
 i3:
   autostart:
     - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
+    # - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
   tray_output: "primary"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
@@ -19,10 +24,10 @@ i3:
     - "$ws1 output eDP1"
     - "$ws2 output eDP1"
     - "$ws3 output eDP1"
-    - "$ws4 output HDMI1"
-    - "$ws5 output HDMI1"
-    - "$ws6 output HDMI1"
-    - "$ws7 output HDMI1"
-    - "$ws8 output HDMI1"
-    - "$ws9 output HDMI1"
-    - "$ws10 output HDMI1"
+    - "$ws4 output DP1-1"
+    - "$ws5 output DP1-1"
+    - "$ws6 output DP1-1"
+    - "$ws7 output DP1-1"
+    - "$ws8 output DP1-1"
+    - "$ws9 output DP1-1"
+    - "$ws10 output DP1-1"
