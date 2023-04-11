@@ -6,17 +6,6 @@
     groups: "audio"
     append: yes
 
-- name: Ensure limits.d and sysctl.d directories exist
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-  with_items:
-    - /etc/security/limits.d
-    - /etc/sysctl.d
-
 - name: Set rtprio, memlock and nice for audio group
   copy:
     content: |
@@ -53,14 +42,6 @@
     #     tuned-adm profile laptop-battery-powersave
     #   register: tuned_profile
     #   changed_when: tuned_profile.rc != 0
-
-    - name: Create tuned profile folder
-      file:
-        path: /etc/tuned/realtime-modified
-        state: directory
-        owner: root
-        group: root
-        recurse: True
 
     - name: Install realtime-modified profile
       copy:

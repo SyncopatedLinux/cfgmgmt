@@ -143,14 +143,14 @@
         use: paru
         name: "{{ kernel.mainline }}"
         state: present
-      when: use_rt_kernel|default(true)|bool == false
+      when: use_rt_kernel|default(false)|bool == false
 
     - name: install realtime kernel and headers
       aur:
         use: paru
         name: "{{ kernel.rt }}"
         state: present
-      when: use_rt_kernel|default(true)|bool == true
+      when: use_rt_kernel|default(false)|bool == true
 
     - name: Include package vars
       include_vars:

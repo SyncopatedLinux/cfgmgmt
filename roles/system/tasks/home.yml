@@ -1,37 +1,5 @@
 ---
 
-- name: Ensure these directories exist
-  file:
-    path: "{{ user.home }}/{{ item }}"
-    state: directory
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
-    mode: '0755'
-    recurse: False
-  with_items:
-    - .config/Debauchee
-    - .config/Kvantum
-    - .config/Thunar
-    - .config/alacritty
-    - .config/dunst
-    - .config/gtk-3.0
-    - .config/gtk-4.0
-    - .config/htop
-    - .config/i3
-    - .config/i3status-rust/themes/
-    - .config/kitty
-    - .config/nitrogen
-    - .config/picom
-    - .config/qt5ct/colors
-    - .config/qt6ct/colors
-    - .config/qutebrowser
-    - .config/sxhkd
-    - .config/tilda
-    - .config/zim
-    - .local/share/zim/templates/plugins
-    - .guake
-    - .sonic-pi/config
-
 - name: Synchronize templates - shell
   template:
     src: "home/{{ item }}.j2"

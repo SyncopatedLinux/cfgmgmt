@@ -6,12 +6,6 @@
       - 'ansible_processor'
       - 'ansible_system_vendor'
 
-- name: Ensure xorg.conf.d exists
-  file:
-    path: "/etc/X11/xorg.conf.d/"
-    state: directory
-    mode: '0755'
-
 - name: Install input config
   template:
     src: etc/X11/xorg.conf.d/00-input.conf.j2

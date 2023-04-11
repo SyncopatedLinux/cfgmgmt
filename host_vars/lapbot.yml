@@ -1,4 +1,6 @@
 ---
-  
+
+use_rt_kernel: true
+
 ohmyzsh:
   theme: steeef

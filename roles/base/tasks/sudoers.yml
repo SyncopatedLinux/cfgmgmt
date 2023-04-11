@@ -23,11 +23,6 @@
     backup: yes
     validate: 'visudo -cf %s'
 
-- name: Ensure /etc/sudoers.d exists
-  file:
-    path: /etc/sudoers.d
-    state: directory
-
 - name: Set NOPASSWD for user in sudoers
   lineinfile:
     path: /etc/sudoers.d/020_nopasswd

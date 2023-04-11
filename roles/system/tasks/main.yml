@@ -5,21 +5,6 @@
     filter:
       - 'ansible_processor'
 
-- name: Ensure usr local directories exist
-  file:
-    path: "{{ item  }}"
-    state: directory
-    mode: '0755'
-    recurse: False
-  with_items:
-    - "/usr/local/share/fonts/"
-    - "/usr/local/share/icons"
-    - "/usr/local/share/pixmaps/"
-    - "/usr/local/share/themes"
-    - "/usr/share/backgrounds/ohmannium"
-    - "{{ user.home }}/.local/bin"
-  tags: ['theme']
-
 - name: install i3autolayout.py
   copy:
     src: home/.local/bin/i3autolayout.py

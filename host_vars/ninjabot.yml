@@ -2,7 +2,10 @@
 
 use_nvidia: true
 use_rt_kernel: false
-install_pulsar: true
+install_pulsar: false
+
+ohmyzsh:
+  theme: sonicradish
 
 i3:
   autostart:
