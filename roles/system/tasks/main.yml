@@ -17,6 +17,7 @@
     - "/usr/local/share/pixmaps/"
     - "/usr/local/share/themes"
     - "/usr/share/backgrounds/ohmannium"
+    - "{{ user.home }}/.local/bin"
   tags: ['theme']
 
 - name: install i3autolayout.py
