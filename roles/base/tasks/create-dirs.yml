@@ -95,3 +95,17 @@
     # - .config/rofi/powermenu/type-5/shared
     # - .config/rofi/powermenu/type-6/shared
     - .config/rofi/scripts/
+
+- name: Ensure these directories also exist
+  file:
+    path: "/root/{{ item }}"
+    state: directory
+    mode: '0755'
+    recurse: True
+  with_items:
+    - .config/Kvantum/
+    - .config/Thunar/
+    - .config/gtk-3.0/
+    - .config/gtk-4.0/
+    - .config/qt5ct/colors/
+    - .config/qt6ct/colors/
