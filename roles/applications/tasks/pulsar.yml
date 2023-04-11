@@ -5,6 +5,7 @@
     use: auto
     name: pulsar-bin
     state: present
+  become: True
   become_user: "{{ user.name }}"
 
 - name: install pulsar packages
@@ -19,10 +20,12 @@
     - indent-sort
     - language-diff
     - language-docker
-    - language-dotfiles language-markdown
+    - language-dotfiles 
+    - language-markdown
     - open-terminal-here
     - permanent-delete
     - sb-atom-sonic-pi
     - tool-bar
     - vibrant-ink-ruby
+  become: True
   become_user: "{{ user.name }}"

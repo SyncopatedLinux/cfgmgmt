@@ -4,4 +4,7 @@ Section "Device"
   Driver "intel"
   # Option "AccelMethod"  "sna"
   Option "TearFree" "true"
+  {% if ansible_hostname == 'ninjabot' %}
+  BusID "PCI:0:2:0"
+  {% endif %}
 EndSection
