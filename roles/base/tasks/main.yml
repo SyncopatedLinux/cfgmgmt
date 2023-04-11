@@ -2,6 +2,14 @@
 
 - import_tasks: create-dirs.yml
 
+- name: install sshd config
+  template:
+    src: etc/ssh/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    backup: True
+  notify: restart sshd
+  tags: ['sshd']
+
 - name: Include distro vars
   include_vars:
     file: vars/{{ ansible_distribution }}.yml
