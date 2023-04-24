@@ -76,7 +76,10 @@ command = "curl 'https://wttr.in/?format=1' -s | xargs"
 interval = 300
 [[block.click]]
 button = "left"
-cmd = "google-chrome-stable --new-window 'https://www.wunderground.com/weather/us/oh/columbus/KOHCOLUM564?utm_source=HomeCard&utm_content=Button&cm_ven=HomeCardButton'"
+cmd = "kitty --class 'weather' --hold -e wthrr"
+[[block.click]]
+button = "right"
+cmd = "kitty --class 'weather' --hold -e wthrr -f w"
 
 [[block]]
 block = "time"

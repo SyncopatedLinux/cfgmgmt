@@ -30,7 +30,7 @@
 
     - import_role:
         name: network
-      when: nas_host is defined
+      when: nas_host|bool
 
     - import_role:
         name: nginx

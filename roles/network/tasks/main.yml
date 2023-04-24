@@ -12,13 +12,13 @@
   tags: ['autofs']
 
 - import_tasks: nas/nfs.yml
-  when: nfs_host is defined
+  when: nfs_host|bool
   tags: ['nfs']
 
 - import_tasks: nas/rsyncd.yml
-  when: rsyncd_host is defined
+  when: rsyncd_host|bool
   tags: ['rsyncd']
 
 - import_tasks: nas/musikcube.yml
-  when: musikcube_host is defined
+  when: musikcube_host|bool
   tags: ['musikcube']

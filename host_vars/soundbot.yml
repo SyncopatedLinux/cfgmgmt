@@ -12,8 +12,8 @@ install_pulsar: false
 ohmyzsh:
   theme: kphoen
 
-nas_host: true
-nfs_host: true
+nas_host: True
+nfs_host: True
 
 i3:
   autostart:

@@ -1,5 +1,10 @@
 ---
 
+nas_host: False
+nfs_host: False
+rsyncd_host: False
+musikcube_host: False
+
 autofs_dir: /etc/autofs
 
 lan:

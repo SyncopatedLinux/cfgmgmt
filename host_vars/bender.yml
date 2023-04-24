@@ -3,4 +3,6 @@
 ohmyzsh:
   theme: sonicradish
 
-nfs_host: true
+nas_host: True
+nfs_host: True
+musikcube_host: True
