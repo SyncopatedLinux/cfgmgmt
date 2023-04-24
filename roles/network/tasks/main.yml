@@ -10,3 +10,15 @@
 - import_tasks: autofs.yml
   when: autofs_client is defined
   tags: ['autofs']
+
+- import_tasks: nas/nfs.yml
+  when: nfs_host is defined
+  tags: ['nfs']
+
+- import_tasks: nas/rsyncd.yml
+  when: rsyncd_host is defined
+  tags: ['rsyncd']
+
+- import_tasks: nas/musikcube.yml
+  when: musikcube_host is defined
+  tags: ['musikcube']

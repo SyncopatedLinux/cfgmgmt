@@ -49,6 +49,7 @@
     - .config/Thunar/
     - .config/alacritty/
     - .config/dunst/
+    - .config/fontconfig/
     - .config/gtk-3.0/
     - .config/gtk-4.0/
     - .config/htop/

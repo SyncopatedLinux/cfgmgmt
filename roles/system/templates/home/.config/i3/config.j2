@@ -41,8 +41,11 @@ set $exec_always exec_always --no-startup-id
 ###############################################################
 ##-------------------- Appearance ---------------------------##
 ###############################################################
-
+{% if ansible_hostname == 'ninjabot' %}
+font pango:{{ font.primary.name }} 8
+{% else %}
 font pango:{{ font.primary.name }} 12
+{% endif %}
 
 for_window [class="^.*"] border pixel 1
 default_border pixel 1
@@ -98,9 +101,11 @@ client.background {{ colors.primary.background }}
 
 bar {
         id bar-primary
-
+{% if ansible_hostname == 'ninjabot' %}
+        font pango:{{ font.primary.name }} 8
+{% else %}
         font pango:{{ font.primary.name }} 14
-
+{% endif %}
         modifier none
 
         workspace_buttons yes
@@ -124,7 +129,7 @@ bar {
 
         status_command /usr/bin/i3status-rs ~/.config/i3status-rust/config.toml
 
-        workspace_min_width 60
+        workspace_min_width 40
 
         height 24
 {% if i3.tray_output != 'default' %}

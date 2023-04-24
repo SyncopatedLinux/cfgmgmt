@@ -23,7 +23,12 @@
 ! xterm
 xterm*termName: xterm-256color
 xterm*font: {{ font.primary.name }}
+{% if ansible_hostname == 'ninjabot' %}
+xterm*faceName: {{ font.primary.name }}:size=10
+{% else %}
 xterm*faceName: {{ font.primary.name }}:size=12
+{% endif %}
+
 xterm*loginShell: true
 xterm*vt100*geometry: 90x34
 xterm*saveLines: 8000
@@ -46,7 +51,11 @@ URxvt*scrollBar_right: false
 URxvt*internalBorder: 0
 URxvt*externalBorder: 0
 URxvt*letterSpace: -1
+{% if ansible_hostname == 'ninjabot' %}
+URxvt.font: xft:{{ font.mono.name }}:size=10
+{% else %}
 URxvt.font: xft:{{ font.mono.name }}:size=12
+{% endif %}
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.urlLauncher: exo-open

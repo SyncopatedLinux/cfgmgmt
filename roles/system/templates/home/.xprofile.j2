@@ -24,7 +24,7 @@ if [ ! -d /tmp/reaper ]; then
 	mkdir -pv /tmp/reaper
 fi
 
-{% if arch_release != 'Soaring' %}
+
 if [ -x "$(command -v autorandr)" ]; then
   autorandr -l "$(autorandr --detected)"
   sleep 0.5
@@ -38,4 +38,3 @@ if [ -f ~/.fehbg ]; then
 else
   feh --recursive --bg-fill --randomize $BACKGROUNDS/*
 fi
-{% endif %}

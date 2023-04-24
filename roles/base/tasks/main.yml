@@ -1,5 +1,8 @@
 ---
 
+- import_tasks: user.yml
+  tags: ['user']
+
 - import_tasks: create-dirs.yml
 
 - name: install sshd config
@@ -13,9 +16,6 @@
 - name: Include distro vars
   include_vars:
     file: vars/{{ ansible_distribution }}.yml
-
-- import_tasks: user.yml
-  tags: ['user']
 
 - import_tasks: sudoers.yml
   tags: ['sudoers']
@@ -34,6 +34,7 @@
   tags: ['firewall']
 
 - import_tasks: filesystem.yml
+  when: arch_release == 'rolling'
   tags: ['filesystem']
 
 - import_tasks: utils.yml

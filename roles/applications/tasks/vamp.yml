@@ -14,6 +14,14 @@
         dest: /tmp
         mode: '0755'
 
+    - name: set user perms for /usr/local/share/vamp
+      file:
+        path: /usr/local/share/vamp
+        state: directory
+        owner: "{{ user.name }}"
+        group: "{{ user.group }}"
+        mode: '0755'
+
     - name: run vamp plugin pack installer
       script: |
         /usr/bin/uxterm -class 'backup' -e /usr/bin/env DISPLAY=:0 /usr/bin/env VAMP_PATH="/usr/local/share/vamp" ./vamp-plugin-pack-installer-1.0

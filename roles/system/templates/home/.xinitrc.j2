@@ -15,7 +15,5 @@ fi
 [ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
 [ -r ~/.xprofile ] && . ~/.xprofile
 
-{% if shell_login == 'true' %}
 # launch the session, commands below this line will be ignored
 exec i3
-{% endif %}

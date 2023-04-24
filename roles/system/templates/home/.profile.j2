@@ -15,3 +15,35 @@ eval "$(/usr/bin/gnome-keyring-daemon --replace --daemonize --components=pkcs11,
 
 ##############################################################
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+
+export TEMP="/tmp"
+
+export TERM="xterm-256color"
+export TERMINAL="xterm-256color"
+export TERMCMD="$TERMINAL"
+
+export NO_AT_BRIDGE=1
+export QT_SCALE_FACTOR=1.0
+export QT_FONT_DPI=96
+export QT_QPA_PLATFORMTHEME=qt5ct
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+export ECASOUND=ecasound
+export LADSPA_PATH="/usr/lib/ladspa"
+export LADSPA_RDF_PATH="/usr/share/ladspa/rdf"
+export RAY_PARENT_SCRIPT_DIR="$HOME/Sessions/ray-scripts"
+export VAMP_PATH="/usr/local/share/vamp"
+
+if [[ ! -n $EDITOR ]]; then useditor micro; fi
+
+if [ -x "$(command -v google-chrome-stable)" ]; then
+export BROWSER="google-chrome-stable"
+fi
+
+if [ -x "$(command -v most)" ]; then
+export PAGER=most
+fi
+
+if [ -x $(command -v hostname) ]; then
+export HOSTNAME=$(hostname)
+fi

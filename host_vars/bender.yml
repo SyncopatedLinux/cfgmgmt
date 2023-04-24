@@ -2,3 +2,5 @@
 
 ohmyzsh:
   theme: sonicradish
+
+nfs_host: true

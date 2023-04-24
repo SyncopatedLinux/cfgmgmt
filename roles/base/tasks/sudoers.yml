@@ -25,7 +25,7 @@
 
 - name: Set NOPASSWD for user in sudoers
   lineinfile:
-    path: /etc/sudoers.d/020_nopasswd
+    path: /etc/sudoers.d/01-user
     line: '{{ user.name }} ALL=(ALL:ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
     create: yes

@@ -20,12 +20,12 @@
     - name: Set Arch Release
       set_fact:
         arch_release: "{{ ansible_facts['lsb']['major_release'] }}"
-      tags: ['facts']
+      tags: ['facts', 'base', 'system']
 
-    - name: print release
-      debug:
-        var: arch_release
-      tags: ['facts']
+    # - name: print release
+    #   debug:
+    #     var: arch_release
+    #   tags: ['facts']
 
     - name: Include distro vars
       include_vars:

@@ -12,6 +12,9 @@ install_pulsar: false
 ohmyzsh:
   theme: kphoen
 
+nas_host: true
+nfs_host: true
+
 i3:
   autostart:
     - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
