@@ -1,6 +1,7 @@
 ---
 
 use_rt_kernel: true
+use_zen_kernel: false
 
 install:
   libvirt:

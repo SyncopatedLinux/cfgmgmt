@@ -38,10 +38,10 @@ input:
   - antimicrox
   - input-remapper-git
 screencasting:
-  - obs-studio
-  - simplescreenrecorder
+  # - obs-studio
+  # - simplescreenrecorder
   - teiler-git
-  - v4l2loopback-dkms
+  # - v4l2loopback-dkms
 terminal:
   - asciiquarium
   - figlet

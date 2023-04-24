@@ -1,7 +1,10 @@
 ---
 
 use_nvidia: true
+
+use_zen_kernel: true
 use_rt_kernel: false
+
 install_pulsar: false
 
 ohmyzsh:

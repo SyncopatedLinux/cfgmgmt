@@ -143,7 +143,16 @@
         use: paru
         name: "{{ kernel.mainline }}"
         state: present
-      when: use_rt_kernel|default(false)|bool == false
+      when:
+        - use_rt_kernel|default(false)|bool == false
+        - use_zen_kernel|default(false)|bool == false
+
+    - name: install zen kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.zen }}"
+        state: present
+      when: use_zen_kernel|default(false)|bool == true
 
     - name: install realtime kernel and headers
       aur:

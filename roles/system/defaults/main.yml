@@ -1,7 +1,10 @@
 ---
 
 backgrounds: /usr/share/backgrounds/ohmannium
-use_nvidia: false
+
+autologin: False
+shell_login: False
+use_nvidia: False
 
 font:
   primary:

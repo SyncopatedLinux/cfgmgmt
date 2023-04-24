@@ -43,6 +43,7 @@
   tags: ['updatedb']
 
 - import_tasks: autologin.yml
+  when: autologin|bool
   tags: ['autologin']
 
 - import_tasks: nvidia.yml

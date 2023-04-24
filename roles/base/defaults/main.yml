@@ -1,13 +1,17 @@
 ---
 
-autologin: True
-shell_login: True
+autologin: False
+shell_login: False
 journal_level: notice
 
 kernel:
   mainline:
     - linux
     - linux-headers
+    - dkms
+  zen:
+    - linux-zen
+    - linux-zen-headers
     - dkms
   rt:
     - linux-rt-lts

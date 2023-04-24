@@ -1,4 +1,5 @@
 ---
+# "hybrids" act as a controller and an execution node
 
 all:
   vars:
@@ -6,6 +7,10 @@ all:
     ansible_connection: ssh
 
   children:
+    # automationcontroller:
+    #   hosts:
+    #     soundbot.syncopated.net:
+    #       node_type: hybrid
     pi:
       hosts:
         pibot:

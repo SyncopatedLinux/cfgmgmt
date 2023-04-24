@@ -2,7 +2,7 @@
 
 { a loosley adapted mantra for }
 
-Configuration Management and Task Automation for Audio Production using FOSS applications on Linux based devices.
+Configuration Management and Task Automation for Linux Workstations
 
 ### Setup
 
