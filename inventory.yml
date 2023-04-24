@@ -22,8 +22,8 @@ all:
       hosts:
         ninjabot:
         soundbot:
-          ansible_connection: local
         lapbot:
+          ansible_connection: local
         crambot:
     webhost:
       vars:
