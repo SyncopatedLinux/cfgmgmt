@@ -8,7 +8,7 @@ use_nvidia: true
 use_zen_kernel: false
 use_rt_kernel: false
 
-install_pulsar: false
+install_pulsar: True
 
 ohmyzsh:
   theme: sonicradish

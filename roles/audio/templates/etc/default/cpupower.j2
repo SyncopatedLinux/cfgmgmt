@@ -5,14 +5,20 @@ governor='powersave'
 # Limit frequency range
 # Valid suffixes: Hz, kHz (default), MHz, GHz, THz
 {% if ansible_hostname == "soundbot" %}
-min_freq="600MHz"
-max_freq="3800MHz"
+min_freq="400MHz"
+max_freq="4000MHz"
 {% endif %}
 
 {% if ansible_hostname == "ninjabot" %}
 min_freq="1600MHz"
 max_freq="3800MHz"
 {% endif %}
+
+{% if ansible_hostname == "lapbot" %}
+min_freq="800Hz"
+max_freq="2700MHz"
+{% endif %}
+
 # Specific frequency to be set.
 # Requires userspace governor to be available.
 # Do not set governor field if you use this one.
