@@ -46,11 +46,6 @@ Server = http://soundbot.hopto.org/packages/archlinux/x86_64/
 [proaudio]
 Server = https://arch.osamc.de/$repo/$arch
 
-{% if arch_release == 'Soaring' %}
-[garuda]
-Include = /etc/pacman.d/chaotic-mirrorlist
-{% endif %}
-
 #[testing]
 #Include = /etc/pacman.d/mirrorlist
 
@@ -69,12 +64,11 @@ Include = /etc/pacman.d/mirrorlist
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 
-{% if arch_release == 'Soaring' %}
+{% if use_chaotic == 'true' %}
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 {% endif %}
 
-{% if arch_release == 'rolling' %}
 # [archlabs-testing]
 # Server =  https://pub-7d84e047b852442a86fd6d7feb1ff2cd.r2.dev/$repo/$arch
 # Server =  https://github.com/ArchLabs/$repo/raw/master/$arch
@@ -85,5 +79,4 @@ Server = https://pub-7d84e047b852442a86fd6d7feb1ff2cd.r2.dev/$repo/$arch
 Server = https://bitbucket.org/archlabslinux/$repo/raw/master/$arch
 Server = https://github.com/ArchLabs/$repo/raw/master/$arch
 Server = https://sourceforge.net/projects/archlabs-repo/files/$repo/$arch
-{% endif %}
 # vim:ft=config

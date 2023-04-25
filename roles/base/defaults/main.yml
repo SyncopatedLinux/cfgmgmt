@@ -2,7 +2,10 @@
 
 autologin: False
 shell_login: False
+
 journal_level: notice
+
+use_chaotic: false
 
 kernel:
   mainline:

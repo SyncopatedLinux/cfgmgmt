@@ -14,7 +14,7 @@ font:
   glyphs:
     name: Font Awesome 6 Free Regular
   mono:
-    name: mononoki NFM
+    name: FireCode Nerd Font
 
 # theme options
 theme:
@@ -22,7 +22,7 @@ theme:
   icons: ArchLabs-Dark
   cursor: xcursor-breeze
   kvantum: KvGnomeDark
-  qtstyle: fusion
+  qtstyle: kvantum-dark
 
 ohmyzsh:
   theme: minimal-terminal-prompt

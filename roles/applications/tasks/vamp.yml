@@ -28,8 +28,7 @@
       args:
         chdir: /tmp
       run_once: True
-      become: True
-      become_user: "{{ user.name }}"
+      become: False
       ignore_errors: True
 
 

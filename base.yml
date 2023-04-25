@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  become: True
   gather_subset:
     - hardware
     - network
@@ -22,14 +23,13 @@
         src: /etc/os-release
         dest: /etc/system-release
         state: link
-      become: True
       tags: ['base']
 
     - name: Get the distrib_id
       shell: |
         cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
       register: distrib_id
-      tags: ['facts']
+      tags: ['facts', 'base', 'system']
 
     - name: Set distrib_id as a fact
       set_fact:
@@ -73,8 +73,7 @@
           register: keys
 
         - name: Copy keys from remote host
-          become: True
-          become_user: "{{ user.name }}"
+          become: False
           delegate_to: 127.0.0.1
           run_once: True
           shell: "scp {{ user.name }}@{{ keyserver }}:~/.ssh/{{ item }} {{ user.home }}/.ssh/{{ item }}"

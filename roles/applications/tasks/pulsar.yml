@@ -6,12 +6,11 @@
         use: auto
         name: pulsar-bin
         state: present
-      become: True
-      become_user: "{{ user.name }}"
 
     - name: install pulsar packages
       shell: pulsar -p install {{ item }}
       with_items:
+        - atom-beautify
         - atom-jinja2
         - blocky
         - color-picker
@@ -23,11 +22,12 @@
         - language-docker
         - language-dotfiles
         - language-markdown
+        - markdown-pdf
+        - markdown-writer
         - open-terminal-here
         - permanent-delete
         - sb-atom-sonic-pi
         - tool-bar
         - vibrant-ink-ruby
 
-  become: True
-  become_user: "{{ user.name }}"
+  become: False
