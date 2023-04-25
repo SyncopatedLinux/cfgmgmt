@@ -79,20 +79,17 @@
         accept_hostkey: yes
         update: yes
         force: no
-      become: True
-      become_user: "{{ user.name }}"
+      become: False
 
     - name: Make and install paru
       shell: "makepkg -si --noconfirm --needed"
       args:
         chdir: "/tmp/paru"
-      become: True
-      become_user: "{{ user.name }}"
+      become: False
 
     - name: clean and update package cache
       shell: "paru -Sc --noconfirm && paru -Syy"
-      become: True
-      become_user: "{{ user.name }}"
+      become: False
 
   when: not paru.stat.exists
   tags: ['paru', 'packages']
@@ -197,6 +194,5 @@
   #       - sxhkd
   #     tags: ['packages']
 
-  become: True
-  become_user: "{{ user.name }}"
+  become: False
   tags: ['packages']

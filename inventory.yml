@@ -20,6 +20,8 @@ all:
         bender:
     workstation:
       hosts:
+        archlabs:
+        avlinux:
         ninjabot:
         soundbot:
           ansible_connection: local

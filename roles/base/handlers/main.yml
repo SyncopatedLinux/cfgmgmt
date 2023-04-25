@@ -5,3 +5,13 @@
     name: sshd
     state: restarted
     enabled: True
+
+- name: reload ufw
+  systemd:
+    name: ufw
+    state: reloaded
+
+- name: reload firewalld
+  shell: |
+    "firewall-cmd --reload"
+  ignore_errors: True

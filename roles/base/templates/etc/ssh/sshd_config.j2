@@ -102,6 +102,9 @@ PrintMotd no
 {% if ansible_distribution == 'Fedora' %}
 #PidFile /var/run/sshd.pid
 {% endif %}
+{% if distrib_id == 'MX' %}
+#PidFile /var/run/sshd.pid
+{% endif %}
 #MaxStartups 10:30:100
 #PermitTunnel no
 #ChrootDirectory none
@@ -120,7 +123,9 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 {% if ansible_distribution == 'Fedora' %}
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
 {% endif %}
-
+{% if distrib_id == 'MX' %}
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+{% endif %}
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
 #	X11Forwarding no

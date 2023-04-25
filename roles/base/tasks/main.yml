@@ -1,55 +1,57 @@
 ---
 
-- import_tasks: user.yml
-  tags: ['user']
+- block:
+    - import_tasks: user.yml
+      tags: ['user']
 
-- import_tasks: create-dirs.yml
+    - import_tasks: create-dirs.yml
 
-- name: install sshd config
-  template:
-    src: etc/ssh/sshd_config.j2
-    dest: /etc/ssh/sshd_config
-    backup: True
-  notify: restart sshd
-  tags: ['sshd']
+    - name: install sshd config
+      template:
+        src: etc/ssh/sshd_config.j2
+        dest: /etc/ssh/sshd_config
+        backup: True
+      notify: restart sshd
+      tags: ['sshd']
 
-- name: Include distro vars
-  include_vars:
-    file: vars/{{ ansible_distribution }}.yml
+    - name: Include distro vars
+      include_vars:
+        file: vars/{{ ansible_distribution }}.yml
 
-- import_tasks: sudoers.yml
-  tags: ['sudoers']
+    - import_tasks: sudoers.yml
+      tags: ['sudoers']
 
-- import_tasks: ruby.yml
-  tags: ['ruby']
+    - import_tasks: ruby.yml
+      tags: ['ruby']
 
-- import_tasks: zshell.yml
-  tags: ['zsh']
+    - import_tasks: zshell.yml
+      tags: ['zsh']
 
-- include_tasks: "distro/Archlinux.yml"
-  when: ansible_distribution == 'Archlinux'
-  tags: ['repo', 'packages', 'mirrors']
+    - include_tasks: "distro/Archlinux.yml"
+      when: ansible_distribution == 'Archlinux'
+      tags: ['repo', 'packages', 'mirrors']
 
-- import_tasks: firewall.yml
-  tags: ['firewall']
+    - import_tasks: firewall.yml
+      tags: ['firewall']
 
-- import_tasks: filesystem.yml
-  when: arch_release == 'rolling'
-  tags: ['filesystem']
+    - import_tasks: filesystem.yml
+      tags: ['filesystem']
 
-- import_tasks: utils.yml
-  tags: ['utils']
+    - import_tasks: utils.yml
+      tags: ['utils']
 
-- import_tasks: updatedb.yml
-  tags: ['updatedb']
+    - import_tasks: updatedb.yml
+      tags: ['updatedb']
 
-- import_tasks: autologin.yml
-  when: autologin|bool
-  tags: ['autologin']
+    - import_tasks: autologin.yml
+      when: autologin|bool
+      tags: ['autologin']
 
-- import_tasks: nvidia.yml
-  when: use_nvidia|default(false)|bool == true
-  tags: ['nvidia']
+    - import_tasks: nvidia.yml
+      when: use_nvidia|default(false)|bool == true
+      tags: ['nvidia']
 
-- import_tasks: grub.yml
-  tags: ['grub']
+    - import_tasks: grub.yml
+      tags: ['grub']
+
+  become: True

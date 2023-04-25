@@ -17,26 +17,38 @@
 
   pre_tasks:
 
-    - name: Set Arch Release
-      set_fact:
-        arch_release: "{{ ansible_facts['lsb']['major_release'] }}"
-      tags: ['facts', 'base', 'system']
-
-    # - name: print release
-    #   debug:
-    #     var: arch_release
-    #   tags: ['facts']
-
-    - name: Include distro vars
-      include_vars:
-        file: vars/{{ ansible_distribution }}.yml
-      tags: ['base']
-
-    - name: Symlink os-release
+    - name: Symlink /etc/os-release to /etc/system-release
       file:
         src: /etc/os-release
         dest: /etc/system-release
         state: link
+      become: True
+      tags: ['base']
+
+    - name: Get the distrib_id
+      shell: |
+        cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
+      register: distrib_id
+      tags: ['facts']
+
+    - name: Set distrib_id as a fact
+      set_fact:
+        distrib_id: "{{ distrib_id.stdout }}"
+      tags: ['facts', 'base', 'system']
+
+    # - name: Set lsb_release
+    #   set_fact:
+    #     lsb_release: "{{ ansible_facts }}"
+    #   tags: ['facts', 'base', 'system']
+
+    - name: print release
+      debug:
+        var: distrib_id
+      tags: ['facts']
+
+    - name: Include distro vars
+      include_vars:
+        file: vars/{{ ansible_distribution }}.yml
       tags: ['base']
 
     - name: Set ansible_home
@@ -104,6 +116,7 @@
           when: supported_march.stdout_lines[0] == 'x86-64-v2'
 
       check_mode: False
+      when: ansible_system_vendor != "QEMU"
       tags: ['base', 'repo', 'packages']
 
   roles:
