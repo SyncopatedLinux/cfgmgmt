@@ -1,5 +1,9 @@
 [global]
+{% if ansible_hostname == 'ninjabot' %}
     font = {{ font.primary.name }} 22
+{% else %}
+    font = {{ font.primary.name }} 14
+{% endif %}
     padding = 1
     frame_color = "{{ colors.primary.status }}"
     frame_width = 2
@@ -128,7 +132,7 @@
 
     icon_path = /usr/share/icons
     icon_theme = "Dracula"
-    enable_recursive_icon_lookup = false
+    enable_recursive_icon_lookup = true
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.

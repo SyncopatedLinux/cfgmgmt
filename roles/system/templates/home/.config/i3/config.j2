@@ -56,8 +56,13 @@ new_float normal
 default_floating_border normal
 hide_edge_borders none
 
+{% if ansible_hostname == 'soundbot' %}
 gaps inner 14
 gaps outer -2
+{% else %}
+gaps inner 8
+gaps outer -2
+{% endif %}
 
 smart_gaps on
 smart_borders on
