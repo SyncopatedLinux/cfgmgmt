@@ -52,9 +52,9 @@ URxvt*internalBorder: 0
 URxvt*externalBorder: 0
 URxvt*letterSpace: -1
 {% if ansible_hostname == 'ninjabot' %}
-URxvt.font: xft:{{ font.mono.name }}:size=12
+URxvt.font: xft:{{ font.primary.name }}:size=12
 {% else %}
-URxvt.font: xft:{{ font.mono.name }}:size=10
+URxvt.font: xft:{{ font.primary.name }}:size=10
 {% endif %}
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard

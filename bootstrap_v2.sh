@@ -90,7 +90,7 @@ read -p "Do you want to copy ssh keys from a remote host? (y/n) " COPY_KEYS
 case $COPY_KEYS in
 	[Yy]* )
 		read -p "Enter the username and hostname of the remote host (e.g. user@example.com): " REMOTE_HOST
-
+    # TODO: running as sudo, installs this in /root/.ssh
 		cd $HOME && scp -r $REMOTE_HOST:~/.ssh .
 		;;
 	[Nn]* )

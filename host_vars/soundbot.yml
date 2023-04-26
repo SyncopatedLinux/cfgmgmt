@@ -23,11 +23,12 @@ i3:
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws9'
-    - '[class="Qsampler"] $ws10'
+    - '[class="REAPER"] $ws8'
+    - '[class="Qsampler"] $ws1'
     - '[class="^Patchage"] $ws10'
-    - '[class="Jalv.select"] $ws10'
-    - '[class="^RaySession$"] $ws10'
+    - '[class="Jalv.select"] $ws1'
+    - '[class="^RaySession$"] $ws1'
+    - '[class="Pulsar"] $ws2'
   workspaces:
     - "$ws1 output DP1-1"
     - "$ws2 output DP1-1"

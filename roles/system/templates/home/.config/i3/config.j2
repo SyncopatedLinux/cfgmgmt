@@ -42,9 +42,9 @@ set $exec_always exec_always --no-startup-id
 ##-------------------- Appearance ---------------------------##
 ###############################################################
 {% if ansible_hostname == 'ninjabot' %}
-font pango:{{ font.primary.name }} 10
-{% else %}
 font pango:{{ font.primary.name }} 12
+{% else %}
+font pango:{{ font.primary.name }} 10
 {% endif %}
 
 for_window [class="^.*"] border pixel 1
@@ -107,7 +107,7 @@ client.background {{ colors.primary.background }}
 bar {
         id bar-primary
 {% if ansible_hostname == 'ninjabot' %}
-        font pango:{{ font.primary.name }} 10
+        font pango:{{ font.primary.name }} 12
 {% else %}
         font pango:{{ font.primary.name }} 12
 {% endif %}
@@ -136,7 +136,7 @@ bar {
 
         workspace_min_width 50
 
-        height 28
+        height 26
 {% if i3.tray_output != 'default' %}
         tray_output "{{ i3.tray_output }}"
 {% else %}
