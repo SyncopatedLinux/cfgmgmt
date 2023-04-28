@@ -19,6 +19,7 @@ font:
   - gnu-free-fonts
   - noto-fonts-emoji
   - ttf-devicons
+  - ttf-firacode-nerd
   - ttf-font-awesome
   - ttf-input
   - ttf-jetbrains-mono

@@ -5,5 +5,4 @@ roles/repo/files/pkgbuilds/.*
 pkgbuilds/
 logs/
 playbooks/facts/
-#group_vars/all.yml
-#host_vars/*
+*.json

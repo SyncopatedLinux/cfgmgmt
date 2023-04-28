@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  become: True
   gather_subset:
     - hardware
     - network
@@ -17,16 +18,37 @@
 
   pre_tasks:
 
-    - name: Include distro vars
-      include_vars:
-        file: vars/{{ ansible_distribution }}.yml
-      tags: ['base']
-
-    - name: Symlink os-release
+    - name: Symlink /etc/os-release to /etc/system-release
       file:
         src: /etc/os-release
         dest: /etc/system-release
         state: link
+      tags: ['base']
+
+    - name: Get the distrib_id
+      shell: |
+        cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
+      register: distrib_id
+      tags: ['facts', 'base', 'system']
+
+    - name: Set distrib_id as a fact
+      set_fact:
+        distrib_id: "{{ distrib_id.stdout }}"
+      tags: ['facts', 'base', 'system']
+
+    # - name: Set lsb_release
+    #   set_fact:
+    #     lsb_release: "{{ ansible_facts }}"
+    #   tags: ['facts', 'base', 'system']
+
+    - name: print release
+      debug:
+        var: distrib_id
+      tags: ['facts']
+
+    - name: Include distro vars
+      include_vars:
+        file: vars/{{ ansible_distribution }}.yml
       tags: ['base']
 
     - name: Set ansible_home
@@ -51,8 +73,7 @@
           register: keys
 
         - name: Copy keys from remote host
-          become: True
-          become_user: "{{ user.name }}"
+          become: False
           delegate_to: 127.0.0.1
           run_once: True
           shell: "scp {{ user.name }}@{{ keyserver }}:~/.ssh/{{ item }} {{ user.home }}/.ssh/{{ item }}"
@@ -73,28 +94,6 @@
 
       ignore_errors: "{{ ansible_check_mode }}"
       tags: ['ssh']
-
-    - block:
-        - name: Check -march support
-          shell: /lib/ld-linux-x86-64.so.2 --help | grep supported|xargs|awk '{print $1}'
-          register: supported_march
-
-        - name: Check output from grep command
-          debug:
-            msg: "{{ supported_march }}"
-
-        - name: Set architecture
-          set_fact:
-            architecture: "x86-64-v3"
-          when: supported_march.stdout_lines[0] == 'x86-64-v3'
-
-        - name: Set architecture
-          set_fact:
-            architecture: "x86-64"
-          when: supported_march.stdout_lines[0] == 'x86-64-v2'
-
-      check_mode: False
-      tags: ['base', 'repo', 'packages']
 
   roles:
 

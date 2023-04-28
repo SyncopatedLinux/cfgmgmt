@@ -2,6 +2,10 @@
 
 backgrounds: /usr/share/backgrounds/ohmannium
 
+autologin: False
+shell_login: False
+use_nvidia: False
+
 font:
   primary:
     name: Hack Nerd Font
@@ -10,7 +14,7 @@ font:
   glyphs:
     name: Font Awesome 6 Free Regular
   mono:
-    name: mononoki NFM
+    name: FireCode Nerd Font
 
 # theme options
 theme:
@@ -18,7 +22,10 @@ theme:
   icons: ArchLabs-Dark
   cursor: xcursor-breeze
   kvantum: KvGnomeDark
-  qtstyle: fusion
+  qtstyle: kvantum-dark
+
+ohmyzsh:
+  theme: minimal-terminal-prompt
 
 i3:
   tray_output: default

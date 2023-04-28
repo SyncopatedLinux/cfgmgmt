@@ -40,4 +40,60 @@
 
       notify: reload firewalld
 
+  when: distrib_id == 'Arch' or distrib_id == 'Fedora'
+  ignore_errors: "{{ ansible_check_mode }}"
+
+
+# Hello. Can you refactor this Ansible task?
+# Please use ufw instead of firewalld
+
+# Sure, here's the refactored Ansible task using ufw instead of firewalld:
+
+- block:
+    - name: Enable and start ufw
+      systemd:
+        name: ufw
+        state: started
+        enabled: yes
+
+    - name: Permit traffic to common services
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: "any"
+      with_items:
+        - 'ntp'
+        - 'rsync'
+        - 'ssh'
+      notify: reload ufw
+      tags: ['nfs', 'ntp', 'rsyncd', 'ssh']
+
+    - name: Permit tcp traffic to jacktrip, barrier and qmidinet
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      with_items:
+        - '6666'
+        - '7905'
+        - '7906'
+        - '24800'
+
+    - name: Permit udp traffic to jacktrip, barrier and qmidinet
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: udp
+      with_items:
+        - '4464'
+        - '4560'
+        - '8000'
+        - '12101'
+        - '21928'
+        - '21929'
+        - '50924'
+        - '55311'
+      notify: reload ufw
+
+  when: distrib_id == 'MX' or distrib_id == 'Debian'
   ignore_errors: "{{ ansible_check_mode }}"

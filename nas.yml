@@ -1,13 +1,13 @@
 ---
 
 - name: setup nas
-  hosts: nas
+  hosts: all
   gather_subset:
     - hardware
     - network
 
   vars_files:
-    - "vars/distro/{{ ansible_distribution }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
 
   vars:
     nfs:
@@ -21,19 +21,16 @@
 
   pre_tasks:
 
+    - name: Include distro vars
+      include_vars:
+        file: vars/{{ ansible_distribution }}.yml
+      tags: ['base']
+
   tasks:
 
-    - import_tasks: nfs.yml
-      when: nfs_host is defined
-      tags: ['nfs']
-
-    - import_tasks: rsyncd.yml
-      when: rsyncd_host is defined
-      tags: ['rsyncd']
-
-    - import_tasks: musikcube.yml
-      when: musikcube_host is defined
-      tags: ['musikcube']
+    - import_role:
+        name: network
+      when: nas_host|bool
 
     - import_role:
         name: nginx

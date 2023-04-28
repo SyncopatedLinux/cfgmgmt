@@ -16,7 +16,7 @@
     - save.sh
   tags: ['raysession']
 
-- include_tasks: Pulsar.yml
+- include_tasks: pulsar.yml
   when: install_pulsar|default(false)|bool == true
   tags: ['pulsar']
 

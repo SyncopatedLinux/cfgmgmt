@@ -3,7 +3,7 @@
 declare -rx archive=REAPER-$(date +%Y%m%d%H).tar.gz
 declare -rx destination="$HOME/Library/reaper/"
 
-if [[ -d $detination ]]; then
+if [[ -d $destination ]]; then
 	if [[ -f $destination/$archive ]]; then
   	echo "already backed up for the hour, hit o to overwrite"
 	else
@@ -19,4 +19,3 @@ if [[ -d $detination ]]; then
 else
 	echo "library not on this host, skipping task"
 fi
-		
