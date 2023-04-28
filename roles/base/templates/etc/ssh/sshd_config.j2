@@ -32,7 +32,7 @@
 PermitRootLogin prohibit-password
 #StrictModes yes
 MaxAuthTries 3
-MaxSessions 10
+#MaxSessions 10
 
 #PubkeyAuthentication yes
 
@@ -75,7 +75,7 @@ KbdInteractiveAuthentication no
 # be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
+# the setting of "PermitRootLogin prohibit-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
@@ -84,11 +84,11 @@ UsePAM yes
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-#X11Forwarding no
+X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
-PrintMotd no # pam does that
+PrintMotd no
 #PrintLastLog yes
 #TCPKeepAlive yes
 #PermitUserEnvironment no
@@ -96,19 +96,15 @@ PrintMotd no # pam does that
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
 #UseDNS no
-
 {% if ansible_distribution == 'Archlinux' %}
 #PidFile /run/sshd.pid
 {% endif %}
-
-{% if ansible_distribution == 'Debian' %}
-#PidFile /var/run/sshd.pid
-{% endif %}
-
 {% if ansible_distribution == 'Fedora' %}
 #PidFile /var/run/sshd.pid
 {% endif %}
-
+{% if distrib_id == 'MX' %}
+#PidFile /var/run/sshd.pid
+{% endif %}
 #MaxStartups 10:30:100
 #PermitTunnel no
 #ChrootDirectory none
@@ -116,7 +112,7 @@ PrintMotd no # pam does that
 
 # no default banner path
 #Banner none
-# Allow client to pass locale environment variables
+
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
@@ -124,17 +120,15 @@ AcceptEnv LANG LC_*
 Subsystem	sftp	/usr/lib/ssh/sftp-server
 {% endif %}
 
-{% if ansible_distribution == 'Debian' %}
-Subsystem	sftp	/usr/lib/openssh/sftp-server
-{% endif %}
-
 {% if ansible_distribution == 'Fedora' %}
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
 {% endif %}
+{% if distrib_id == 'MX' %}
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+{% endif %}
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-X11Forwarding no
-
+#	X11Forwarding no
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server

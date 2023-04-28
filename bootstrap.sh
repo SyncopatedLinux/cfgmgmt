@@ -14,7 +14,7 @@ trap ctrl_c INT SIGINT SIGTERM ERR EXIT
 tput reset
 
 if [[ "${EUID}" -eq 0 ]]; then
-  echo "please run with sudo. exiting"
+  echo "please run as user. exiting"
   exit
 fi
 
@@ -63,28 +63,19 @@ wipe="true"
 #########################################################################
 
 BOOTSTRAP_PKGS=(
-  'ansible'
   'aria2'
-  'base-devel'
   'bat'
   'bc'
+  'cargo'
   'ccache'
   'cmake'
-  'fd'
   'dialog'
   'git'
   'git-lfs'
-  'gum'
   'htop'
   'lnav'
   'neovim'
   'net-tools'
-  'openssh'
-  'python-pip'
-  'reflector'
-  'ruby-bundler'
-  'rubygems'
-  'rust'
   'unzip'
   'wget'
   'zsh'
@@ -157,9 +148,9 @@ else
   say "ok then" $RED
 fi
 
-if [ ! -d $HOME/.local/share/yadm/repo.git ]; then
-  cd $HOME && yadm clone $dotsrepo
-else
-  cd $HOME && yadm fetch && yadm pull
-  yadm bootstrap
-fi
+# if [ ! -d $HOME/.local/share/yadm/repo.git ]; then
+#   cd $HOME && yadm clone $dotsrepo
+# else
+#   cd $HOME && yadm fetch && yadm pull
+#   yadm bootstrap
+# fi

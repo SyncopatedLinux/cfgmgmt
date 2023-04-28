@@ -24,13 +24,13 @@ if [ ! -d /tmp/reaper ]; then
 	mkdir -pv /tmp/reaper
 fi
 
+
 if [ -x "$(command -v autorandr)" ]; then
   autorandr -l "$(autorandr --detected)"
   sleep 0.5
 else
   echo "autorandr not found"
 fi
-
 
 #note: "~"" does not expand in quotes
 if [ -f ~/.fehbg ]; then

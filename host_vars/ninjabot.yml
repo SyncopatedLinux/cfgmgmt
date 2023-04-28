@@ -1,20 +1,33 @@
 ---
 
+autologin: False
+shell_login: False
+
 use_nvidia: true
+
+use_zen_kernel: false
+use_rt_kernel: false
+
+install_pulsar: True
+
+ohmyzsh:
+  theme: sonicradish
 
 i3:
   autostart:
-    - "/usr/bin/barriers -f --no-tray --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
-    - "hexchat --minimize=2"
+    # - "/usr/bin/barriers -f --no-tray --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
+    - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
+    # - "hexchat --minimize=2"
   tray_output: "DVI-I-1"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws9'
-    - '[class="Qsampler"] $ws10'
+    - '[class="REAPER"] $ws8'
+    - '[class="Qsampler"] $ws1'
     - '[class="^Patchage"] $ws10'
-    - '[class="Jalv.select"] $ws10'
-    - '[class="^RaySession$"] $ws10'
+    - '[class="Pulsar"] $ws2'
+    - '[class="Jalv.select"] $ws1'
+    - '[class="^RaySession$"] $ws1'
   workspaces:
     - "$ws1 output DVI-I-1"
     - "$ws2 output DVI-I-1"

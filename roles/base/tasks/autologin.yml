@@ -17,7 +17,7 @@
         mode: '0644'
         backup: yes
 
-  when: shell_login|default(True) == True
+  when: shell_login|bool
 
 - block:
     - name: Install lightdm

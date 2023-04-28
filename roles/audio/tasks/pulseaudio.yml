@@ -1,12 +1,5 @@
 ---
 
-- name: Ensure pulse config directory exists
-  file:
-    path: "{{ user.home }}/.config/pulse"
-    state: directory
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
-
 - name: Update pulseaudio configs
   copy:
     src: "etc/pulse/{{ item }}"
@@ -20,11 +13,7 @@
     - daemon.conf
     - default.pa
     - system.pa
-
-- name: Ensure /etc/pulse/default.pa.d exists
-  file:
-    path: /etc/pulse/default.pa.d
-    state: directory
+  become: False
 
 - name: Install pulseaudio bluetooth config
   copy:

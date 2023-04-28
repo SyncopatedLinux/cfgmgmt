@@ -1,55 +1,17 @@
 ---
 
-- name: Ensure these directories exist
-  file:
-    path: "{{ user.home }}/{{ item }}"
-    state: directory
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
-    mode: '0755'
-    recurse: False
-  with_items:
-    - .config/Debauchee
-    - .config/Kvantum
-    - .config/Thunar
-    - .config/alacritty
-    - .config/dunst
-    - .config/gtk-3.0
-    - .config/gtk-4.0
-    - .config/htop
-    - .config/i3
-    - .config/i3status-rust/themes/
-    - .config/kitty
-    - .config/nitrogen
-    - .config/picom
-    - .config/qt5ct/colors
-    - .config/qt6ct/colors
-    - .config/qutebrowser
-    - .config/sxhkd
-    - .config/tilda
-    - .config/zim
-    - .local/share/zim/templates/plugins
-    - .guake
-    - .sonic-pi/config
-
-- name: Synchronize templates - shell
+- name: Syncronize templates - shell
   template:
-    src: "home/{{ item }}.j2"
-    dest: "{{ user.home }}/{{ item }}"
+    src: "home/{{ item[1] }}.j2"
+    dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: '0644'
     backup: yes
-  with_items:
-    - .aliases
-    - .profile
-    - .ualiases
-    - .zlogin
-    - .zprofile
-    - .zshenv
-    - .zshrc
-    - .zshrc.local
-  tags: ['zsh', 'shell', 'profile', 'alias']
+  with_nested:
+    - [ '{{ user.home }}', '/root' ]
+    - [ '.aliases', '.profile', '.ualiases', '.zlogin', '.zprofile', '.zshenv', '.zshrc', '.zshrc.local' ]
+  tags: ['shell', 'profile', 'alias' ]
 
 - name: Synchronize templates - x11
   template:
@@ -105,37 +67,31 @@
     - .config/kitty/start.conf
   tags: ['terminal', 'alacritty', 'kitty', 'tilda']
 
-- name: Synchronize templates - gtk
+- name: Syncronize templates - gtk
   template:
-    src: "home/{{ item }}.j2"
-    dest: "{{ user.home }}/{{ item }}"
+    src: "home/{{ item[1] }}.j2"
+    dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: '0644'
     backup: yes
-  with_items:
-    - .config/gtk-3.0/bookmarks
-    - .config/gtk-3.0/gtk.css
-    - .config/gtk-3.0/settings.ini
-    - .config/gtk-4.0/settings.ini
-    - .gtkrc-2.0
-  tags: ['gtk', 'theme']
+  with_nested:
+    - [ '{{ user.home }}', '/root' ]
+    - [ '.config/gtk-3.0/bookmarks', '.config/gtk-3.0/gtk.css', '.config/gtk-3.0/settings.ini', '.config/gtk-4.0/settings.ini', '.gtkrc-2.0' ]
+  tags: ['gtk']
 
-- name: Synchronize templates - qt
+- name: Syncronize templates - qt
   template:
-    src: "home/{{ item }}.j2"
-    dest: "{{ user.home }}/{{ item }}"
+    src: "home/{{ item[1] }}.j2"
+    dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: '0644'
     backup: yes
-  with_items:
-    - .config/Kvantum/kvantum.kvconfig
-    - .config/qt5ct/colors/syncopated.conf
-    - .config/qt5ct/qt5ct.conf
-    - .config/qt6ct/colors/syncopated.conf
-    - .config/qt6ct/qt6ct.conf
-  tags: ['qt', 'theme']
+  with_nested:
+    - [ '{{ user.home }}', '/root' ]
+    - [ '.config/Kvantum/kvantum.kvconfig', '.config/qt5ct/colors/syncopated.conf', '.config/qt5ct/qt5ct.conf', '.config/qt6ct/colors/syncopated.conf', '.config/qt6ct/qt6ct.conf' ]
+  tags: ['qt']
 
 - name: Synchronize templates - applications
   template:
@@ -165,6 +121,13 @@
     mode: '0755'
   when: x_config.changed
   tags: ['x11', 'profile']
+
+- name: Ensure root home is owned by root
+  file:
+    path: /root/
+    owner: root
+    group: root
+    recurse: True
 
 - name: Reload i3
   command: bash -lc "i3-msg -s /run/user/{{ user.uid }}/i3/ipc-socket.* reload"

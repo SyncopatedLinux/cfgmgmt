@@ -23,17 +23,16 @@ assign [title="jkmeter"] $ws1
 # assign [title="zita-mu1-0.3.3"] $ws1
 assign [title="zita-rev1"] $ws1
 
-
 # assign [class="(?i)pulsar"] $ws5
-assign [class="Bipscript\ IDE"] $ws5
-assign [class="Sonic\ Pi"] $ws5
+assign [class="Bipscript\ IDE"] $ws2
+assign [class="Sonic\ Pi"] $ws2
 
 assign [class="Guitarix"] $ws5
 assign [class="Non-Sequencer"] $w5
 assign [class="^FMIT$"] $ws5
 assign [class="^Hydrogen"] $ws5
 assign [class="^Seq192"] $ws5
-assign [class="^Timemachine$"] $ws5
+assign [class="^Timemachine$"] $ws10
 
 assign [class="Mixxx"] $ws7
 
@@ -48,11 +47,11 @@ assign {{ app }}
 {% else %}
 assign [class="Jalv.gtk" title="Helm"] $ws6
 assign [class="qmidiarp"] $ws6
-assign [class="REAPER"] $ws9
-assign [class="Qsampler"] $ws10
+assign [class="REAPER"] $ws8
+assign [class="Qsampler"] $ws1
 assign [class="^Patchage"] $ws10
-assign [class="Jalv.select"] $ws10
-assign [class="^RaySession$"] $ws10
+assign [class="Jalv.select"] $ws1
+assign [class="^RaySession$"] $ws1
 {% endif %}
 #############################################################################
 #----------------------------- Window Assignments -----------------------#
@@ -100,6 +99,7 @@ for_window [class="checklog"] floating enable, move to workspace 5, resize set 2
 for_window [class="govna"] floating enable, resize set 678 491, move to position center, focus
 for_window [class="brightness"] floating enable, resize set 1007 631, move to position center, focus
 for_window [class="ghissue"] floating enable, resize set 626 503, move to position center, focus
+for_window [class="weather"] floating enable, resize set 757 647, move output DVI-D-0, move to position center, focus
 
 ######################################
 #       ---{ scratchpad }---
@@ -169,7 +169,7 @@ for_window [title="(?i)EBU R128 Meter"] border normal, floating enable, move pos
 for_window [title="(?i)x42-comp"] border normal, floating enable, resize set 358 504, move position 658px 46
 for_window [title="(?i)x42-dpl"] border normal, floating enable, move position 261px 1807
 for_window [title="(?i)Luftikus"] border normal, floating enable, move position 192px 619
-for_window [class="(?i)zita-mu1"] border normal, floating enable, resize set 980 90, move position 44px 1916
+for_window [class="(?i)zita-mu1"] border normal, floating enable, resize set 980 90, move position 1951px 906
 for_window [title="(?i)x42-eq"] floating disable
 for_window [title="^zita-rev1"] border normal, floating enable
 

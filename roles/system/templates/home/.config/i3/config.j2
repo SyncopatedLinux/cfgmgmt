@@ -41,8 +41,11 @@ set $exec_always exec_always --no-startup-id
 ###############################################################
 ##-------------------- Appearance ---------------------------##
 ###############################################################
-
+{% if ansible_hostname == 'ninjabot' %}
 font pango:{{ font.primary.name }} 12
+{% else %}
+font pango:{{ font.primary.name }} 10
+{% endif %}
 
 for_window [class="^.*"] border pixel 1
 default_border pixel 1
@@ -53,8 +56,13 @@ new_float normal
 default_floating_border normal
 hide_edge_borders none
 
+{% if ansible_hostname == 'soundbot' %}
 gaps inner 14
 gaps outer -2
+{% else %}
+gaps inner 8
+gaps outer -2
+{% endif %}
 
 smart_gaps on
 smart_borders on
@@ -98,9 +106,11 @@ client.background {{ colors.primary.background }}
 
 bar {
         id bar-primary
-
-        font pango:{{ font.primary.name }} Bold 14
-
+{% if ansible_hostname == 'ninjabot' %}
+        font pango:{{ font.primary.name }} 12
+{% else %}
+        font pango:{{ font.primary.name }} 12
+{% endif %}
         modifier none
 
         workspace_buttons yes
@@ -124,9 +134,9 @@ bar {
 
         status_command /usr/bin/i3status-rs ~/.config/i3status-rust/config.toml
 
-        workspace_min_width 60
+        workspace_min_width 50
 
-        height 24
+        height 26
 {% if i3.tray_output != 'default' %}
         tray_output "{{ i3.tray_output }}"
 {% else %}

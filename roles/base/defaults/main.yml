@@ -1,5 +1,22 @@
 ---
 
-autologin: True
-shell_login: True
+autologin: False
+shell_login: False
+
 journal_level: notice
+
+use_chaotic: false
+
+kernel:
+  mainline:
+    - linux
+    - linux-headers
+    - dkms
+  zen:
+    - linux-zen
+    - linux-zen-headers
+    - dkms
+  rt:
+    - linux-rt-lts
+    - linux-rt-lts-headers
+    - dkms

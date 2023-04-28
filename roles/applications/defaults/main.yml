@@ -42,8 +42,8 @@ raysession:
 
 reaper:
   url: "http://reaper.fm/files/6.x/"
-  file: reaper675_linux_x86_64.tar.xz
-  version: v6.75
+  file: reaper679_linux_x86_64.tar.xz
+  version: v6.79
 
 scala:
   url: "http://www.huygens-fokker.org/software/"

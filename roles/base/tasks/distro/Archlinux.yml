@@ -1,5 +1,30 @@
 ---
 
+#TODO: set defaults to "auto" and "native"
+
+- block:
+    - name: Check -march support
+      shell: /lib/ld-linux-x86-64.so.2 --help | grep supported|xargs|awk '{print $1}'
+      register: supported_march
+
+    - name: Check output from grep command
+      debug:
+        msg: "{{ supported_march }}"
+
+    - name: Set architecture
+      set_fact:
+        architecture: "x86-64-v3"
+      when: supported_march.stdout_lines[0] == 'x86-64-v3'
+
+    - name: Set architecture
+      set_fact:
+        architecture: "x86-64"
+      when: supported_march.stdout_lines[0] == 'x86-64-v2'
+
+  check_mode: False
+  when: ansible_system_vendor != "QEMU"
+  tags: ['base', 'repo', 'packages']
+
 - name: Add syncopated repo key
   shell: |
     if [[ -z "$(pacman-key --list-keys | grep syncopated 2>/dev/null)" ]];
@@ -79,18 +104,18 @@
         accept_hostkey: yes
         update: yes
         force: no
+      become: False
 
     - name: Make and install paru
       shell: "makepkg -si --noconfirm --needed"
       args:
         chdir: "/tmp/paru"
+      become: False
 
     - name: clean and update package cache
-      shell: |
-        paru -Sc --noconfirm && paru -Syy
+      shell: "paru -Sc --noconfirm && paru -Syy"
+      become: False
 
-  become: True
-  become_user: "{{ user.name }}"
   when: not paru.stat.exists
   tags: ['paru', 'packages']
 
@@ -135,6 +160,29 @@
 
 - block:
 
+    - name: install mainline kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.mainline }}"
+        state: present
+      when:
+        - use_rt_kernel|default(false)|bool == false
+        - use_zen_kernel|default(false)|bool == false
+
+    - name: install zen kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.zen }}"
+        state: present
+      when: use_zen_kernel|default(false)|bool == true
+
+    - name: install realtime kernel and headers
+      aur:
+        use: paru
+        name: "{{ kernel.rt }}"
+        state: present
+      when: use_rt_kernel|default(false)|bool == true
+
     - name: Include package vars
       include_vars:
         dir: packages/{{ ansible_distribution }}
@@ -171,6 +219,5 @@
   #       - sxhkd
   #     tags: ['packages']
 
-  become: True
-  become_user: "{{ user.name }}"
+  become: False
   tags: ['packages']

@@ -1,5 +1,10 @@
+{% if use_nvidia == true %}
+VDPAU_DRIVER="nvidia"
+LIBVA_DRIVER_NAME="vdpau"
+{% else %}
 {% if ansible_processor[1] == "GenuineIntel" %}
 LIBVA_DRIVER_NAME="i965"
+{% endif %}
 {% endif %}
 # fix for missing font glyphs in GTK applications
 COGL_ATLAS_DEFAULT_BLIT_MODE="framebuffer"

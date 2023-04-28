@@ -1,28 +1,42 @@
 ---
 
+use_rt_kernel: true
+use_zen_kernel: false
+
 install:
   libvirt:
     qemu_full: True
+
+install_pulsar: false
+
+ohmyzsh:
+  theme: kphoen
+
+nas_host: True
+nfs_host: True
+
 i3:
   autostart:
-    - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
+    # - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
+    - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
   tray_output: "primary"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws9'
-    - '[class="Qsampler"] $ws10'
+    - '[class="REAPER"] $ws8'
+    - '[class="Qsampler"] $ws1'
     - '[class="^Patchage"] $ws10'
-    - '[class="Jalv.select"] $ws10'
-    - '[class="^RaySession$"] $ws10'
+    - '[class="Jalv.select"] $ws1'
+    - '[class="^RaySession$"] $ws1'
+    - '[class="Pulsar"] $ws2'
   workspaces:
-    - "$ws1 output eDP1"
-    - "$ws2 output eDP1"
-    - "$ws3 output eDP1"
-    - "$ws4 output HDMI1"
-    - "$ws5 output HDMI1"
-    - "$ws6 output HDMI1"
-    - "$ws7 output HDMI1"
-    - "$ws8 output HDMI1"
-    - "$ws9 output HDMI1"
-    - "$ws10 output HDMI1"
+    - "$ws1 output DP1-1"
+    - "$ws2 output DP1-1"
+    - "$ws3 output DP1-1"
+    - "$ws4 output DP1-1"
+    - "$ws5 output DP1-1"
+    - "$ws6 output DP1-1"
+    - "$ws7 output DP1-1"
+    - "$ws8 output DP1-1"
+    - "$ws9 output DP1-1"
+    - "$ws10 output eDP1"

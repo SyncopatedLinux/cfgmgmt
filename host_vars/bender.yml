@@ -1,0 +1,8 @@
+---
+
+ohmyzsh:
+  theme: sonicradish
+
+nas_host: True
+nfs_host: True
+musikcube_host: True

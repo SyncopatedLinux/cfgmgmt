@@ -34,7 +34,9 @@
 
     - name: Rebuild ramdisk environment if a change was made.
       shell: |
-        mkinitcpio -P
+        if [ -x "$(command -v mkinitcpio)" ]; then
+          mkinitcpio -P
+        fi
       when: mkinit.changed
       tags: ['initram']
 
