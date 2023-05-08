@@ -26,10 +26,6 @@
 - import_tasks: zshell.yml
   tags: ['zsh']
 
-- include_tasks: "distro/Archlinux.yml"
-  when: ansible_distribution == 'Archlinux'
-  tags: ['repo', 'packages', 'mirrors']
-
 - import_tasks: firewall.yml
   tags: ['firewall']
 
