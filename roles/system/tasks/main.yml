@@ -32,12 +32,8 @@
 - import_tasks: menu.yml
   tags: ['menu']
 
-- name: Enable input-remapper service
-  systemd:
-    name: input-remapper
-    daemon_reload: yes
-    enabled: True
-    state: started
+- import_tasks: input-remapper.yml
+  tags: ['input-remapper']
 
 - name: Set XDG env vars
   copy:
