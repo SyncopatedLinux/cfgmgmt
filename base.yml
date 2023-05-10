@@ -97,6 +97,9 @@
 
   roles:
 
+    - role: distro
+      tags: ['distro']
+
     - role: base
       tags: ['base']
 

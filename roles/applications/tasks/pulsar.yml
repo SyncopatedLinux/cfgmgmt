@@ -1,11 +1,11 @@
 ---
 
 - block:
-    - name: install pulsar
-      aur:
-        use: auto
-        name: pulsar-bin
-        state: present
+    # - name: install pulsar
+    #   aur:
+    #     use: auto
+    #     name: pulsar-bin
+    #     state: present
 
     - name: install pulsar packages
       shell: pulsar -p install {{ item }}

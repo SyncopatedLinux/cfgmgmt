@@ -1,0 +1,40 @@
+---
+
+# - name: Install input-remapper package
+#   apt:
+#     deb: "https://github.com/sezanzeb/input-remapper/releases/download/2.0.0/input-remapper-2.0.0.deb"
+#     state: present
+#   when: "'Debian' in ansible_distribution"
+
+- name: Install evdev module
+  pip:
+    name: evdev
+    executable: pip3
+    state: present
+
+- name: Remove key-mapper module
+  pip:
+    name: key-mapper
+    executable: pip3
+    state: absent
+
+- name: Clone input-remapper repository
+  vars:
+    input_remapper_version: "2.0.0" # replace with desired version
+  git:
+    repo: https://github.com/sezanzeb/input-remapper.git
+    version: "{{ input_remapper_version }}"
+    dest: /tmp/input-remapper
+  register: git_clone_result
+
+- name: Install input-remapper using python3 setup
+  command: >
+    sh -c 'cd /tmp/input-remapper &&
+           python3 setup.py install'
+
+- name: Enable input-remapper service
+  systemd:
+    name: input-remapper
+    daemon_reload: yes
+    enabled: True
+    state: started

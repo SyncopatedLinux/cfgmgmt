@@ -1,0 +1,126 @@
+---
+
+packages:
+  networkmanager:
+    - network-manager
+    - network-manager-openvpn
+  bluetooth:
+    - bluez
+    - bluez-tools
+  system:
+    # - gendesk
+    # - gum
+    # - lightdm
+    # - python3-pymupdf
+    # - waf
+    - aria2
+    - atool
+    - autofs
+    - autojump
+    - bat
+    - bc
+    - bibutils
+    - bind9
+    - bluez
+    - brightnessctl
+    - build-essential
+    - ccache
+    - cmake
+    - dialog
+    - dmidecode
+    - etherwake
+    - exa
+    - faad
+    - fasd
+    - fd-find
+    - firewalld
+    - fwupd
+    - fzf
+    - git
+    - git-core
+    - git-lfs
+    - gnome-keyring
+    - help2man
+    - htop
+    - hunspell
+    - iftop
+    - inetutils-ping
+    - initramfs-tools
+    - iotop
+    - jq
+    - kitty
+    - libaribb24-0
+    - libbluray-dev
+    - libboost-all-dev
+    - libc6-dev
+    - libcppunit-dev
+    - libcrypt1
+    - libev-dev
+    - libgit2-dev
+    - libgl1-mesa-dev
+    - libgme-dev
+    - libgtkmm-2.4-1v5
+    - libgtkmm-3.0-1v5
+    - libimlib2-dev
+    - libjansson-dev
+    - libmad0-dev
+    - libnm-dev
+    - libnma-dev
+    - libopus-dev
+    - libpoppler-dev
+    - libsamplerate0-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - libsuil-dev
+    - libtag1-dev
+    - libtesseract-dev
+    - libtool
+    - libunistring-dev
+    - libvdpau-dev
+    - libxml2-dev
+    - libzip-dev
+    - linux-cpupower
+    - lnav
+    - lsof
+    - lua5.3
+    - lzip
+    - man-db
+    - manpages
+    - mdadm
+    - mediainfo
+    - mlocate
+    - most
+    - ncdu
+    - ncurses-term
+    - net-tools
+    - nfs-common
+    - npm
+    - numlockx
+    - openssl
+    - pandoc
+    - pcscd
+    - python3-i3ipc
+    - python3-pip
+    - python3-setuptools
+    - python3-ueberzug
+    - r-base
+    - ranger
+    - ripgrep
+    - rsync
+    - rtirq-init
+    - rtkit
+    - ruby-bundler
+    - rubygems
+    - smartmontools
+    - sndio-tools
+    - stunnel4
+    - timeshift
+    - tuned
+    - udisks2
+    - usbutils
+    - w3m
+    - wget
+    - xdg-user-dirs
+    - xz-utils
+    - zlib1g-dev
+    - zoxide
