@@ -53,6 +53,7 @@ elif [ -f /etc/redhat-release ]; then
 fi
 
 
+
 # and so it begins...
 wipe && say "hello!\n" $GREEN && sleep 0.5
 
@@ -101,6 +102,38 @@ case $COPY_KEYS in
 		;;
 esac
 
+
+say "-----------------------------------------------\n" $BLUE
+say "installing third party pacman keys" $BLUE
+say "-----------------------------------------------\n" $BLUE
+
+# clean cache
+pacman -Scc --noconfirm > /dev/null
+
+# install repository keys
+if [[ ! -z "$(pacman-key --list-keys | grep syncopated 2>/dev/null)" ]];
+then
+  printf "key already installed"
+else
+  printf "adding syncopated gpg to pacman db"
+  sleep 0.5
+  curl -s http://soundbot.hopto.org/syncopated.gpg | sudo pacman-key --add -
+  sudo pacman-key --lsign-key 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A > /dev/null
+  sudo pacman -Sy --noconfirm > /dev/null
+fi
+
+if [[ ! -z "$(pacman-key --list-keys | grep proaudio 2>/dev/null)" ]];
+then
+  printf "key already installed"
+else
+  printf "adding OSAMC gpg to pacman db"
+  sleep 0.5
+  curl -s https://arch.osamc.de/proaudio/osamc.gpg | sudo pacman-key --add -
+  sudo pacman-key --lsign-key 762AE5DB2B38786364BD81C4B9141BCC62D38EE5 > /dev/null
+  sudo pacman -Sy --noconfirm > /dev/null
+fi
+
+
 say "-----------------------------------------------\n" $BLUE
 
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
@@ -142,22 +175,28 @@ say "remove the system package and install with pip" $BLUE
 say "as of date, pip will install ansible 2.14.5" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
-case $distro in
-	Debian|Raspbian|MX)
-		if [ -x $(apt list --installed | grep ansible) ]; then
-			apt-get remove -y ansible --quiet
-		fi
-		;;
-	Arch|Manjaro)
-		if [ -x $(pacman -Q | grep ansible) ]; then
-			pacman -Rdd ansible --noconfirm --quiet
-		fi
-		;;
-	*)
-		echo "Unsupported distribution: $distro"
-		exit 1
-		;;
-esac
+if [ -x "$(command -v ansible)" ]; then
+  case $distro in
+  	Debian|Raspbian|MX)
+  			if apt-get remove -y ansible --quiet; then
+  				echo "Ansible has been removed successfully."
+  			else
+  				echo "Failed to remove Ansible."
+  			fi
+  		;;
+  	Arch|Manjaro)
+  			if pacman -Rdd ansible --noconfirm; then
+  				echo "Ansible has been removed successfully."
+  			else
+  				echo "Failed to remove Ansible."
+  			fi
+  		;;
+  	*)
+  		echo "Unsupported distribution: $distro"
+  		exit 1
+  		;;
+  esac
+fi
 
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
 say "\n-----------------------------------------------" $BLUE
@@ -207,6 +246,7 @@ BOOTSTRAP_PKGS=(
   'net-tools'
   'unzip'
   'wget'
+  'x11-ssh-askpass'
   'zsh'
 )
 

@@ -1,9 +1,8 @@
 ---
 
-- import_tasks: user.yml
-  tags: ['user']
-
-- import_tasks: create-dirs.yml
+- name: Include distro vars
+  include_vars:
+    file: vars/{{ ansible_distribution }}.yml
 
 - name: install sshd config
   template:
@@ -12,16 +11,6 @@
     backup: True
   notify: restart sshd
   tags: ['sshd']
-
-- name: Include distro vars
-  include_vars:
-    file: vars/{{ ansible_distribution }}.yml
-
-- import_tasks: sudoers.yml
-  tags: ['sudoers']
-
-- import_tasks: ruby.yml
-  tags: ['ruby']
 
 - import_tasks: zshell.yml
   tags: ['zsh']

@@ -115,11 +115,11 @@ colors:
     border: '#3149a7'
     text: '#ebdbb2'
   focused:
-    border: '#3149a7'
+    border: '#ebd61c'
     background: '#000000'
     text: '#ebdbb2'
     indicator: '#735E0D'
-    child_border: '#3149a7'
+    child_border: '#ebd61c'
   unfocused:
     border: '#2a2a2a'
     background: '#000000'
@@ -131,7 +131,7 @@ colors:
     background: '#000000'
     text: '#4a4d44'
     indicator: '#735E0D'
-    child_border: '#3149a7'
+    child_border: '#ebd61c'
   inactive:
     border: '#2a2a2a'
     background: '#000000'
