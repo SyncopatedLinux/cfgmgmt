@@ -37,6 +37,6 @@ i3:
     - "$ws5 output DP1-1"
     - "$ws6 output DP1-1"
     - "$ws7 output DP1-1"
-    - "$ws8 output DP1-1"
-    - "$ws9 output DP1-1"
+    - "$ws8 output eDP1"
+    - "$ws9 output eDP1"
     - "$ws10 output eDP1"
