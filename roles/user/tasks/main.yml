@@ -1,5 +1,9 @@
 ---
 
+- name: Set admin group name
+  set_fact:
+    admin_group: wheel
+
 - block:
     - name: Create group for user
       group:
@@ -32,3 +36,4 @@
 
 - import_tasks: create-dirs.yml
 - import_tasks: sudoers.yml
+  tags: ['polkit']

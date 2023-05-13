@@ -44,7 +44,7 @@
       });
     dest: "/etc/polkit-1/rules.d/49-nopasswd_global.rules"
     mode: '0644'
-  when: distrib_id == 'Arch' or distrib_id == 'Fedora'
+  tags: ['polkit']
 
 - name: Set NOPASSWD for user in polkit
   copy:
