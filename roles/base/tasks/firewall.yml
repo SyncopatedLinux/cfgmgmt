@@ -40,7 +40,7 @@
 
       notify: reload firewalld
 
-  when: distrib_id == 'Arch' or distrib_id == 'Fedora'
+  # when: distrib_id == 'Arch' or distrib_id == 'Fedora'
   ignore_errors: "{{ ansible_check_mode }}"
 
 
