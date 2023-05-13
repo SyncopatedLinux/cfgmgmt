@@ -34,12 +34,12 @@
       shell: |
         cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
       register: distrib_id
-      tags: ['facts', 'base', 'system']
+      tags: ['facts', 'base', 'system', 'user']
 
     - name: Set distrib_id as a fact
       set_fact:
         distrib_id: "{{ distrib_id.stdout }}"
-      tags: ['facts', 'base', 'system']
+      tags: ['facts', 'base', 'system', 'user']
 
     - name: Set ansible_home
       set_fact:

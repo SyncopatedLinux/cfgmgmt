@@ -29,13 +29,13 @@ i3:
     - '[class="Jalv.select"] $ws1'
     - '[class="^RaySession$"] $ws1'
   workspaces:
-    - "$ws1 output DVI-I-1"
-    - "$ws2 output DVI-I-1"
-    - "$ws3 output DVI-I-1"
-    - "$ws4 output DVI-I-1"
-    - "$ws5 output DVI-D-0"
-    - "$ws6 output DVI-D-0"
-    - "$ws7 output DVI-D-0"
-    - "$ws8 output DVI-D-0"
-    - "$ws9 output DVI-D-0"
-    - "$ws10 output DVI-D-0"
+    - "$ws1 output DVI-D-0"
+    - "$ws2 output DVI-D-0"
+    - "$ws3 output DVI-D-0"
+    - "$ws4 output DVI-D-0"
+    - "$ws5 output DVI-I-1"
+    - "$ws6 output DVI-I-1"
+    - "$ws7 output DVI-I-1"
+    - "$ws8 output DVI-I-1"
+    - "$ws9 output DVI-I-1"
+    - "$ws10 output DVI-I-1"
