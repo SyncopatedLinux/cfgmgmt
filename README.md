@@ -8,7 +8,7 @@ This project focuses on utilizing Ansible, an open-source configuration manageme
 
 The purpose of this project is to automate and standardize the configuration of various components involved in an audio production workflow. By using Ansible, we aim to simplify the setup process, ensure consistency across different devices, and enhance productivity for audio professionals working in a Linux environment.
 
-This project is designed with compatibility for older hardware in mind. By implementing a resource-efficient configuration, utilizing lightweight components, applying optimization techniques, and conducting comprehensive hardware compatibility testing, the project aims to provide an optimized audio production workflow that can run effectively on older machines. This enables users with older hardware to leverage real-time audio processing capabilities and enjoy a streamlined and productive audio production experience.
+This project is designed with compatibility for older hardware in mind. By implementing a resource-efficient configuration, utilizing lightweight components, applying optimization techniques, and conducting thorough hardware compatibility testing, the project aims to provide an optimized audio production workflow that can run effectively on both older and newers hardware. This enables users to leverage real-time audio processing capabilities and enjoy a streamlined and productive audio production experience.
 
 ## Features
 
@@ -16,7 +16,7 @@ This project is designed with compatibility for older hardware in mind. By imple
 Ansible allows us to define and manage the desired state of the audio production environment. This includes configuring software applications, system settings, and network parameters.
 
 ### Task Automation:
-With Ansible's powerful automation capabilities, we can automate routine tasks involved in the audio production workflow. This includes launching applications, setting up project templates, managing audio file conversions, and more.
+With Ansible's versatile automation capabilities, we can automate routine tasks involved in the audio production workflow. This includes launching applications, setting up project templates, managing audio file conversions, installing plugins and more.
 
 ### Scalability and Flexibility:
 Ansible's modular architecture enables scalability, making it suitable for both small-scale and large-scale audio production setups. Additionally, its flexibility allows for easy customization and adaptation to specific requirements.
@@ -24,13 +24,39 @@ Ansible's modular architecture enables scalability, making it suitable for both 
 ### Real-Time Optimization:
 To optimize the OS for real-time audio using Ansible, the following steps are typically involved:
 
-- Kernel Configuration: Modify kernel parameters related to real-time audio, such as increasing the maximum number of simultaneous audio processes, adjusting buffer sizes, and enabling real-time scheduling.
+- **User and Group Configuration**: The user is added to the "audio" group, ensuring appropriate permissions for accessing audio-related resources.
 
-- Audio Service Configuration: Configure audio services and daemons to prioritize real-time audio processing. This involves setting appropriate scheduling policies, adjusting resource limits, and disabling unnecessary services that may introduce latency.
+- **Security and Resource Limits**: A configuration file is copied to set real-time priority (rtprio), memory locking (memlock), and nice values for the audio group. These settings help prioritize audio processing and ensure resources are allocated effectively.
 
-- System Tuning: Fine-tune various system settings, such as adjusting CPU frequency scaling governors, disabling power-saving features that may impact audio performance, and optimizing network settings to minimize audio streaming latency.
+- **Timer Permissions**: Assigns appropriate permissions for system timers (rtc0 and hpet) to the "audio" group in the udev rules configuration.
 
-- Hardware Configuration: Automate the configuration of audio interfaces, sound cards, and other hardware components to ensure optimal performance and compatibility with the chosen FOSS applications.
+- **Tuned Service (optional)**: The "tuned" service is disabled, which can be useful for fine-tuning system settings based on specific performance profiles. The installation of a modified "realtime" profile is also performed, enabling further optimizations.
+
+- **RTIRQ and RTKit Configuration**: The RTIRQ defaults file is copied to configure real-time IRQ thread priorities, improving the handling of audio-related interrupts. The RTKit configuration file and systemd service file are installed, providing a framework for managing real-time tasks and resource allocations.
+
+- **CPU Power Management**: The default configuration file for CPU power management (cpupower) is templated, allowing customization of CPU frequency scaling and power-saving settings. The cpupower service is enabled, ensuring that the configured power management settings are applied. This task is skipped for QEMU-based systems.
+
+- **IRQ Balance Service**: The irqbalance service is disabled to prevent automatic IRQ balancing, which can interfere with real-time audio processing.
+
+- **System Control Parameters (sysctl)**: A configuration file is copied to set sysctl parameters, which allow fine-grained control over various system settings related to real-time audio performance.
+
+Sysctl configurations can have a direct impact on audio quality and performance. Here's how each configuration relates to audio:
+
+- **Swappiness**: By reducing the kernel's tendency to swap, a lower swappiness value (30) ensures that audio data remains in memory, minimizing delays caused by disk I/O and improving overall responsiveness during audio processing.
+
+- **VFS Cache Pressure**: A lower value (50) for vfs_cache_pressure helps retain directory and inode objects in the VFS cache, which can enhance the performance of file access operations in audio applications, such as reading and loading audio files.
+
+- **Dirty Ratio and Background Ratio**: By setting lower values (3 and 5, respectively), the kernel writes out dirty data more promptly. This ensures that audio data and buffers are written to disk without significant delay, reducing the chances of audio glitches or dropouts.
+
+- **Page-Cluster**: Disabling the page-cluster behavior (value of 0) can be beneficial for audio workloads. It prevents unnecessary read-ahead operations from swap space, minimizing disk activity and potential latency issues during audio streaming or real-time processing.
+
+- **Max Map Count**: Increasing the maximum number of memory map areas (16777216) allows audio applications to utilize more memory efficiently, accommodating large sound libraries, plugins, and virtual instruments.
+
+- **Real-Time Scheduling and HPET Frequency**: Configurations related to real-time scheduling and HPET frequency can enhance the precision and accuracy of time-sensitive audio operations, such as real-time synthesis, audio processing with low-latency requirements, and synchronization of audio streams.
+
+Optimizing these sysctl configurations for audio-related tasks helps ensure that the system maintains stable performance, reduces audio latency, minimizes audio artifacts, and provides a smooth and uninterrupted audio experience.
+
+
 
 ### Workflow Enhancement with i3 Window Manager:
 
@@ -55,6 +81,120 @@ By incorporating the i3 window manager into the audio production workflow, users
 ### Resource-Efficient Configuration:
 
 To ensure compatibility and performance on older hardware, the project conducts thorough testing and validation on a range of hardware configurations. By testing the project on various older machines with different specifications, any compatibility issues or performance bottlenecks can be identified and addressed. This testing process helps fine-tune the configurations and optimizations specifically for older hardware setups, ensuring a smooth and efficient audio production experience.
+
+# Featured Software
+
+### Networked Audio
+
+[Ray Session](https://github.com/Houston4444/RaySession): A powerful session manager for audio applications, allowing you to control and manage multiple applications from a single interface.
+
+[JackTrip](https://www.jacktrip.com/): An application that enables high-quality, low-latency audio streaming over the internet.
+
+[qmidinet](https://qmidinet.sourceforge.io/): A MIDI Network Gateway via UDP/IP Multicast, designed for use in studio or stage environments.
+
+[touchosc](https://hexler.net/touchosc): A modular OSC and MIDI control surface for iPhone, iPod Touch, and iPad by hexler.
+
+### Sound Filters and Effects
+> [zita-lrx](https://manpages.ubuntu.com/manpages/xenial/man1/zita-lrx.1.html): A simple and easy-to-use 2x2x2 (stereo to stereo) cross-over network.
+
+> [zita-mu1](https://kokkinizita.linuxaudio.org/linuxaudio/zita-mu1-doc/quickguide.html): A stereo to mono upmixer, useful for checking mono compatibility.
+
+> [zita-rev1](https://kokkinizita.linuxaudio.org/linuxaudio/zita-rev1-doc/quickguide.html): A reverb audio plugin, designed to produce a natural sounding room reverberation effect.
+
+> [x42-plugins](http://x42-plugins.com/x42/): A collection of free audio plugins, including equalizers, compressors, and more.
+
+> [swh-plugins](http://plugin.org.uk/ladspa-swh/docs/ladspa-swh.html): is a collection of LADSPA (Linux Audio Developer's Simple Plugin API) plugins. The collection includes a wide range of plugins, including filters, reverb, delay, distortion, and many others.
+
+> [iem ambisonics](https://plugins.iem.at/): A free and open-source audio plugin suite that includes Ambisonic plugins up to the 7th order.
+
+### Mixers and Patch Panel
+> [reaper](reaper.fm)
+
+> [non-mixer](http://non.tuxfamily.org/wiki/Non%20Mixer)
+
+> [patchage](https://drobilla.net/software/patchage.html)
+
+### IDE
+> [pulsar](https://pulsar-edit.dev/)
+
+> [sonic-pi](https://sonic-pi.net/): A code-based music creation and performance tool. It allows you to learn to code creatively by composing or performing music in an incredible range of styles from classical to algorave.
+
+> [bipscript](bipscript.org)
+
+### Synths
+> [helm](https://tytel.org/helm/): A software synthesizer that lets you create all sorts of awesome sounds. It's free to use and it's open-source, so you can tinker with it and see how it all works.
+
+> [vital](https://vital.audio/): A spectral warping wavetable synthesizer that allows you to create complex, evolving sounds with an easy-to-use interface.
+
+> [AlsaModularSynth](https://alsamodular.sourceforge.net/)
+
+### Sequencers
+> [qmidiarp](https://qmidiarp.sourceforge.net/): A MIDI arpeggiator, sequencer and LFO for ALSA. It provides arpeggiator, sequencer and LFO modules, which can be synchronized to a MIDI clock.
+
+> [seq192](https://github.com/jean-emmanuel/seq192)
+
+> [non-sequencer](http://non.tuxfamily.org/wiki/index.php?page=Non%20Sequencer)
+
+> [hydrogen](http://hydrogen-music.org/)
+
+### Soundfont Audio Samplers
+> [linuxsampler](https://www.linuxsampler.org/): A professional grade software audio sampler that aims to deliver performance and features at par with hardware sampler devices.
+
+> [sfizz](https://sfz.tools/sfizz/)
+
+> [polyphone](https://www.polyphone-soundfonts.com/)
+
+> [swami](http://www.swamiproject.org/)
+
+> [sooperlooper](http://sonosaurus.com/sooperlooper/)
+
+### Record and Edit
+> [audacity](https://www.audacityteam.org/): An easy-to-use, multi-track audio editor
+
+> [ocenaudio](https://www.ocenaudio.com/)
+
+> [timemachine](http://plugin.org.uk/timemachine/): " I used to always keep a minidisc recorder in my studio running in a mode where when you pressed record it wrote the last 10 seconds of audio to the disk and then caught up to realtime and kept recording. The recorder died and haven't been able to replace it, so this is a simple jack app to do the same job. It has the advantage that it never clips and can be wired to any part of the jack graph. The idea is that I doodle away with whatever is kicking around in my studio and when I heard an interesting noise, I'd press record and capture it, without having to try and recreate it. :)""
+
+
+
+### Signal Analysis
+> [fmit](https://gillesdegottex.github.io/fmit/)
+
+> [jaaa](http://kokkinizita.linuxaudio.org/linuxaudio/jaaa-pict.html)
+
+> [japa](http://kokkinizita.linuxaudio.org/linuxaudio/japa-pict.html)
+
+> [baudline]("https://www.baudline.com/")
+
+> [tony](https://www.sonicvisualiser.org/tony/)
+
+> [sonic-visualizer](https://www.sonicvisualiser.org/)
+
+> [sonic annotator](https://vamp-plugins.org/sonic-annotator/)
+
+### Sample Management
+> [deadbeef]("https://deadbeef.sourceforge.io/")
+
+> [mixxx](mixxx.org)
+
+> [sononym](https://www.sononym.net/)
+
+### and more!
+
+> [lsmi](https://lsmi-all.sourceforge.net/)
+
+> [AntimicroX](https://antimicrox.github.io/)
+
+> [njconnect](https://sourceforge.net/projects/njconnect/)
+
+> [jack_mixer](https://rdio.space/jackmixer/)
+
+> [Calf Studio](https://calf-studio-gear.org/)
+
+> [Dragonfly Reverb](https://michaelwillis.github.io/dragonfly-reverb/)
+
+> [ingen](http://drobilla.net/software/ingen.html)
+Ask AI to edit or generate...
 
 
 # Contributions
