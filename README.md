@@ -108,18 +108,18 @@ To ensure compatibility and performance on older hardware, the project conducts 
 > [iem ambisonics](https://plugins.iem.at/): A free and open-source audio plugin suite that includes Ambisonic plugins up to the 7th order.
 
 ### Mixers and Patch Panel
-> [reaper](reaper.fm)
+> [reaper](https://reaper.fm): A digital audio workstation and MIDI sequencer
 
-> [non-mixer](http://non.tuxfamily.org/wiki/Non%20Mixer)
+> [non-mixer](http://non.tuxfamily.org/wiki/Non%20Mixer): A modular Digital Audio Mixer
 
-> [patchage](https://drobilla.net/software/patchage.html)
+> [patchage](https://drobilla.net/software/patchage.html): A modular patch bay for audio and MIDI systems based on Jack and Alsa.
 
 ### IDE
 > [pulsar](https://pulsar-edit.dev/)
 
 > [sonic-pi](https://sonic-pi.net/): A code-based music creation and performance tool. It allows you to learn to code creatively by composing or performing music in an incredible range of styles from classical to algorave.
 
-> [bipscript](bipscript.org)
+> [bipscript](http://bipscript.org): A scripting language for interactive music. Features include APIs for audio plugin hosting, MIDI sequencing and OSC control.
 
 ### Synths
 > [helm](https://tytel.org/helm/): A software synthesizer that lets you create all sorts of awesome sounds. It's free to use and it's open-source, so you can tinker with it and see how it all works.
@@ -131,70 +131,71 @@ To ensure compatibility and performance on older hardware, the project conducts 
 ### Sequencers
 > [qmidiarp](https://qmidiarp.sourceforge.net/): A MIDI arpeggiator, sequencer and LFO for ALSA. It provides arpeggiator, sequencer and LFO modules, which can be synchronized to a MIDI clock.
 
-> [seq192](https://github.com/jean-emmanuel/seq192)
+> [seq192](https://github.com/jean-emmanuel/seq192): Pattern-based sequencer
 
-> [non-sequencer](http://non.tuxfamily.org/wiki/index.php?page=Non%20Sequencer)
+> [non-sequencer](http://non.tuxfamily.org/wiki/index.php?page=Non%20Sequencer): Pattern-based sequencer
 
-> [hydrogen](http://hydrogen-music.org/)
+> [hydrogen](http://hydrogen-music.org/): Pattern-based sequencer
 
 ### Soundfont Audio Samplers
 > [linuxsampler](https://www.linuxsampler.org/): A professional grade software audio sampler that aims to deliver performance and features at par with hardware sampler devices.
 
 > [sfizz](https://sfz.tools/sfizz/)
 
-> [polyphone](https://www.polyphone-soundfonts.com/)
+> [polyphone](https://www.polyphone-soundfonts.com/) SoundFont editor
 
-> [swami](http://www.swamiproject.org/)
+> [swami](http://www.swamiproject.org/): SoundFont editor
 
-> [sooperlooper](http://sonosaurus.com/sooperlooper/)
+> [sooperlooper](http://sonosaurus.com/sooperlooper/): A live looping sampler capable of immediate loop recording, overdubbing, multiplying, reversing and more. It allows for multiple simultaneous multi-channel loops limited only by your computer's available memory.
 
 ### Record and Edit
 > [audacity](https://www.audacityteam.org/): An easy-to-use, multi-track audio editor
 
-> [ocenaudio](https://www.ocenaudio.com/)
+> [ocenaudio](https://www.ocenaudio.com/): A cross-platform, easy to use, fast and functional audio editor.
 
 > [timemachine](http://plugin.org.uk/timemachine/): " I used to always keep a minidisc recorder in my studio running in a mode where when you pressed record it wrote the last 10 seconds of audio to the disk and then caught up to realtime and kept recording. The recorder died and haven't been able to replace it, so this is a simple jack app to do the same job. It has the advantage that it never clips and can be wired to any part of the jack graph. The idea is that I doodle away with whatever is kicking around in my studio and when I heard an interesting noise, I'd press record and capture it, without having to try and recreate it. :)""
 
 
 
 ### Signal Analysis
-> [fmit](https://gillesdegottex.github.io/fmit/)
+> [fmit](https://gillesdegottex.github.io/fmit/ss.html): a graphical utility for tuning your musical instruments, with error and volume history and advanced features.
 
-> [jaaa](http://kokkinizita.linuxaudio.org/linuxaudio/jaaa-pict.html)
+> [Jaaa (JACK and ALSA Audio Analyser)](http://kokkinizita.linuxaudio.org/linuxaudio/jaaa-pict.html): An audio signal generator and spectrum analyser designed to make accurate measurements.
 
-> [japa](http://kokkinizita.linuxaudio.org/linuxaudio/japa-pict.html)
 
-> [baudline]("https://www.baudline.com/")
+> [Japa (JACK and ALSA Perceptual Analyser)](http://kokkinizita.linuxaudio.org/linuxaudio/japa-pict.html): A 'perceptual' or 'psychoacoustic' audio spectrum analyser. In contrast to JAAA, this is more an acoustical or musical tool than a purely technical one. Possible uses include spectrum monitoring while mixing or mastering, evaluation of ambient noise, and (using pink noise), equalisation of PA systems.
 
-> [tony](https://www.sonicvisualiser.org/tony/)
+> [baudline](https://www.baudline.com/): A time frequency browser designed for spectrum analysis data visualization.
 
-> [sonic-visualizer](https://www.sonicvisualiser.org/)
+> [tony](https://www.sonicvisualiser.org/tony/): Designed for high quality pitch and note transcription for scientific applications. It is designed primarily for use with solo vocal recordings.
 
-> [sonic annotator](https://vamp-plugins.org/sonic-annotator/)
+> [sonic-visualizer](https://www.sonicvisualiser.org/): Designed for musicologists, archivists, signal-processing researchers, and anyone else looking for a friendly way to look at what lies inside the audio file.
+
+> [sonic annotator](https://vamp-plugins.org/sonic-annotator/): A batch tool for feature extraction and annotation of audio files using Vamp plugins.
+
 
 ### Sample Management
-> [deadbeef]("https://deadbeef.sourceforge.io/")
+> [deadbeef](https://deadbeef.sourceforge.io/): A customizable modular cross-platform audio player
 
-> [mixxx](mixxx.org)
+> [mixxx](mixxx.org): Integrates the tools DJs need to perform creative live mixes with digital music files.
 
-> [sononym](https://www.sononym.net/)
+> [sononym](https://www.sononym.net/): Sample discovery, similarity search, duplicate detection, organizing, and exporting. Uses of machine learning to categorize samples.
 
 ### and more!
 
-> [lsmi](https://lsmi-all.sourceforge.net/)
+> [lsmi](https://lsmi-all.sourceforge.net/): Use homemade, repurposed, or commercial devices as MIDI controllers, even if the devices themselves don't have the capability to generate MIDI messages.
 
 > [AntimicroX](https://antimicrox.github.io/)
 
-> [njconnect](https://sourceforge.net/projects/njconnect/)
+> [njconnect](https://sourceforge.net/projects/njconnect/): Curses Jack connection manager
 
-> [jack_mixer](https://rdio.space/jackmixer/)
+> [jack_mixer](https://rdio.space/jackmixer/): Audio mixer with a look similar to its hardware counterpart
 
 > [Calf Studio](https://calf-studio-gear.org/)
 
-> [Dragonfly Reverb](https://michaelwillis.github.io/dragonfly-reverb/)
+> [Dragonfly Reverb](https://michaelwillis.github.io/dragonfly-reverb/): A bundle of reverb plugins
 
-> [ingen](http://drobilla.net/software/ingen.html)
-Ask AI to edit or generate...
+> [ingen](http://drobilla.net/software/ingen.html): A modular audio processing system for Jack and LV2 based systems.
 
 
 # Contributions
