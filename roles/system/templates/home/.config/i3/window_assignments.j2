@@ -24,19 +24,19 @@ assign [title="jkmeter"] $ws1
 assign [title="zita-rev1"] $ws1
 
 
-assign [title="Pulsar"] $ws1
+assign [class="(?i)pulsar"] $ws1
 assign [class="Bipscript\ IDE"] $ws1
-assign [class="Sonic\ Pi"] $ws1
+assign [class="(?i)sonic-pi"] $ws1
 
 
-assign [title="Google-chrome"] $ws2
+assign [title="(?i)google-chrome"] $ws2
 
-assign [class="^RaySession$"] $ws3
-assign [class="Jalv.select"] $ws3
+assign [class="^RaySession$"] $ws9
+assign [class="Jalv.select"] $ws9
 
 assign [class="Mixxx"] $ws6
 
-assign [class="REAPER"] $ws7
+assign [class="REAPER"] $ws8
 
 assign [class="Non-Mixer"] $ws9
 assign [class="Jack_mixer"] $ws9
@@ -129,7 +129,8 @@ for_window [class="REAPER" title="^Mixer"] floating disable, focus
 # for_window [class="REAPER" title="^Preferences"] floating enable, border normal, resize set 803 505, move output primary, focus
 # for_window [class="REAPER" title="^Actions"] floating enable, border normal, resize set 701 405, move output primary, focus
 # for_window [class="REAPER" title="^Docker"] floating disable, move to workspace 4, focus
-for_window [class="REAPER" title="(?i)JS:"] border normal, floating enable, move to position pointer, focus
+
+for_window [class="REAPER" title="(?i)JS:"] border normal, floating enable, move to output DVI-D-0
 for_window [class="REAPER" title="(?i)CLAP:"] border normal, floating enable, move to position pointer, focus
 for_window [class="REAPER" title="(?i)VST:"] border normal, floating enable, move position center, focus
 for_window [class="REAPER" title="(?i)VST3:"] border normal, floating enable, move position center, focus
