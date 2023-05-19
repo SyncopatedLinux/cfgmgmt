@@ -64,7 +64,7 @@ say "ssh will also be enabled and started." $BLUE
 say "-----------------------------------------------\n" $BLUE
 
 case $distro in
-	Arch|Manjaro)
+	Arch|Manjaro|blendOS)
 		pacman -Syu --noconfirm --downloadonly --quiet
 		pacman -S --noconfirm openssh base-devel fd ruby-bundler rubygems
 		systemctl enable sshd
@@ -152,7 +152,7 @@ case $distro in
 		ufw allow ssh
 		ufw enable
 		;;
-	Arch|Manjaro)
+	Arch|Manjaro|blendOS)
 		pacman -S --noconfirm firewalld
 		systemctl enable firewalld
 		systemctl start firewalld
@@ -184,7 +184,7 @@ if [ -x "$(command -v ansible)" ]; then
   				echo "Failed to remove Ansible."
   			fi
   		;;
-  	Arch|Manjaro)
+  	Arch|Manjaro|blendOS)
   			if pacman -Rdd ansible --noconfirm; then
   				echo "Ansible has been removed successfully."
   			else
@@ -208,7 +208,7 @@ case $distro in
 		apt-get update --quiet
 		apt-get install -y python3-pip
 		;;
-	Arch|Manjaro)
+	Arch|Manjaro|blendOS)
 		pacman -S --noconfirm python-pip
 		;;
 	*)
@@ -255,7 +255,7 @@ case $distro in
 		apt-get update --quiet
 		apt-get install -y "${BOOTSTRAP_PKGS[@]}"
 		;;
-	Arch|Manjaro)
+	Arch|Manjaro|blendOS)
 		pacman -Sy --noconfirm --needed "${BOOTSTRAP_PKGS[@]}"
 		;;
 	*)

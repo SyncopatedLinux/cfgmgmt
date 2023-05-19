@@ -68,7 +68,11 @@ Include = /etc/pacman.d/mirrorlist
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 {% endif %}
-
+{% if distrib_id == 'blendOS' %}
+[blend]
+SigLevel = Never
+Server = https://pkg-repo.blendos.co/$repo/os/$arch
+{% else %}
 # [archlabs-testing]
 # Server =  https://pub-7d84e047b852442a86fd6d7feb1ff2cd.r2.dev/$repo/$arch
 # Server =  https://github.com/ArchLabs/$repo/raw/master/$arch
@@ -79,4 +83,8 @@ Server = https://pub-7d84e047b852442a86fd6d7feb1ff2cd.r2.dev/$repo/$arch
 Server = https://bitbucket.org/archlabslinux/$repo/raw/master/$arch
 Server = https://github.com/ArchLabs/$repo/raw/master/$arch
 Server = https://sourceforge.net/projects/archlabs-repo/files/$repo/$arch
+{% endif %}
+
+
+
 # vim:ft=config

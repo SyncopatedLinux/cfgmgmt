@@ -23,6 +23,7 @@
     backup: yes
     validate: 'visudo -cf %s'
 
+# TODO: adjust for blendOS
 - name: Set NOPASSWD for user in sudoers
   lineinfile:
     path: /etc/sudoers.d/01-user

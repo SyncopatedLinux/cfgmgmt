@@ -56,8 +56,6 @@ Sysctl configurations can have a direct impact on audio quality and performance.
 
 Optimizing these sysctl configurations for audio-related tasks helps ensure that the system maintains stable performance, reduces audio latency, minimizes audio artifacts, and provides a smooth and uninterrupted audio experience.
 
-
-
 ### Workflow Enhancement with i3 Window Manager:
 
 To further enhance the audio production workflow, this project incorporates the usage of the i3 window manager. i3 is a dynamic tiling window manager known for its efficiency, flexibility, and keyboard-driven interface. By integrating i3 into the audio production environment, users can experience improved multitasking, efficient window management, and streamlined navigation.
@@ -81,6 +79,18 @@ By incorporating the i3 window manager into the audio production workflow, users
 ### Resource-Efficient Configuration:
 
 To ensure compatibility and performance on older hardware, the project conducts thorough testing and validation on a range of hardware configurations. By testing the project on various older machines with different specifications, any compatibility issues or performance bottlenecks can be identified and addressed. This testing process helps fine-tune the configurations and optimizations specifically for older hardware setups, ensuring a smooth and efficient audio production experience.
+
+### Cross-Distribution Compatibility
+
+This framework is designed to be versatile and adaptable, making it compatible with most major Linux distributions. While the initial implementation focuses on Arch Linux, it can serve as a solid foundation for extending support to other distributions as well. The modular structure and use of Ansible allow for easy customization and configuration for different operating systems.
+
+To adapt this framework to a specific Linux distribution, you may need to make adjustments to the playbook, configuration files, and package management. Distribution-specific tasks, package names, and package managers can be incorporated to ensure seamless integration with different distributions.
+
+The playbook structure follows best practices and can serve as a starting point for creating distribution-specific playbooks. By leveraging the flexibility of Ansible and the extensive documentation and community support available for various Linux distributions, you can extend the framework's capabilities to match your desired distribution.
+
+Please note that while this framework provides a solid foundation, thorough testing and validation are essential when adapting it to different distributions. Differences in package availability, default configurations, and system behavior may require additional adjustments to achieve optimal performance and compatibility.
+
+By embracing the cross-distribution compatibility of this framework, you can leverage the benefits of Configuration Management and Task Automation for audio production workflows on a wide range of Linux distributions, empowering users to optimize their systems regardless of their preferred Linux platform.
 
 # Featured Software
 

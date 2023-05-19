@@ -40,11 +40,11 @@
         enabled: no
       ignore_errors: "{{ ansible_check_mode }}"
 
-    - name: Set tuned profile to laptop-battery-powersave
-      shell: |
-        tuned-adm profile laptop-battery-powersave
-      register: tuned_profile
-      changed_when: tuned_profile.rc != 0
+    # - name: Set tuned profile to laptop-battery-powersave
+    #   shell: |
+    #     tuned-adm profile laptop-battery-powersave
+    #   register: tuned_profile
+    #   changed_when: tuned_profile.rc != 0
 
     - name: Install realtime-modified profile
       copy:
