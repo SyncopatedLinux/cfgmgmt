@@ -102,13 +102,13 @@ By embracing the cross-distribution compatibility of this framework, you can lev
 
 ### Networked Audio
 
-[Ray Session](https://github.com/Houston4444/RaySession): A powerful session manager for audio applications, allowing you to control and manage multiple applications from a single interface.
+> [Ray Session](https://github.com/Houston4444/RaySession): A powerful session manager for audio applications, allowing you to control and manage multiple applications from a single interface.
 
-[JackTrip](https://www.jacktrip.com/): An application that enables high-quality, low-latency audio streaming over the internet.
+> [JackTrip](https://www.jacktrip.com/): An application that enables high-quality, low-latency audio streaming over the internet.
 
-[qmidinet](https://qmidinet.sourceforge.io/): A MIDI Network Gateway via UDP/IP Multicast, designed for use in studio or stage environments.
+> [qmidinet](https://qmidinet.sourceforge.io/): A MIDI Network Gateway via UDP/IP Multicast, designed for use in studio or stage environments.
 
-[touchosc](https://hexler.net/touchosc): A modular OSC and MIDI control surface for iPhone, iPod Touch, and iPad by hexler.
+> [touchosc](https://hexler.net/touchosc): A modular OSC and MIDI control surface for iPhone, iPod Touch, and iPad by hexler.
 
 ### Sound Filters and Effects
 > [zita-lrx](https://manpages.ubuntu.com/manpages/xenial/man1/zita-lrx.1.html): A simple and easy-to-use 2x2x2 (stereo to stereo) cross-over network.
@@ -212,6 +212,8 @@ By embracing the cross-distribution compatibility of this framework, you can lev
 > [Dragonfly Reverb](https://michaelwillis.github.io/dragonfly-reverb/): A bundle of reverb plugins
 
 > [ingen](http://drobilla.net/software/ingen.html): A modular audio processing system for Jack and LV2 based systems.
+
+
 
 
 # Contributions
