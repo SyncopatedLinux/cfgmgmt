@@ -1,39 +1,47 @@
 ---
 
 - name: Include distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: vars/{{ ansible_distribution }}.yml
 
 - name: install sshd config
-  template:
+  ansible.builtin.template:
     src: etc/ssh/sshd_config.j2
     dest: /etc/ssh/sshd_config
     backup: True
   notify: restart sshd
   tags: ['sshd']
 
-- import_tasks: zshell.yml
+- ansible.builtin.import_tasks:
+    file: zshell.yml
   tags: ['zsh']
 
-- import_tasks: firewall.yml
+- ansible.builtin.import_tasks:
+    file: firewall.yml
   tags: ['firewall']
 
-- import_tasks: filesystem.yml
+- ansible.builtin.import_tasks:
+    file: filesystem.yml
   tags: ['filesystem']
 
-- import_tasks: utils.yml
+- ansible.builtin.import_tasks:
+    file: utils.yml
   tags: ['utils']
 
-- import_tasks: updatedb.yml
+- ansible.builtin.import_tasks:
+    file: updatedb.yml
   tags: ['updatedb']
 
-- import_tasks: autologin.yml
+- ansible.builtin.import_tasks:
+    file: autologin.yml
   when: autologin|bool
   tags: ['autologin']
 
-- import_tasks: nvidia.yml
+- ansible.builtin.import_tasks:
+    file: nvidia.yml
   when: use_nvidia|default(false)|bool == true
   tags: ['nvidia']
 
-- import_tasks: grub.yml
+- ansible.builtin.import_tasks:
+    file: grub.yml
   tags: ['grub']

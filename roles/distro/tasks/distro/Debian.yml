@@ -2,38 +2,38 @@
 
 - block:
     - name: Remove nodejs-legacy package
-      apt:
+      ansible.builtin.apt:
         name:
           - nodejs-legacy
         state: absent
 
     - name: Add Node.js APT repository key
-      apt_key:
+      ansible.builtin.apt_key:
         url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
         state: present
 
     - name: Add Node.js APT repository
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: "deb https://deb.nodesource.com/node_14.x {{ ansible_distribution_release }} main"
         state: present
         filename: nodesource
 
     - name: Add GPG key for Node.js APT repository
-      apt_key:
+      ansible.builtin.apt_key:
         url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
         state: present
 
     - name: Install Node.js version 14
-      apt:
+      ansible.builtin.apt:
         name: nodejs
         state: present
 
     - name: Include package vars
-      include_vars:
+      ansible.builtin.include_vars:
         file: packages/{{ ansible_distribution }}/base.yml
 
     - name: Install System packages
-      apt:
+      ansible.builtin.apt:
         name: "{{ packages.system }}"
         state: present
 

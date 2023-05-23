@@ -1,7 +1,7 @@
 ---
 
 - name: Update pulseaudio configs
-  copy:
+  ansible.builtin.copy:
     src: "etc/pulse/{{ item }}"
     dest: "{{ user.home }}/.config/pulse/{{ item }}"
     owner: "{{ user.name }}"
@@ -16,14 +16,14 @@
   become: False
 
 - name: Install pulseaudio bluetooth config
-  copy:
+  ansible.builtin.copy:
     src: etc/pulse/default.pa.d/bluetooth.pa
     dest: /etc/pulse/default.pa.d/bluetooth.pa
     mode: '0644'
   when: use_bluetooth is defined
 
 - name: Adjust pulseaudio.service file
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /usr/lib/systemd/user/pulseaudio.service
     insertafter: '^Description'
     line: 'After=jack_control.service'

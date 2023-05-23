@@ -1,7 +1,7 @@
 ---
 
 - name: Syncronize templates - shell
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -14,7 +14,7 @@
   tags: ['shell', 'profile', 'alias' ]
 
 - name: Synchronize templates - x11
-  template:
+  ansible.builtin.template:
     src: "home/{{ item }}.j2"
     dest: "{{ user.home }}/{{ item }}"
     owner: "{{ user.name }}"
@@ -30,7 +30,7 @@
   tags: ['x11', 'profile']
 
 - name: Synchronize templates - wm
-  template:
+  ansible.builtin.template:
     src: "home/{{ item }}.j2"
     dest: "{{ user.home }}/{{ item }}"
     owner: "{{ user.name }}"
@@ -51,7 +51,7 @@
   tags: ['i3', 'dunst', 'picom', 'keybindings']
 
 - name: Synchronize templates - terminal
-  template:
+  ansible.builtin.template:
     src: "home/{{ item }}.j2"
     dest: "{{ user.home }}/{{ item }}"
     owner: "{{ user.name }}"
@@ -68,7 +68,7 @@
   tags: ['terminal', 'alacritty', 'kitty', 'tilda']
 
 - name: Syncronize templates - gtk
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -81,7 +81,7 @@
   tags: ['gtk']
 
 - name: Syncronize templates - qt
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -94,7 +94,7 @@
   tags: ['qt']
 
 - name: Synchronize templates - applications
-  template:
+  ansible.builtin.template:
     src: "home/{{ item }}.j2"
     dest: "{{ user.home }}/{{ item }}"
     owner: "{{ user.name }}"
@@ -116,21 +116,21 @@
   tags: ['htop', 'zim', 'qutebrowser', 'sonicpi', 'theme']
 
 - name: Ensure .xinitrc is executable
-  file:
+  ansible.builtin.file:
     path: "{{ user.home }}/.xinitrc"
     mode: '0755'
   when: x_config.changed
   tags: ['x11', 'profile']
 
 - name: Ensure root home is owned by root
-  file:
+  ansible.builtin.file:
     path: /root/
     owner: root
     group: root
     recurse: True
 
 - name: Reload i3
-  command: bash -lc "i3-msg -s /run/user/{{ user.uid }}/i3/ipc-socket.* reload"
+  ansible.builtin.command: bash -lc "i3-msg -s /run/user/{{ user.uid }}/i3/ipc-socket.* reload"
   become_user: "{{ user.name }}"
   when: wmconfig.changed
   ignore_errors: True

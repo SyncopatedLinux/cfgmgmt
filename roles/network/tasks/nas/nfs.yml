@@ -2,14 +2,14 @@
 
 - block:
     - name: Ensure group nobody exists
-      group:
+      ansible.builtin.group:
         name: nobody
         gid: 65534
         non_unique: True
         system: True
 
     - name: Ensure user nobody exists
-      user:
+      ansible.builtin.user:
         name: nobody
         system: True
         state: present
@@ -18,7 +18,7 @@
         group: nobody
 
     - name: Install nfs configs
-      template:
+      ansible.builtin.template:
         src: "etc/{{ item }}.j2"
         dest: "/etc/{{ item }}"
         mode: '0644'
@@ -28,7 +28,7 @@
         - nfs.conf
 
     - name: Ensure nfs/rpc services are enabled and started
-      service:
+      ansible.builtin.service:
         name: "{{ item }}"
         state: restarted
         enabled: yes
@@ -39,7 +39,7 @@
         - rpcbind
 
     - name: Permit traffic to rpcbind
-      firewalld:
+      ansible.posix.firewalld:
         port: "{{ item }}"
         permanent: yes
         state: enabled

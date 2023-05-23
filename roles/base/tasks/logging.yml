@@ -1,7 +1,7 @@
 ---
 
 - name: Install systemd configs
-  copy:
+  ansible.builtin.copy:
     src: "files/etc/systemd/{{ item }}"
     dest: "/etc/systemd/{{ item }}"
     mode: '0644'
@@ -12,7 +12,7 @@
   register: systemd_config
 
 - name: Set system log level config
-  template:
+  ansible.builtin.template:
     src: etc/systemd/system.conf.j2
     dest: /etc/systemd/system.conf
     mode: '0644'
@@ -20,7 +20,7 @@
   register: systemd_logging_system
 
 - name: Set user log level config
-  template:
+  ansible.builtin.template:
     src: etc/systemd/user.conf.j2
     dest: /etc/systemd/user.conf
     mode: '0644'
@@ -35,7 +35,7 @@
     #   become_user: "{{ user.name }}"
 
     - name: Reload systemd
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: yes
 
   when: (systemd_config.changed or systemd_logging_system.changed or systemd_logging_user.changed)

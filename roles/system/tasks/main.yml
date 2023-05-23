@@ -6,7 +6,7 @@
       - 'ansible_processor'
 
 - name: install i3autolayout.py
-  copy:
+  ansible.builtin.copy:
     src: home/.local/bin/i3autolayout.py
     dest: "{{ user.home }}/.local/bin/i3autolayout.py"
     owner: "{{ user.name }}"
@@ -17,26 +17,32 @@
 #   when: build_iso is defined
 #   tags: ['iso']
 
-- import_tasks: home.yml
+- ansible.builtin.import_tasks:
+    file: home.yml
   tags: ['home']
 
-- import_tasks: x11.yml
+- ansible.builtin.import_tasks:
+    file: x11.yml
   tags: ['x11']
 
-- import_tasks: theme.yml
+- ansible.builtin.import_tasks:
+    file: theme.yml
   tags: ['theme']
 
-- import_tasks: xdg.yml
+- ansible.builtin.import_tasks:
+    file: xdg.yml
   tags: ['xdg']
 
-- import_tasks: menu.yml
+- ansible.builtin.import_tasks:
+    file: menu.yml
   tags: ['menu']
 
-- import_tasks: input-remapper.yml
+- ansible.builtin.import_tasks:
+    file: input-remapper.yml
   tags: ['input-remapper']
 
 - name: Set XDG env vars
-  copy:
+  ansible.builtin.copy:
     content: |
       # -*- mode: shell-script -*-
       # ref: https://wiki.archlinux.org/title/XDG_Base_Directory
@@ -51,7 +57,7 @@
   tags: ['env', 'xdg']
 
 - name: Set misc profile vars
-  template:
+  ansible.builtin.template:
     src: usr/lib/environment.d/51-misc-environment.conf.j2
     dest: /usr/lib/environment.d/51-misc-environment.conf
     mode: '0644'
@@ -59,7 +65,7 @@
   tags: ['env']
 
 - name: Install Thunar actions
-  copy:
+  ansible.builtin.copy:
     src: "files/etc/xdg/Thunar/{{ item }}"
     dest: "/etc/xdg/Thunar/{{ item }}"
     mode: '0644'
@@ -69,6 +75,6 @@
   tags: ['thunar']
 
 - name: Set Thunar as default for opening directories
-  shell: xdg-mime default thunar.desktop inode/directory
+  ansible.builtin.shell: xdg-mime default thunar.desktop inode/directory
   become_user: "{{ user.name }}"
   tags: ['thunar']

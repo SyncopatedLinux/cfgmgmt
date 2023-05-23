@@ -14,7 +14,7 @@
 #   tags: ['jgmenu']
 
 - name: Synchronize templates - rofi
-  template:
+  ansible.builtin.template:
     src: "home/{{ item }}.j2"
     dest: "{{ user.home }}/{{ item }}"
     owner: "{{ user.name }}"

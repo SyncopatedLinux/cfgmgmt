@@ -6,3 +6,4 @@ pkgbuilds/
 logs/
 playbooks/facts/
 *.json
+__pycache__

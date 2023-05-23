@@ -1,5 +1,5 @@
 - name: Starting docker tasks
-  debug:
+  ansible.builtin.debug:
     msg: "Starting docker tasks"
 
 - name: Install docker packages
@@ -12,7 +12,7 @@
   tags: ['packages']
 
 - name: Add user to docker group
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     groups: docker
     append: yes
@@ -20,14 +20,14 @@
   ignore_errors: yes
 
 - name: Set docker storage location
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "/usr/lib/systemd/system/docker.service"
     regexp: "^ExecStart=/usr/bin/dockerd -H fd://"
     line: "ExecStart=/usr/bin/dockerd --data-root {{ docker.storage }} -H fd:// --containerd=/run/containerd/containerd.sock"
   notify: reload systemd daemon
 
 - name: Create docker config directory
-  file:
+  ansible.builtin.file:
     path: /etc/docker
     state: directory
     owner: root
@@ -35,7 +35,7 @@
     mode: '0755'
 
 - name: Enable experimental features in docker
-  copy:
+  ansible.builtin.copy:
     content: |
       {
         "experimental": true
@@ -45,7 +45,7 @@
     owner: root
 
 - name: Disable overlay redirect
-  copy:
+  ansible.builtin.copy:
     content: |
       options overlay metacopy=off redirect_dir=off
 

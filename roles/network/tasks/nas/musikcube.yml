@@ -1,13 +1,13 @@
 ---
 
 - name: Install musikcube systemd
-  template:
+  ansible.builtin.template:
     src: etc/systemd/system/musikcube.service
     dest: /etc/systemd/system/musikcube.service
     mode: '0644'
 
 - name: Enable musikcube services
-  systemd:
+  ansible.builtin.systemd:
     name: musikcubed
     enabled: yes
     state: started

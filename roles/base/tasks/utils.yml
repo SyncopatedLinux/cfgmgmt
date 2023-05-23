@@ -1,7 +1,7 @@
 ---
 
 - name: Sync folder syncopated utility scripts
-  synchronize:
+  ansible.posix.synchronize:
     src: usr/local/bin/
     dest: /usr/local/bin/
     recursive: yes
@@ -15,7 +15,7 @@
   tags: ['utils']
 
 - name: Ensure files in /usr/local/bin are executable
-  file:
+  ansible.builtin.file:
     path: /usr/local/bin
     mode: '0755'
     recurse: True

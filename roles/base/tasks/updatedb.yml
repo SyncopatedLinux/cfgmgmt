@@ -1,7 +1,7 @@
 ---
 
 - name: Set directories to not be indexed
-  template:
+  ansible.builtin.template:
     src: etc/updatedb.conf.j2
     dest: /etc/updatedb.conf
     owner: root
@@ -11,6 +11,6 @@
   tags: ['updatedb']
 
 - name: Run updatedb
-  command: "updatedb"
+  ansible.builtin.command: "updatedb"
   ignore_errors: True
   tags: ['updatedb']

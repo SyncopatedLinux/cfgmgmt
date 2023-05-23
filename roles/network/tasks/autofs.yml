@@ -1,18 +1,18 @@
 ---
 
 - name: Set autofs config folder
-  set_fact:
+  ansible.builtin.set_fact:
     _autofs_dir: "{{ autofs_dir }}"
 
 - block:
     - name: Create mount directory folder if it doesn't already exist
-      file:
+      ansible.builtin.file:
         path: /mnt/{{ autofs_client.host }}
         state: directory
         mode: '0755'
 
     - name: Install autofs configs
-      template:
+      ansible.builtin.template:
         src: etc/autofs/{{ item }}.j2
         dest: "{{ _autofs_dir }}/{{ item }}"
         mode: '0644'

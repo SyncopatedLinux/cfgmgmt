@@ -1,7 +1,7 @@
 ---
 
 - name: check if the vamp plugins currently exist
-  stat:
+  ansible.builtin.stat:
     path: "/usr/local/share/vamp/vamp-example-plugins.so"
   register: vamp_installed
   ignore_errors: "{{ ansible_check_mode }}"
@@ -9,13 +9,13 @@
 - block:
 
     - name: fetch vamp plugin installer
-      get_url:
+      ansible.builtin.get_url:
         url: "https://code.soundsoftware.ac.uk/attachments/download/2696/vamp-plugin-pack-installer-1.0"
         dest: /tmp
         mode: '0755'
 
     - name: set user perms for /usr/local/share/vamp
-      file:
+      ansible.builtin.file:
         path: /usr/local/share/vamp
         state: directory
         owner: "{{ user.name }}"
@@ -23,7 +23,7 @@
         mode: '0755'
 
     - name: run vamp plugin pack installer
-      script: |
+      ansible.builtin.script: |
         /usr/bin/uxterm -class 'backup' -e /usr/bin/env DISPLAY=:0 /usr/bin/env VAMP_PATH="/usr/local/share/vamp" ./vamp-plugin-pack-installer-1.0
       args:
         chdir: /tmp

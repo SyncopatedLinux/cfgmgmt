@@ -1,54 +1,62 @@
 ---
 
 - name: Starting application tasks
-  debug:
+  ansible.builtin.debug:
     msg: "starting application tasks"
 
 - name: Copy raysession default scripts
-  copy:
+  ansible.builtin.copy:
     src: "usr/local/share/raysession/session_templates/scripted/ray-scripts/{{ item }}"
     dest: "/usr/share/raysession/session_templates/scripted/ray-scripts/{{ item }}"
     mode: '0755'
     backup: yes
-  with_items:
+  loop:
     - close.sh
     - load.sh
     - save.sh
   tags: ['raysession']
 
-- include_tasks: pulsar.yml
+- ansible.builtin.include_tasks:
+    file: pulsar.yml
   when: install_pulsar|default(false)|bool == true
   tags: ['pulsar']
 
-- include_tasks: vamp.yml
+- ansible.builtin.include_tasks:
+    file: vamp.yml
   tags: ['vamp']
 
-- include_tasks: mixxx.yml
+- ansible.builtin.include_tasks:
+    file: mixxx.yml
   tags: ['mixxx']
 
 - name: Install vmpk keymap
-  copy:
+  ansible.builtin.copy:
     src: usr/share/vmpk/qwerty_extended.xml
     dest: /usr/share/vmpk/qwerty_extended.xml
     mode: '0644'
   tags: ['vmpk']
 
-- include_tasks: reaper.yml
+- ansible.builtin.include_tasks:
+    file: reaper.yml
   when: install_reaper|default(true)|bool == true
   tags: ['reaper']
 
-- include_tasks: sonicannotator.yml
+- ansible.builtin.include_tasks:
+    file: sonicannotator.yml
   when: install_annotator|default(true)|bool == true
   tags: ['sonicannotator']
 
-- include_tasks: soniclineup.yml
+- ansible.builtin.include_tasks:
+    file: soniclineup.yml
   when: install_soniclineup|default(true)|bool == true
   tags: ['soniclineup']
 
-- include_tasks: tony.yml
+- ansible.builtin.include_tasks:
+    file: tony.yml
   when: install_tony|default(true)|bool == true
   tags: ['tony']
 
-- include_tasks: touchosc.yml
+- ansible.builtin.include_tasks:
+    file: touchosc.yml
   when: install_touchosc|default(true)|bool == true
   tags: ['touchosc']
