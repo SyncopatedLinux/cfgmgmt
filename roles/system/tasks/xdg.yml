@@ -58,7 +58,7 @@
     rsync_opts:
       - "--update"
       - "--omit-dir-times"
-  with_items:
+  loop:
     - ambisonics/ambix
     - ambisonics/mcfx
     - ambisonics/iempluginsuite
