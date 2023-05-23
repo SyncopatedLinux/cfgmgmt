@@ -6,28 +6,28 @@ bindsym $mod+Shift+m sticky toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+Shift+grave move scratchpad
-bindsym XF86Launch2 scratchpad show
 
-bindsym XF86LaunchA floating disable, focus
 
-bindsym XF86Launch3 [class="^Zim"] scratchpad show
+#bindsym $mod+Shift+grave move scratchpad
+bindsym Shift+F8 move scratchpad
+bindsym XF86Launch1 scratchpad show
+bindsym Control+XF86Launch1 floating disable, focus
 
-# bindsym XF86Launch1 [class="(?i)atom"] focus
-# bindsym XF86Launch5 [class="Sonic\ Pi"] focus
-# bindsym XF86Launch6 [class="^VMPK"] scratchpad show, move position center
-# bindsym XF86Launch3 workspace $ws2
-# bindsym XF86Launch7 workspace $ws8
-# bindsym XF86Launch4 workspace $ws5
-# bindsym XF86Launch8 workspace $ws9
 
-bindsym XF86Launch6 focus output HDMI-1
-bindsym XF86Launch7 focus output HDMI-2
-
-# bindsym XF86LaunchB nop dropdown
-
+bindsym XF86Launch2 [class="(?i)pulsar"] focus
+# bindsym XF86Launch3 [class="Sonic\ Pi"] focus
+# bindsym XF86Launch4
+# bindsym XF86Launch5
+# bindsym XF86Launch6
+# bindsym XF86Launch7
+# bindsym XF86Launch8
 bindsym $mod+F7 [title="^jack-keyboard"] scratchpad show
 bindsym $mod+F8 [class="^VMPK"] scratchpad show
+
+
+#bindsym <var> focus output HDMI-1
+#bindsym <var> focus output HDMI-2
+#bindsym XF86LaunchB nop dropdown
 
 bindsym $mod+Return $exec "kitty"
 
@@ -46,7 +46,7 @@ bindsym F1 kill
 bindsym $mod+q kill
 bindsym $mod+KP_Subtract kill
 
-bindsym Shift+F8 kill
+
 
 # change focus
 bindsym $mod+j focus left

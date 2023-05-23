@@ -23,35 +23,43 @@ assign [title="jkmeter"] $ws1
 # assign [title="zita-mu1-0.3.3"] $ws1
 assign [title="zita-rev1"] $ws1
 
-# assign [class="(?i)pulsar"] $ws5
-assign [class="Bipscript\ IDE"] $ws2
-assign [class="Sonic\ Pi"] $ws2
 
-assign [class="Guitarix"] $ws5
-assign [class="Non-Sequencer"] $w5
-assign [class="^FMIT$"] $ws5
-assign [class="^Hydrogen"] $ws5
-assign [class="^Seq192"] $ws5
+assign [class="(?i)pulsar"] $ws1
+assign [class="Bipscript\ IDE"] $ws1
+assign [class="(?i)sonic-pi"] $ws1
+
+
+assign [title="(?i)google-chrome"] $ws2
+
+assign [class="^RaySession$"] $ws9
+assign [class="Jalv.select"] $ws9
+
+assign [class="Mixxx"] $ws6
+
+assign [class="REAPER"] $ws8
+
+assign [class="Non-Mixer"] $ws9
+assign [class="Jack_mixer"] $ws9
+assign [class="^Patchage"] $ws9
+
 assign [class="^Timemachine$"] $ws10
+assign [class="^FMIT$"] $ws10
 
-assign [class="Mixxx"] $ws7
 
-
-assign [class="Jack_mixer"] $ws8
-assign [class="Non-Mixer"] $ws8
+# assign [class="Guitarix"] $ws5
+# assign [class="Non-Sequencer"] $w5
+# assign [class="^Hydrogen"] $ws5
+# assign [class="^Seq192"] $ws5
+# assign [class="Jalv.gtk" title="Helm"] $ws6
+# assign [class="qmidiarp"] $ws6
+# assign [class="Qsampler"] $ws1
 
 {% if i3.assignments != 'default' %}
 {% for app in i3.assignments %}
 assign {{ app }}
 {% endfor %}
 {% else %}
-assign [class="Jalv.gtk" title="Helm"] $ws6
-assign [class="qmidiarp"] $ws6
-assign [class="REAPER"] $ws8
-assign [class="Qsampler"] $ws1
-assign [class="^Patchage"] $ws10
-assign [class="Jalv.select"] $ws1
-assign [class="^RaySession$"] $ws1
+
 {% endif %}
 #############################################################################
 #----------------------------- Window Assignments -----------------------#
@@ -99,7 +107,7 @@ for_window [class="checklog"] floating enable, move to workspace 5, resize set 2
 for_window [class="govna"] floating enable, resize set 678 491, move to position center, focus
 for_window [class="brightness"] floating enable, resize set 1007 631, move to position center, focus
 for_window [class="ghissue"] floating enable, resize set 626 503, move to position center, focus
-for_window [class="weather"] floating enable, resize set 757 647, move output DVI-D-0, move to position center, focus
+for_window [class="weather"] floating enable, resize set 834 627, move output DVI-D-0, move to position center, focus
 
 ######################################
 #       ---{ scratchpad }---
@@ -121,7 +129,8 @@ for_window [class="REAPER" title="^Mixer"] floating disable, focus
 # for_window [class="REAPER" title="^Preferences"] floating enable, border normal, resize set 803 505, move output primary, focus
 # for_window [class="REAPER" title="^Actions"] floating enable, border normal, resize set 701 405, move output primary, focus
 # for_window [class="REAPER" title="^Docker"] floating disable, move to workspace 4, focus
-for_window [class="REAPER" title="(?i)JS:"] border normal, floating enable, move to position pointer, focus
+
+for_window [class="REAPER" title="(?i)JS:"] border normal, floating enable, move to output DVI-D-0
 for_window [class="REAPER" title="(?i)CLAP:"] border normal, floating enable, move to position pointer, focus
 for_window [class="REAPER" title="(?i)VST:"] border normal, floating enable, move position center, focus
 for_window [class="REAPER" title="(?i)VST3:"] border normal, floating enable, move position center, focus

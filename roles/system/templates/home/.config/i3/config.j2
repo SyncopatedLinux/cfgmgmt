@@ -134,9 +134,14 @@ bar {
 
         status_command /usr/bin/i3status-rs ~/.config/i3status-rust/config.toml
 
+{% if ansible_hostname == 'ninjabot' %}
+        workspace_min_width 40
+        height 30
+{% else %}
         workspace_min_width 50
-
         height 26
+{% endif %}
+
 {% if i3.tray_output != 'default' %}
         tray_output "{{ i3.tray_output }}"
 {% else %}

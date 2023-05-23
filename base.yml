@@ -18,6 +18,11 @@
 
   pre_tasks:
 
+    - name: Include distro vars
+      include_vars:
+        file: vars/{{ ansible_distribution }}.yml
+      tags: ['base']
+
     - name: Symlink /etc/os-release to /etc/system-release
       file:
         src: /etc/os-release
@@ -29,27 +34,12 @@
       shell: |
         cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
       register: distrib_id
-      tags: ['facts', 'base', 'system']
+      tags: ['facts', 'base', 'system', 'user']
 
     - name: Set distrib_id as a fact
       set_fact:
         distrib_id: "{{ distrib_id.stdout }}"
-      tags: ['facts', 'base', 'system']
-
-    # - name: Set lsb_release
-    #   set_fact:
-    #     lsb_release: "{{ ansible_facts }}"
-    #   tags: ['facts', 'base', 'system']
-
-    - name: print release
-      debug:
-        var: distrib_id
-      tags: ['facts']
-
-    - name: Include distro vars
-      include_vars:
-        file: vars/{{ ansible_distribution }}.yml
-      tags: ['base']
+      tags: ['facts', 'base', 'system', 'user']
 
     - name: Set ansible_home
       set_fact:
@@ -95,7 +85,83 @@
       ignore_errors: "{{ ansible_check_mode }}"
       tags: ['ssh']
 
+    #TODO: add task to install rubygems, ruby-devel, git
+    - block:
+        - name: Set --no-user-install in gemrc
+          copy:
+            content: |
+              gem: --no-user-install --no-document
+
+            dest: "/etc/gemrc"
+            owner: root
+
+        - name: Gather list of installed gems
+          shell: "gem list | awk '{ print $1 }'"
+          register: gemlist
+          changed_when: gemlist.rc != 0
+          ignore_errors: "{{ ansible_check_mode }}"
+
+        - name: Set list of gems to install
+          set_fact:
+            _gems: "{{ gems|difference(gemlist.stdout) }}"
+
+        - name: Install ruby gems
+          shell: "gem install {{ item }}"
+          with_items:
+            - "{{ _gems }}"
+          when: _gems | length > 0
+
+      vars:
+        gems:
+          - activesupport
+          - awesome_print
+          - bcrypt_pbkdf
+          - childprocess
+          - clipboard
+          - colorize
+          - coltrane
+          - ed25519
+          - eventmachine
+          - ffi
+          - fractional
+          - geo_coord
+          - highline
+          - i3ipc
+          - i18n
+          - kramdown
+          - logging
+          - minitest
+          - mocha
+          - multi_json
+          - neovim
+          - net-ssh
+          - parallel
+          - pastel
+          - pry
+          - pry-doc
+          - rake
+          - rdoc
+          - rexml
+          - rouge
+          - ruby-openai
+          - ruport
+          - sync
+          - sys-proctable
+          - treetop
+          - tty-box
+          - tty-command
+          - tty-prompt
+          - tty-screen
+          - yaml
+
+
   roles:
+
+    - role: user
+      tags: ['user']
+
+    - role: distro
+      tags: ['distro']
 
     - role: base
       tags: ['base']

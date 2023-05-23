@@ -17,18 +17,16 @@
   include_vars:
     file: vars/{{ ansible_distribution }}.yml
 
-- import_tasks: sudoers.yml
-  tags: ['sudoers']
-
-- import_tasks: ruby.yml
-  tags: ['ruby']
+- name: install sshd config
+  template:
+    src: etc/ssh/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    backup: True
+  notify: restart sshd
+  tags: ['sshd']
 
 - import_tasks: zshell.yml
   tags: ['zsh']
-
-- include_tasks: "distro/Archlinux.yml"
-  when: ansible_distribution == 'Archlinux'
-  tags: ['repo', 'packages', 'mirrors']
 
 - import_tasks: firewall.yml
   tags: ['firewall']

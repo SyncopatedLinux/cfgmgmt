@@ -15,12 +15,15 @@
     dest: "/etc/security/limits.d/41-realtime.conf"
     mode: '0644'
 
-- name: Install timer permissions file
+# It is safe to have this file even if
+# your hardware contains neither device
+# source: https://gentoostudio.org/?page_id=420
+- name: Set timer permissions in udev rules
   copy:
-    src: etc/udev/rules.d/40-timer-permissions.rules
-    dest: /etc/udev/rules.d/40-timer-permissions.rules
-    owner: root
-    group: root
+    content: |
+      KERNEL=="rtc0", GROUP="audio"
+      KERNEL=="hpet", GROUP="audio"
+    dest: "/etc/udev/rules.d/40-timer-permissions.rules"
     mode: '0644'
 
 - name: Set sysctl params

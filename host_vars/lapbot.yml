@@ -4,5 +4,7 @@ use_rt_kernel: true
 
 install_pulsar: true
 
+use_chaotic: false
+
 ohmyzsh:
   theme: steeef

@@ -77,7 +77,7 @@ colors:
     link: '#066592'
     tag: '#838d6e'
     h1: '#108E1A'
-    h2: '#343434'
+    h2: '#bbaf05'
     h3: '#14a8f0'
     h4: '#b8b8b8'
     h5: '#e9f10a'
@@ -115,11 +115,11 @@ colors:
     border: '#3149a7'
     text: '#ebdbb2'
   focused:
-    border: '#3149a7'
+    border: '#ebd61c'
     background: '#000000'
     text: '#ebdbb2'
     indicator: '#735E0D'
-    child_border: '#3149a7'
+    child_border: '#ebd61c'
   unfocused:
     border: '#2a2a2a'
     background: '#000000'
@@ -131,7 +131,7 @@ colors:
     background: '#000000'
     text: '#4a4d44'
     indicator: '#735E0D'
-    child_border: '#3149a7'
+    child_border: '#ebd61c'
   inactive:
     border: '#2a2a2a'
     background: '#000000'

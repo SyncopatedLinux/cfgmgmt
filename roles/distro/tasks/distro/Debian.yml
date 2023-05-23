@@ -1,0 +1,52 @@
+---
+
+- block:
+    - name: Remove nodejs-legacy package
+      apt:
+        name:
+          - nodejs-legacy
+        state: absent
+
+    - name: Add Node.js APT repository key
+      apt_key:
+        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+        state: present
+
+    - name: Add Node.js APT repository
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_14.x {{ ansible_distribution_release }} main"
+        state: present
+        filename: nodesource
+
+    - name: Add GPG key for Node.js APT repository
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+
+    - name: Install Node.js version 14
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Include package vars
+      include_vars:
+        file: packages/{{ ansible_distribution }}/base.yml
+
+    - name: Install System packages
+      apt:
+        name: "{{ packages.system }}"
+        state: present
+
+    # - name: Install Bluetooth packages
+    #   apt:
+    #     name: "{{ item }}"
+    #     state: present
+    #   loop: "{{ bluetooth }}"
+    #
+    # - name: Install System packages
+    #   apt:
+    #     name: "{{ item }}"
+    #     state: present
+    #   loop: "{{ system }}"
+
+  tags: ['packages']

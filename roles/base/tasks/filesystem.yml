@@ -17,6 +17,8 @@
     use: auto
     name: btrfsmaintenance
     state: present
+  become: True
+  become_user: "{{ user.name }}"
   when: btrfs_exists|default(false)|bool == true
   tags: ['btrfs']
 
