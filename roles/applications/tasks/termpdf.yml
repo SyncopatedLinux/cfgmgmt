@@ -2,11 +2,11 @@
 
 - block:
     - name: check if termpdf.py is already installed
-      stat: path="{{ user.home }}/.local/bin/termpdf.py"
+      ansible.builtin.stat: path="{{ user.home }}/.local/bin/termpdf.py"
       register: hazitermpdf
 
     - name: install termpdf
-      shell: |
+      ansible.builtin.shell: |
         git clone https://github.com/dsanson/termpdf.py
         cd termpdf.py
         pip install -r requirements.txt
