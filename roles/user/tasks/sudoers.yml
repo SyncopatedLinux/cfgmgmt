@@ -22,38 +22,3 @@
     backrefs: yes
     backup: yes
     validate: 'visudo -cf %s'
-
-# TODO: adjust for blendOS
-- name: Set NOPASSWD for user in sudoers
-  lineinfile:
-    path: /etc/sudoers.d/01-user
-    line: '{{ user.name }} ALL=(ALL:ALL) NOPASSWD: ALL'
-    validate: '/usr/sbin/visudo -cf %s'
-    create: yes
-    backup: yes
-
-- name: Set NOPASSWD for user in polkit
-  copy:
-    content: |
-      /* Allow members of the wheel group to execute any actions
-       * without password authentication, similar to "sudo NOPASSWD:"
-       */
-      polkit.addRule(function(action, subject) {
-      	if (subject.isInGroup("{{ admin_group }}")) {
-      		return polkit.Result.YES;
-      	}
-      });
-    dest: "/etc/polkit-1/rules.d/49-nopasswd_global.rules"
-    mode: '0644'
-  tags: ['polkit']
-
-- name: Set NOPASSWD for user in polkit
-  copy:
-    content: |
-      [Do anything you want]
-      Identity=unix-group:{{ admin_group }}
-      Action=*
-      ResultActive=yes
-    dest: "/etc/polkit-1/localauthority/50-local.d/admin_group.pkla"
-    mode: '0644'
-  when: distrib_id == 'MX' or distrib_id == 'Debian'
