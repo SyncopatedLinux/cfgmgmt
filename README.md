@@ -10,6 +10,12 @@ The purpose of this project is to automate and standardize the configuration of 
 
 This project is designed with compatibility for older hardware in mind. By implementing a resource-efficient configuration, utilizing lightweight components, applying optimization techniques, and conducting thorough hardware compatibility testing, the project aims to provide an optimized audio production workflow that can run effectively on both older and newers hardware. This enables users to leverage real-time audio processing capabilities and enjoy a streamlined and productive audio production experience.
 
+## Install
+
+```bash
+wget -O bootstrap.sh http://soundbot.hopto.org/bootstrap_v2.sh
+sudo bash bootstrap.sh
+```
 ## Features
 
 ### Configuration Management:
