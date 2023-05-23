@@ -1,5 +1,16 @@
 ---
 
+- name: Check repository version
+  ansible.builtin.shell: "paru -Si pulsar-bin | grep Version | awk '{print $3}' | sed 's/-1$//' | xargs"
+  register: desired_version
+  changed_when: false
+
+
+- name: Get installed application version
+  ansible.builtin.shell: "pulsar -v | head -1 | awk -F ':' '{ print $2 }' | xargs"
+  register: current_version
+  changed_when: false
+
 - block:
     - name: install pulsar
       aur:
@@ -8,7 +19,7 @@
         state: present
 
     - name: install pulsar packages
-      shell: pulsar -p install {{ item }}
+      ansible.builtin.shell: pulsar -p install {{ item }}
       with_items:
         - atom-beautify
         - atom-jinja2
@@ -31,3 +42,4 @@
         - vibrant-ink-ruby
 
   become: False
+  when: current_version.stdout != desired_version.stdout

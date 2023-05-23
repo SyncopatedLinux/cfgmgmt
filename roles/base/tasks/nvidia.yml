@@ -14,13 +14,13 @@
       become_user: "{{ user.name }}"
 
     - name: install xorg.conf for nvidia
-      copy:
+      ansible.builtin.copy:
         src: etc/X11/xorg.conf.d/20-nvidia.conf
         dest: /etc/X11/xorg.conf.d/20-nvidia.conf
         mode: '0644'
 
     - name: install modprobe configurations
-      copy:
+      ansible.builtin.copy:
         src: "etc/modprobe.d/{{ item }}"
         dest: "/etc/modprobe.d/{{ item }}"
         mode: '0644'

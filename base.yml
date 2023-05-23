@@ -19,46 +19,46 @@
   pre_tasks:
 
     - name: Include distro vars
-      include_vars:
+      ansible.builtin.include_vars:
         file: vars/{{ ansible_distribution }}.yml
       tags: ['base']
 
     - name: Symlink /etc/os-release to /etc/system-release
-      file:
+      ansible.builtin.file:
         src: /etc/os-release
         dest: /etc/system-release
         state: link
       tags: ['base']
 
     - name: Get the distrib_id
-      shell: |
+      ansible.builtin.shell: |
         cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
       register: distrib_id
       tags: ['facts', 'base', 'system', 'user']
 
     - name: Set distrib_id as a fact
-      set_fact:
+      ansible.builtin.set_fact:
         distrib_id: "{{ distrib_id.stdout }}"
       tags: ['facts', 'base', 'system', 'user']
 
     - name: Set ansible_home
-      set_fact:
+      ansible.builtin.set_fact:
         ansible_home: "{{ lookup('env','HOME') }}/Workspace/ohmannium"
       tags: ['base']
 
     - name: Set admin_group variable
-      set_fact:
+      ansible.builtin.set_fact:
         admin_group: "{{ admin_group }}"
       tags: ['base']
 
     - block:
         - name: Print keyserver hostname
-          debug:
+          ansible.builtin.debug:
             msg: "{{ keyserver }}"
           when: ( debugging is defined or keyserver is defined )
 
         - name: Check if keys are present
-          stat:
+          ansible.builtin.stat:
             path: "{{ user.home }}/.ssh/id_rsa"
           register: keys
 
@@ -66,7 +66,7 @@
           become: False
           delegate_to: 127.0.0.1
           run_once: True
-          shell: "scp {{ user.name }}@{{ keyserver }}:~/.ssh/{{ item }} {{ user.home }}/.ssh/{{ item }}"
+          ansible.builtin.shell: "scp {{ user.name }}@{{ keyserver }}:~/.ssh/{{ item }} {{ user.home }}/.ssh/{{ item }}"
           args:
             chdir: "{{ user.home }}"
           with_items:
@@ -78,7 +78,7 @@
           tags: ['keys']
 
         - name: Enable ssh daemon
-          service:
+          ansible.builtin.service:
             name: sshd
             enabled: True
 
@@ -88,7 +88,7 @@
     #TODO: add task to install rubygems, ruby-devel, git
     - block:
         - name: Set --no-user-install in gemrc
-          copy:
+          ansible.builtin.copy:
             content: |
               gem: --no-user-install --no-document
 
@@ -96,17 +96,17 @@
             owner: root
 
         - name: Gather list of installed gems
-          shell: "gem list | awk '{ print $1 }'"
+          ansible.builtin.shell: "gem list | awk '{ print $1 }'"
           register: gemlist
           changed_when: gemlist.rc != 0
           ignore_errors: "{{ ansible_check_mode }}"
 
         - name: Set list of gems to install
-          set_fact:
+          ansible.builtin.set_fact:
             _gems: "{{ gems|difference(gemlist.stdout) }}"
 
         - name: Install ruby gems
-          shell: "gem install {{ item }}"
+          ansible.builtin.shell: "gem install {{ item }}"
           with_items:
             - "{{ _gems }}"
           when: _gems | length > 0
@@ -181,7 +181,7 @@
   post_tasks:
 
       - name: Cleanup old backup files
-        script: /usr/local/bin/cleanup.sh
+        ansible.builtin.script: /usr/local/bin/cleanup.sh
         when: cleanup is defined
         tags: ['cleanup']
 
@@ -194,7 +194,7 @@
         when: reboot is defined
 
       - name: Wait for host to reboot
-        wait_for_connection:
+        ansible.builtin.wait_for_connection:
           connect_timeout: 20
           sleep: 5
           delay: 5

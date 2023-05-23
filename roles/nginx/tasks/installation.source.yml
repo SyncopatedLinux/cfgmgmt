@@ -1,7 +1,7 @@
 ---
 
 - name: install nginx dependencies
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
     update_cache: yes
@@ -13,7 +13,7 @@
   when: ansible_distribution == 'Fedora'
 
 - name: install nginx dependencies
-  pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
     force: yes
@@ -26,32 +26,32 @@
   when: ansible_distribution == 'Archlinux'
 
 - name: create nginx group
-  group:
+  ansible.builtin.group:
     name: nginx
     state: present
     system: True
 
 - name: create nginx user
-  user:
+  ansible.builtin.user:
     name: nginx
     state: present
     group: nginx
     system: True
 
 - name: fetch nginx source
-  get_url:
+  ansible.builtin.get_url:
     url: http://nginx.org/download/nginx-1.22.1.tar.gz
     dest: "/tmp"
     validate_certs: no
 
 - name: extract nginx source
-  unarchive:
+  ansible.builtin.unarchive:
     src: /tmp/nginx-1.22.1.tar.gz
     dest: "/tmp"
     remote_src: yes
 
 - name: clone fancyindex
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/aperezdc/ngx-fancyindex.git"
     dest: "/tmp/ngx-fancyindex"
     accept_hostkey: yes
@@ -60,13 +60,13 @@
     recursive: yes
 
 - name: configure nginx with modules
-  shell: |
+  ansible.builtin.shell: |
     ./configure --prefix=/usr --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/run/nginx.pid --conf-path=/etc/nginx/nginx.conf --modules-path=/usr/share/nginx/modules --add-module=../ngx-fancyindex --with-http_addition_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_ssl_module
   args:
     chdir: /tmp/nginx-1.22.1
 
 - name: make and install nginx
-  shell: |
+  ansible.builtin.shell: |
       make && make install
   args:
     chdir: /tmp/nginx-1.22.1

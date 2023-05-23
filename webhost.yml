@@ -121,7 +121,7 @@
   pre_tasks:
 
     - name: Print all available facts
-      debug:
+      ansible.builtin.debug:
         var: ansible_facts
       when: debugging is defined
       tags: ['facts']
@@ -134,7 +134,7 @@
   post_tasks:
 
     - name: Permit http/https traffic
-      firewalld:
+      ansible.posix.firewalld:
         service: "{{ item }}"
         state: enabled
         permanent: yes
@@ -144,5 +144,5 @@
       tags: ['firewall']
 
     - name: Reload firewalld
-      shell: "firewall-cmd --reload"
+      ansible.builtin.shell: "firewall-cmd --reload"
       tags: ['firewall']

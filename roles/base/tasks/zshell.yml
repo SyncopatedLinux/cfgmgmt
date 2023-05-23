@@ -1,13 +1,13 @@
 ---
 
 - name: Set root shell
-  user:
+  ansible.builtin.user:
     name: root
     shell: /usr/bin/zsh
 
 
 - name: Sync zsh functions
-  synchronize:
+  ansible.posix.synchronize:
     src: "usr/local/share/zsh"
     dest: "/usr/local/share"
     recursive: yes
@@ -21,7 +21,7 @@
   tags: ['zsh']
 
 - name: Ensure /usr/local/share/zsh has correct owner/group
-  file:
+  ansible.builtin.file:
     path: "/usr/local/share/zsh"
     state: directory
     owner: root

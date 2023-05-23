@@ -6,3 +6,6 @@ pkgbuilds/
 logs/
 playbooks/facts/
 *.json
+__pycache__
+callback_plugins/
+touchosc_v2.yml

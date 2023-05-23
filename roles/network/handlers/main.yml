@@ -1,16 +1,16 @@
 ---
 
 - name: enable systemd-timesyncd service
-  systemd:
+  ansible.builtin.systemd:
     name: systemd-timesyncd
     enabled: yes
 
 - name: reload firewalld
-  shell: "firewall-cmd --reload"
+  ansible.builtin.shell: "firewall-cmd --reload"
   ignore_errors: True
 
 - name: enable autofs service
-  systemd:
+  ansible.builtin.systemd:
     name: autofs
     enabled: yes
   ignore_errors: "{{ ansible_check_mode }}"

@@ -6,7 +6,7 @@
 #   with_dict: "{{ network.interfaces }}"
 
 - name: add ethernet device
-  nmcli:
+  community.general.nmcli:
     type: "{{ item.value.type }}"
     ifname: "{{ item.value.ifname }}"
     conn_name: "{{ item.value.conn_name }}"
@@ -22,7 +22,7 @@
     - item.value.conn_name == item.value.ifname
 
 - name: add wifi device
-  nmcli:
+  community.general.nmcli:
     type: "{{ item.value.type }}"
     ifname: "{{ item.value.ifname }}"
     conn_name: "{{ item.value.conn_name }}"
@@ -40,7 +40,7 @@
   tags: ['wireless']
 
 - name: add audio subnet device
-  nmcli:
+  community.general.nmcli:
     type: "{{ item.value.type }}"
     ifname: "{{ item.value.ifname }}"
     conn_name: "{{ item.value.conn_name }}"
@@ -51,7 +51,7 @@
   when: item.value.conn_name == 'audio'
 
 - name: add bridge device
-  nmcli:
+  community.general.nmcli:
     type: "{{ item.value.type }}"
     ifname: "{{ item.value.ifname }}"
     conn_name: "{{ item.value.conn_name }}"
@@ -64,7 +64,7 @@
   when: item.value.type == 'bridge'
 
 - name: add bridge slave
-  nmcli:
+  community.general.nmcli:
     type: "{{ item.value.type }}"
     ifname: "{{ item.value.ifname }}"
     conn_name: "{{ item.value.conn_name }}"
@@ -77,7 +77,7 @@
     - item.value.bridge is defined
 
 - name: ensure NetworkManager is enabled and restart service
-  systemd:
+  ansible.builtin.systemd:
     name: NetworkManager
     enabled: yes
     state: restarted

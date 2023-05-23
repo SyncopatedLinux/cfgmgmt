@@ -1,13 +1,13 @@
 ---
 
 - name: Ensure user belongs to audio group
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     groups: "audio"
     append: yes
 
 - name: Set rtprio, memlock and nice for audio group
-  copy:
+  ansible.builtin.copy:
     content: |
       @audio  - rtprio  98
       @audio  - memlock unlimited
@@ -19,7 +19,7 @@
 # your hardware contains neither device
 # source: https://gentoostudio.org/?page_id=420
 - name: Set timer permissions in udev rules
-  copy:
+  ansible.builtin.copy:
     content: |
       KERNEL=="rtc0", GROUP="audio"
       KERNEL=="hpet", GROUP="audio"
@@ -27,7 +27,7 @@
     mode: '0644'
 
 - name: Set sysctl params
-  copy:
+  ansible.builtin.copy:
     src: etc/sysctl.d/99-cachyos-settings.conf
     dest: /etc/sysctl.d/99-cachyos-settings.conf
     mode: '0644'
@@ -35,7 +35,7 @@
 
 - block:
     - name: Enable tuned service
-      systemd:
+      ansible.builtin.systemd:
         name: tuned
         enabled: no
       ignore_errors: "{{ ansible_check_mode }}"
@@ -47,7 +47,7 @@
     #   changed_when: tuned_profile.rc != 0
 
     - name: Install realtime-modified profile
-      copy:
+      ansible.builtin.copy:
         src: etc/tuned/realtime-modified/tuned.conf
         dest: /etc/tuned/realtime-modified/tuned.conf
         owner: root
@@ -59,7 +59,7 @@
 
 - block:
     - name: Install rtirq defaults
-      copy:
+      ansible.builtin.copy:
         src: etc/sysconfig/rtirq
         dest: /etc/rtirq.conf
         directory_mode: no
@@ -70,7 +70,7 @@
 
     # rtkit package should be Installed before this happens
     - name: Install rtkit.conf
-      copy:
+      ansible.builtin.copy:
         src: etc/rtkit.conf
         dest: /etc/rtkit.conf
         directory_mode: no
@@ -80,7 +80,7 @@
       register: rtkit_conf
 
     - name: Install rtkit systemd file
-      template:
+      ansible.builtin.template:
         src: usr/lib/systemd/system/rtkit-daemon.service.j2
         dest: /usr/lib/systemd/system/rtkit-daemon.service
         mode: '0644'
@@ -92,7 +92,7 @@
     - "enable rtkit service"
 
 - name: Install cpucpower defaults
-  template:
+  ansible.builtin.template:
     src: etc/default/cpupower.j2
     dest: /etc/default/cpupower
     mode: '0644'
@@ -100,7 +100,7 @@
   tags: ['cpupower']
 
 - name: Enable cpupower service
-  service:
+  ansible.builtin.service:
     name: cpupower
     enabled: True
   ignore_errors: "{{ ansible_check_mode }}"
@@ -110,7 +110,7 @@
 # Do not use the irqbalance daemon, or do so carefully [4].
 # https://wiki.archlinux.org/title/Professional_audio#Tips_and_tricks
 - name: Disable irqbalance service
-  service:
+  ansible.builtin.service:
     name: irqbalance
     enabled: False
   ignore_errors: True

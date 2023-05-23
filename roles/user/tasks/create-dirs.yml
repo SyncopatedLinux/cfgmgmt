@@ -1,7 +1,7 @@
 ---
 
 - name: Ensure sudoers.d exists
-  file:
+  ansible.builtin.file:
     path: /etc/sudoers.d/
     state: directory
     owner: root
@@ -10,7 +10,7 @@
     recurse: False
 
 - name: Create tuned profile folder
-  file:
+  ansible.builtin.file:
     path: /etc/tuned/realtime-modified/
     state: directory
     owner: root
@@ -18,7 +18,7 @@
     recurse: True
 
 - name: Ensure these directories exist
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: '0755'
@@ -36,7 +36,7 @@
     - /usr/share/backgrounds/ohmannium/
 
 - name: Ensure these directories also exist
-  file:
+  ansible.builtin.file:
     path: "{{ user.home }}/{{ item }}"
     state: directory
     owner: "{{ user.name }}"
@@ -98,7 +98,7 @@
     - .config/rofi/scripts/
 
 - name: Ensure these directories also exist
-  file:
+  ansible.builtin.file:
     path: "/root/{{ item }}"
     state: directory
     mode: '0755'

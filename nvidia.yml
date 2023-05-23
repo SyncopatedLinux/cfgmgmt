@@ -7,7 +7,7 @@
   pre_tasks:
 
     - name: Install dkms and kernel headers
-      apt:
+      ansible.builtin.apt:
         name: "{{ item }}"
         state: latest
       loop:
@@ -16,19 +16,19 @@
 
     - name: Check if Nvidia drivers are already installed
       become: yes
-      shell: "apt list --installed | grep nvidia|telsa"
+      ansible.builtin.shell: "apt list --installed | grep nvidia|telsa"
       register: nvidia_packages
 
     - name: Remove Nvidia drivers if already installed
       become: yes
-      apt:
+      ansible.builtin.apt:
         name: "{{ item }}"
         state: absent
       with_items: "{{ nvidia_packages.stdout_lines }}"
       when: "'nvidia' in item"
 
     - name: Prevent Nvidia packages from being installed via system repository
-      blockinfile:
+      ansible.builtin.blockinfile:
         path: /etc/apt/preferences.d/nvidia
         block: |
           Package: nvidia*
@@ -38,13 +38,13 @@
   tasks:
 
     - name: Get NVIDIA GPU model
-      command: "lspci | grep -E 'VGA|3D' | grep -i nvidia"
+      ansible.builtin.command: "lspci | grep -E 'VGA|3D' | grep -i nvidia"
       register: gpu_output
       ignore_errors: true
       changed_when: false
 
     - name: Install NVIDIA driver for legacy GPU
-      apt:
+      ansible.builtin.apt:
         name: "nvidia-legacy-340xx-driver"
         state: present
       when: gpu_output.rc != 0
@@ -54,7 +54,7 @@
         nvidia_driver_version: "470.82.00"
       block:
         - name: Download NVIDIA driver for Debian
-          get_url:
+          ansible.builtin.get_url:
             url: "{{ nvidia_driver_url }}"
             dest: "/tmp/NVIDIA-Linux-x86_64-{{ nvidia_driver_version }}.run"
           when:
@@ -62,10 +62,10 @@
             - gpu_output.rc == 0"
 
         - name: Install NVIDIA driver
-          shell: "sh /tmp/NVIDIA-Linux-x86_64-{{ nvidia_driver_version if ansible_distribution == 'Debian' else mx_nvidia_driver_version }}.run --silent"
+          ansible.builtin.shell: "sh /tmp/NVIDIA-Linux-x86_64-{{ nvidia_driver_version if ansible_distribution == 'Debian' else mx_nvidia_driver_version }}.run --silent"
           register: nvidia_install_output
           when: gpu_output.rc == 0
 
         - name: Reboot the system
-          reboot:
+          ansible.builtin.reboot:
           when: nvidia_install_output is changed

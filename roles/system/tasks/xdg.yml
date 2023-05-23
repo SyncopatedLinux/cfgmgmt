@@ -1,7 +1,7 @@
 ---
 
 - name: Create /etc/xdg/menus and /usr/share/desktop-entries
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: '0755'
@@ -10,7 +10,7 @@
     - /usr/share/desktop-directories
 
 - name: Install application menu
-  copy:
+  ansible.builtin.copy:
     src: "files/etc/xdg/menus/arch-applications.menu"
     dest: "/etc/xdg/menus/arch-applications.menu"
     mode: '0644'
@@ -18,7 +18,7 @@
   tags: ['menu']
 
 - name: Install menus
-  copy:
+  ansible.builtin.copy:
     src: "files/etc/xdg/menus/applications-merged/{{ item }}"
     dest: "/etc/xdg/menus/applications-merged/{{ item }}"
     mode: '0644'
@@ -31,7 +31,7 @@
   tags: ['menu']
 
 - name: Install directory entries
-  copy:
+  ansible.builtin.copy:
     src: "files/usr/local/share/desktop-directories/{{ item }}"
     dest: "/usr/share/desktop-directories/{{ item }}"
     mode: '0644'
@@ -47,7 +47,7 @@
   tags: ['menu']
 
 - name: Install Ambisonics desktop entries
-  synchronize:
+  ansible.posix.synchronize:
     src: "files/usr/local/share/applications/{{ item }}/"
     dest: "/usr/share/applications/"
     recursive: yes
@@ -380,4 +380,4 @@
 #   become_user: "{{ user.name }}"
 
 - name: Update desktop database
-  command: bash -lc "update-desktop-database"
+  ansible.builtin.command: bash -lc "update-desktop-database"

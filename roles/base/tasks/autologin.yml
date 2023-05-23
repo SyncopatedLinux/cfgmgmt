@@ -2,14 +2,14 @@
 
 - block:
     - name: Create getty@tty1.service.d directory
-      file:
+      ansible.builtin.file:
         path: "/etc/systemd/system/getty@tty1.service.d"
         state: directory
         owner: root
         group: root
 
     - name: Create systemd drop-in file for virtual console autologin
-      template:
+      ansible.builtin.template:
         src: "etc/systemd/system/getty@tty1.service.d/autologin.conf.j2"
         dest: "/etc/systemd/system/getty@tty1.service.d/autologin.conf"
         owner: root
@@ -28,19 +28,19 @@
       become_user: "{{ user.name }}"
 
     - name: Ensure group autologin exists
-      group:
+      ansible.builtin.group:
         name: autologin
         state: present
         system: yes
 
     - name: Add user to autologin group
-      user:
+      ansible.builtin.user:
         name: "{{ user.name }}"
         groups: autologin
         append: yes
 
     - name: Install xsession file to /etc/lightdm/xsession
-      copy:
+      ansible.builtin.copy:
         src: etc/lightdm/Xsession
         dest: /etc/lightdm/Xsession
         directory_mode: yes
@@ -49,7 +49,7 @@
         mode: '0755'
 
     - name: Update lightdm.conf
-      template:
+      ansible.builtin.template:
         src: etc/lightdm/lightdm.conf.j2
         dest: /etc/lightdm/lightdm.conf
         mode: '644'
@@ -58,7 +58,7 @@
         backup: yes
 
     - name: Update pam
-      copy:
+      ansible.builtin.copy:
         src: "etc/pam.d/{{ item }}"
         dest: "/etc/pam.d/{{ item }}"
         mode: '0644'
@@ -75,7 +75,7 @@
 
 # if this file does not exist, lightdm will fail to start
 - name: Set dmrc to i3
-  copy:
+  ansible.builtin.copy:
     content: |
       [Desktop]
       Session=i3

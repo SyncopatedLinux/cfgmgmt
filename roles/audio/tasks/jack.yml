@@ -22,7 +22,7 @@
 #   become_user: "{{ user.name }}"
 
 - name: Create environment file for jack_control.service
-  copy:
+  ansible.builtin.copy:
     content: |
       DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
     dest: "/etc/default/jack_control"
@@ -36,7 +36,7 @@
 #     mode: '0755'
 
 - name: Install jack_control service file
-  copy:
+  ansible.builtin.copy:
     src: "usr/lib/systemd/user/jack_control.service"
     dest: "/usr/lib/systemd/user/jack_control.service"
     mode: '0644'

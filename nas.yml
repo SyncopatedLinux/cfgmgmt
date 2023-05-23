@@ -22,23 +22,23 @@
   pre_tasks:
 
     - name: Include distro vars
-      include_vars:
-        file: vars/{{ ansible_distribution }}.yml
+      ansible.builtin.include_vars:
+        file: "vars/{{ ansible_distribution }}.yml"
       tags: ['base']
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: network
       when: nas_host|bool
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: nginx
       when: web_host is defined
 
   post_tasks:
 
     - name: Reload firewalld
-      shell: "firewall-cmd --reload"
+      ansible.builtin.shell: "firewall-cmd --reload"
       when: fw_nfs.changed
       ignore_errors: True

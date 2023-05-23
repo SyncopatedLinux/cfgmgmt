@@ -1,23 +1,23 @@
 ---
 
 - name: Set admin group name
-  set_fact:
+  ansible.builtin.set_fact:
     admin_group: wheel
 
 - block:
     - name: Create group for user
-      group:
+      ansible.builtin.group:
         name: "{{ user.group }}"
         state: present
         gid: "{{ user.gid }}"
 
     - name: Set user primary group
-      user:
+      ansible.builtin.user:
         name: "{{ user.name }}"
         group: "{{ user.group }}"
 
     - name: Ensure user ownership of home directory
-      file:
+      ansible.builtin.file:
         path: "{{ user.home }}"
         state: directory
         owner: "{{ user.name }}"
@@ -27,13 +27,15 @@
   tags: ['user']
 
 - name: Install yadm
-  get_url:
+  ansible.builtin.get_url:
     url: "https://github.com/TheLocehiliosan/yadm/raw/master/yadm"
     dest: "/usr/local/bin"
     mode: '0755'
   tags: ['yadm']
 
 
-- import_tasks: create-dirs.yml
-- import_tasks: sudoers.yml
+- ansible.builtin.import_tasks:
+    file: create-dirs.yml
+- ansible.builtin.import_tasks:
+    file: sudoers.yml
   tags: ['polkit']

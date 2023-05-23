@@ -1,11 +1,11 @@
 ---
 
 - name: set iso skel dir
-  set_fact:
+  ansible.builtin.set_fact:
     airootfs: "{{ user.home }}/Workspace/ohmannium/roles/iso/files/airootfs/etc/skel"
 
 - name: Ensure these directories exist
-  file:
+  ansible.builtin.file:
     path: "{{ item[0] }}/{{ item[1] }}"
     state: directory
     owner: "{{ user.name }}"
@@ -18,7 +18,7 @@
   tags: ['home', 'skel']
 
 - name: Syncronize templates - shell
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -31,7 +31,7 @@
   tags: ['shell', 'profile', 'alias' ]
 
 - name: Syncronize templates - x11
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -45,7 +45,7 @@
   tags: ['x11', 'profile']
 
 - name: Syncronize templates - wm
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -59,7 +59,7 @@
   tags: ['i3', 'dunst', 'picom']
 
 - name: Syncronize templates - keybindings
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -73,7 +73,7 @@
   tags: ['keybindings', 'i3', 'sxhkd']
 
 - name: Syncronize templates - terminal
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -86,7 +86,7 @@
   tags: ['terminal', 'alacritty', 'kitty', 'tilda']
 
 - name: Syncronize templates - gtk
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -99,7 +99,7 @@
   tags: ['gtk']
 
 - name: Syncronize templates - qt
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -112,7 +112,7 @@
   tags: ['qt']
 
 - name: Syncronize templates - applications
-  template:
+  ansible.builtin.template:
     src: "home/{{ item[1] }}.j2"
     dest: "{{ item[0] }}/{{ item[1] }}"
     owner: "{{ user.name }}"
@@ -125,7 +125,7 @@
   tags: ['htop', 'zim', 'qutebrowser', 'sonicpi']
 
 - name: Ensure .xinitrc is executable
-  file:
+  ansible.builtin.file:
     path: "{{ item }}/.xinitrc"
     mode: '0755'
   with_items:
@@ -135,7 +135,7 @@
   tags: ['x11', 'profile']
 
 - name: Reset perms on {{ airootfs }}
-  file:
+  ansible.builtin.file:
     path: "{{ airootfs }}"
     state: directory
     owner: root
@@ -144,7 +144,7 @@
   tags: ['skel']
 
 - name: Reload i3
-  command: bash -lc "i3-msg -s /run/user/{{ user.uid }}/i3/ipc-socket.* reload"
+  ansible.builtin.command: bash -lc "i3-msg -s /run/user/{{ user.uid }}/i3/ipc-socket.* reload"
   become_user: "{{ user.name }}"
   when:
     - wm_config.changed

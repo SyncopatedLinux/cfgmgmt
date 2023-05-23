@@ -7,7 +7,7 @@
       - 'ansible_system_vendor'
 
 - name: Install input config
-  template:
+  ansible.builtin.template:
     src: etc/X11/xorg.conf.d/00-input.conf.j2
     dest: /etc/X11/xorg.conf.d/00-input.conf
     mode: '0644'
@@ -16,13 +16,13 @@
 - block:
     - block:
         - name: Install intel config
-          template:
+          ansible.builtin.template:
             src: etc/X11/xorg.conf.d/20-intel.conf.j2
             dest: /etc/X11/xorg.conf.d/20-intel.conf
             mode: '0644'
 
         - name: Uninstall mesa in favor of mesa-amber
-          pacman:
+          community.general.pacman:
             name: mesa
             state: absent
             force: yes

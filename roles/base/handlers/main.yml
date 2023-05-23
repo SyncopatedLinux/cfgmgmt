@@ -1,17 +1,17 @@
 ---
 
 - name: restart sshd
-  service:
+  ansible.builtin.service:
     name: sshd
     state: restarted
     enabled: True
 
 - name: reload ufw
-  systemd:
+  ansible.builtin.systemd:
     name: ufw
     state: reloaded
 
 - name: reload firewalld
-  shell: |
+  ansible.builtin.shell: |
     "firewall-cmd --reload"
   ignore_errors: True

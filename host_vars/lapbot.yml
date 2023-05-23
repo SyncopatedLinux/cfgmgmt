@@ -3,6 +3,7 @@
 use_rt_kernel: true
 
 install_pulsar: true
+install_vscode: true
 
 use_chaotic: false
 

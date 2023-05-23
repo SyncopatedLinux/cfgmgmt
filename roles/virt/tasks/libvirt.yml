@@ -1,12 +1,12 @@
 ---
 
 - name: Starting libvirt tasks
-  debug:
+  ansible.builtin.debug:
     msg: "Starting libvirt tasks"
 
 # :: exfatprogs and exfat-utils are in conflict. Remove exfat-utils? [y/N]
 - name: Remove conflicting packages
-  pacman:
+  community.general.pacman:
     name: exfat-utils
     state: absent
     force: yes
@@ -14,7 +14,7 @@
   tags: ['packages']
 
 - name: Install qemu package
-  shell: |
+  ansible.builtin.shell: |
     if [ {{ install.libvirt.qemu_full }} == 'True' ];then
       yes | pacman -S qemu-full
     else
@@ -23,7 +23,7 @@
   tags: ['packages']
 
 - name: Install libvirt packages
-  pacman:
+  community.general.pacman:
     name: "{{ libvirt.packages }}"
     state: present
     force: yes
@@ -32,13 +32,13 @@
 
 - block:
     - name: Set socket group and perms to allow for remote access
-      copy:
+      ansible.builtin.copy:
         src: etc/libvirt/libvirtd.conf
         dest: /etc/libvirt/libvirtd.conf
         mode: '0644'
 
     - name: Disable lvmetad for remote access reasons
-      lineinfile:
+      ansible.builtin.lineinfile:
         dest: /etc/lvm/lvm.conf
         regexp: "^    use_lvmetad = 1"
         line: "    use_lvmetad = 0"
@@ -46,7 +46,7 @@
         backup: yes
 
     - name: Add user to libvirt group
-      user:
+      ansible.builtin.user:
         name: "{{ user.name }}"
         groups: "libvirt,kvm"
         append: yes

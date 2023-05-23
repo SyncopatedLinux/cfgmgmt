@@ -2,13 +2,13 @@
 
 - block:
     - name: Enable and start firewalld
-      systemd:
+      ansible.builtin.systemd:
         name: firewalld
         state: started
         enabled: yes
 
     - name: Permit traffic to common services
-      firewalld:
+      ansible.posix.firewalld:
         service: "{{ item }}"
         state: enabled
         permanent: yes
@@ -20,7 +20,7 @@
       tags: ['nfs', 'ntp', 'rsyncd', 'ssh']
 
     - name: Permit traffic to jacktrip, barrier and qmidinet
-      firewalld:
+      ansible.posix.firewalld:
         port: "{{ item }}"
         state: enabled
         permanent: yes
@@ -51,13 +51,13 @@
 
 - block:
     - name: Enable and start ufw
-      systemd:
+      ansible.builtin.systemd:
         name: ufw
         state: started
         enabled: yes
 
     - name: Permit traffic to common services
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ item }}"
         proto: "any"
@@ -69,7 +69,7 @@
       tags: ['nfs', 'ntp', 'rsyncd', 'ssh']
 
     - name: Permit tcp traffic to jacktrip, barrier and qmidinet
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ item }}"
         proto: tcp
@@ -80,7 +80,7 @@
         - '24800'
 
     - name: Permit udp traffic to jacktrip, barrier and qmidinet
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ item }}"
         proto: udp

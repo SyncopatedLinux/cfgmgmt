@@ -1,24 +1,29 @@
 ---
 
 - name: Starting network tasks
-  debug:
+  ansible.builtin.debug:
     msg: "Starting network tasks"
 
-- import_tasks: networkmanager.yml
+- ansible.builtin.import_tasks:
+    file: networkmanager.yml
   tags: ['networkmanager']
 
-- import_tasks: autofs.yml
+- ansible.builtin.import_tasks:
+    file: autofs.yml
   when: autofs_client is defined
   tags: ['autofs']
 
-- import_tasks: nas/nfs.yml
+- ansible.builtin.import_tasks:
+    file: nas/nfs.yml
   when: nfs_host|bool
   tags: ['nfs']
 
-- import_tasks: nas/rsyncd.yml
+- ansible.builtin.import_tasks:
+    file: nas/rsyncd.yml
   when: rsyncd_host|bool
   tags: ['rsyncd']
 
-- import_tasks: nas/musikcube.yml
+- ansible.builtin.import_tasks:
+    file: nas/musikcube.yml
   when: musikcube_host|bool
   tags: ['musikcube']

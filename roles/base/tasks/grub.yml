@@ -2,13 +2,13 @@
 
 #TODO: package this
 - name: Install modified starfield theme
-  unarchive:
+  ansible.builtin.unarchive:
     src: files/usr/share/grub/starfield.tar.gz
     dest: "/usr/share/grub/themes"
   when: ansible_distribution == 'Archlinux'
 
 - name: Set kernel cmdline params in grub
-  template:
+  ansible.builtin.template:
     src: etc/default/grub.j2
     dest: /etc/default/grub
     owner: root
@@ -18,7 +18,7 @@
   register: default_grub
 
 - name: Remake grub if changes were made
-  shell: "{{ grub_mkconfig_command }}"
+  ansible.builtin.shell: "{{ grub_mkconfig_command }}"
   when: default_grub.changed and reboot is not defined
   vars:
     grub_mkconfig_command: >-
@@ -33,7 +33,7 @@
 - block:
 
     - name: Remake grub if changes were made
-      shell: grub-mkconfig -o /boot/grub/grub.cfg
+      ansible.builtin.shell: grub-mkconfig -o /boot/grub/grub.cfg
 
     # [WARNING]: Reset is not implemented local connection
     - name: Reboot host if grub was modified
@@ -42,7 +42,7 @@
       poll: 0
 
     - name: Wait for host to reboot
-      wait_for_connection:
+      ansible.builtin.wait_for_connection:
         connect_timeout: 20
         sleep: 5
         delay: 5
