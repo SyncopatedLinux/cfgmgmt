@@ -22,6 +22,11 @@
   tags: ['pulsar']
 
 - ansible.builtin.include_tasks:
+    file: vscode.yml
+  when: install_vscode|default(false)|bool == true
+  tags: ['vscode']
+
+- ansible.builtin.include_tasks:
     file: vamp.yml
   tags: ['vamp']
 

@@ -32,7 +32,8 @@ polyphone:
 
 protokol:
   url: "https://hexler.net/pub/protokol/"
-  file: "protokol-0.4.8.93-linux-x86_64.zip"
+  file: "protokol-0.5.1.101-linux-x64.zip"
+  version: 0.5.1.101
 
 qmidinet:
   git: "https://github.com/rncbc/qmidinet.git"
@@ -70,3 +71,4 @@ tony:
 touchosc:
   url: "https://hexler.net/pub/touchosc/"
   file: "touchosc-1.2.0.166-linux-x64.zip"
+  version: 1.2.0.166
