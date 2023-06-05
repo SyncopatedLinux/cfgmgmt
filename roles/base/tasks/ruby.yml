@@ -1,0 +1,32 @@
+---
+#TODO: add task to install rubygems, ruby-devel, git
+- block:
+    - name: Set --no-user-install in gemrc
+      ansible.builtin.copy:
+        content: |
+          gem: --user-install --no-document
+
+        dest: "{{ user.home }}/.gemrc"
+        owner: "{{ user.name }}"
+
+    - name: Gather list of installed gems
+      ansible.builtin.shell: "gem list | awk '{ print $1 }'"
+      register: gemlist
+      changed_when: gemlist.rc != 0
+      ignore_errors: "{{ ansible_check_mode }}"
+
+    - name: Set list of gems to install
+      ansible.builtin.set_fact:
+        _gems: "{{ gems|difference(gemlist.stdout) }}"
+
+    - name: Install ruby gems
+      become_user: "{{ user.name }}"
+      ansible.builtin.shell: "gem install {{ item }}"
+      with_items:
+        - "{{ _gems }}"
+      when: _gems | length > 0
+
+  tags: ['ruby']
+  become: false
+  become_user: " {{ user.name }}"
+

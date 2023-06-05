@@ -13,7 +13,7 @@ This project is designed with compatibility for older hardware in mind. By imple
 ## Install
 
 ```bash
-wget -O bootstrap.sh http://soundbot.hopto.org/bootstrap_v2.sh
+wget -O bootstrap.sh http://syncopated.hopto.org/bootstrap_v2.sh
 sudo bash bootstrap.sh
 ```
 ## Features

@@ -93,7 +93,7 @@ then
 else
   printf "adding syncopated gpg to pacman db"
   sleep 0.5
-  curl -s http://soundbot.hopto.org/syncopated.gpg | sudo pacman-key --add -
+  curl -s http://syncopated.hopto.org/syncopated.gpg | sudo pacman-key --add -
   sudo pacman-key --lsign-key 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A > /dev/null
   sudo pacman -Sy --noconfirm > /dev/null
 fi

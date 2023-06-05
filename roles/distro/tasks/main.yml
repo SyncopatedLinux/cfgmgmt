@@ -1,5 +1,0 @@
----
-
-- name: Include tasks based on distribution
-  ansible.builtin.include_tasks: "distro/{{ ansible_distribution }}.yml"
-  tags: ['packages']

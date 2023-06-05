@@ -13,7 +13,6 @@
     - daemon.conf
     - default.pa
     - system.pa
-  become: False
 
 - name: Install pulseaudio bluetooth config
   ansible.builtin.copy:

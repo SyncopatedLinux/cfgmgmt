@@ -1,5 +1,13 @@
 ---
 
+- ansible.builtin.import_tasks:
+    file: ruby.yml
+  tags: ['ruby']
+
+- name: Include tasks based on distribution
+  ansible.builtin.include_tasks: "distro/{{ ansible_distribution }}.yml"
+  tags: ['packages']
+
 - name: Include distro vars
   ansible.builtin.include_vars:
     file: vars/{{ ansible_distribution }}.yml

@@ -22,7 +22,7 @@
       when: supported_march.stdout_lines[0] == 'x86-64-v2'
 
   check_mode: False
-  when: ansible_system_vendor != "QEMU"
+  # when: ansible_system_vendor != "QEMU"
   tags: ['base', 'repo', 'packages']
 
 - name: Add syncopated repo key
@@ -66,7 +66,6 @@
     mode: '0644'
     backup: yes
   with_items:
-    - pacman.conf
     - paru.conf
     - makepkg.conf
   tags: ['makepkg', 'pacman', 'paru', 'packages', 'repo']
@@ -161,14 +160,14 @@
 
 - block:
 
-    - name: install mainline kernel and headers
-      aur:
-        use: paru
-        name: "{{ kernel.mainline }}"
-        state: present
-      when:
-        - use_rt_kernel|default(false)|bool == false
-        - use_zen_kernel|default(false)|bool == false
+    # - name: install mainline kernel and headers
+    #   aur:
+    #     use: paru
+    #     name: "{{ kernel.mainline }}"
+    #     state: present
+    #   when:
+    #     - use_rt_kernel|default(false)|bool == false
+    #     - use_zen_kernel|default(false)|bool == false
 
     - name: install zen kernel and headers
       aur:
