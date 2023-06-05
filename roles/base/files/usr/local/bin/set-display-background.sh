@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-declare -rx BACKGROUNDS="/usr/share/backgrounds/ohmannium"
+declare -rx BACKGROUNDS="/usr/share/backgrounds/syncopated"
 
 if [ -x "$(command -v autorandr)" ]; then
   profile=$(autorandr --detected)

@@ -44,7 +44,7 @@
 
     - name: Set ansible_home
       ansible.builtin.set_fact:
-        ansible_home: "{{ lookup('env','HOME') }}/Workspace/ohmannium"
+        ansible_home: "{{ lookup('env','HOME') }}/Workspace/syncopated/cfgmgmt"
       tags: ['base']
 
     - name: Set admin_group variable

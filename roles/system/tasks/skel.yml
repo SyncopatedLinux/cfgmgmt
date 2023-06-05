@@ -2,7 +2,7 @@
 
 - name: set iso skel dir
   ansible.builtin.set_fact:
-    airootfs: "{{ user.home }}/Workspace/ohmannium/roles/iso/files/airootfs/etc/skel"
+    airootfs: "{{ user.home }}/Workspace/syncopated/iso/airootfs/etc/skel"
 
 - name: Ensure these directories exist
   ansible.builtin.file:
