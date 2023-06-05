@@ -1,11 +1,11 @@
 ---
 
 #TODO: package this
-- name: Install modified starfield theme
-  ansible.builtin.unarchive:
-    src: files/usr/share/grub/starfield.tar.gz
-    dest: "/usr/share/grub/themes"
-  when: ansible_distribution == 'Archlinux'
+# - name: Install modified starfield theme
+#   ansible.builtin.unarchive:
+#     src: files/usr/share/grub/starfield.tar.gz
+#     dest: "/usr/share/grub/themes"
+#   when: ansible_distribution == 'Archlinux'
 
 - name: Set kernel cmdline params in grub
   ansible.builtin.template:

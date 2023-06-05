@@ -220,3 +220,6 @@ pacman -Sy --noconfirm --needed "${BOOTSTRAP_PKGS[@]}"
 export ZSH="/usr/local/share/oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+ansible-pull -U https://gitlab.com/b08x/ohmannium.git -C development -i "$(hostnamectl --static)"
+
+# yadm clone git@github.com:b08x/dots.git
