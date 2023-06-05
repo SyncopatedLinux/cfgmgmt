@@ -34,7 +34,7 @@ case $choice in
     arecord -l | grep card >> $INPUTS
     echo "select input device"
     device=$(cat $INPUTS | gum choose | awk '{print $2}' | sed 's/://g')
-    echo "give this device an alieas(no spaces)"
+    echo "give this device an alias(no spaces)"
     name=$(gum input|sed 's/ /_/g')
     loadInput $name $device
     ;;

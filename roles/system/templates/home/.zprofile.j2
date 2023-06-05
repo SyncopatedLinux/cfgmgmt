@@ -1,6 +1,8 @@
 # add ~/.local/bin to the PATH
 echo $PATH | grep -q "$HOME/.local/bin:" || export PATH="$HOME/.local/bin:$PATH"
 
+echo $PATH | grep -q "$HOME/.local/share/gem/ruby" || export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
 # automatically run startx when logging in on tty1
 
 # When Xorg is run in rootless mode, Xorg logs are saved to ~/.local/share/xorg/Xorg.log.

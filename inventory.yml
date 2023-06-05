@@ -21,6 +21,7 @@ all:
     workstation:
       hosts:
         archlabs:
+        syncopated:
         avlinux:
         ninjabot:
         soundbot:
@@ -34,7 +35,7 @@ all:
         bender:
           use_fancy_index: True
           nginx_create_blank_index: False
-        soundbot.hopto.org:
+        syncopated.hopto.org:
           ansible_user: ec2-user
           remote_user: root
           use_fancy_index: True

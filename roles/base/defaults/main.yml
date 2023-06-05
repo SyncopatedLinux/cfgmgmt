@@ -5,7 +5,8 @@ shell_login: False
 
 journal_level: notice
 
-use_chaotic: false
+use_chaotic: False
+use_cachy: False
 
 kernel:
   mainline:
@@ -20,3 +21,45 @@ kernel:
     - linux-rt-lts
     - linux-rt-lts-headers
     - dkms
+
+gems:
+  - activesupport
+  - awesome_print
+  - bcrypt_pbkdf
+  - childprocess
+  - clipboard
+  - colorize
+  - coltrane
+  - ed25519
+  - eventmachine
+  - ffi
+  - fractional
+  - geo_coord
+  - highline
+  - i3ipc
+  - i18n
+  - kramdown
+  - logging
+  - minitest
+  - mocha
+  - multi_json
+  - neovim
+  - net-ssh
+  - parallel
+  - pastel
+  - pry
+  - pry-doc
+  - rake
+  - rdoc
+  - rexml
+  - rouge
+  - ruby-openai
+  - ruport
+  - sync
+  - sys-proctable
+  - treetop
+  - tty-box
+  - tty-command
+  - tty-prompt
+  - tty-screen
+  - yaml

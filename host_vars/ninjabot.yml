@@ -8,7 +8,9 @@ use_nvidia: true
 use_zen_kernel: false
 use_rt_kernel: false
 
-install_pulsar: True
+install_pulsar: False
+install_vscode: true
+
 install:
   docker: true
 
@@ -26,7 +28,7 @@ i3:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
     - '[class="REAPER"] $ws8'
-    - '[class="Qsampler"] $ws1'
+    # - '[class="Qsampler"] $ws1'
     - '[class="^Patchage"] $ws10'
     - '[class="Pulsar"] $ws2'
     - '[class="Jalv.select"] $ws1'

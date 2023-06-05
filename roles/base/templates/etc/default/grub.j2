@@ -1,11 +1,11 @@
 # GRUB boot loader configuration
 {% if ansible_distribution == 'Archlinux' %}
-GRUB_DEFAULT=0
+GRUB_DEFAULT=saved
 GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="ArchLabs - Ohmannium"
 GRUB_CMDLINE_LINUX_DEFAULT="udev.log_priority=3"
 {% if ansible_hostname == 'ninjabot' %}
-GRUB_CMDLINE_LINUX="efi=runtime crashkernel=auto threadirqs modprobe.blacklist=nouveau rhgb audit=0 delayacct"
+GRUB_CMDLINE_LINUX="efi=runtime crashkernel=auto threadirqs modprobe.blacklist=nouveau nvidia-drm.modeset=1 rhgb audit=0 delayacct"
 {% else %}
 GRUB_CMDLINE_LINUX="efi=runtime crashkernel=auto threadirqs quiet rhgb audit=0 delayacct"
 {% endif %}
@@ -59,7 +59,7 @@ GRUB_THEME="/usr/share/grub/themes/starfield/theme.txt"
 
 # Uncomment to make GRUB remember the last selection. This requires
 # setting 'GRUB_DEFAULT=saved' above.
-#GRUB_SAVEDEFAULT=true
+GRUB_SAVEDEFAULT=true
 
 # Uncomment to disable submenus in boot menu
 #GRUB_DISABLE_SUBMENU=y

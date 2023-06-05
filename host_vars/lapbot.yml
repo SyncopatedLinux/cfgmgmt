@@ -7,5 +7,9 @@ install_vscode: true
 
 use_chaotic: false
 
+install:
+  libvirt:
+    qemu_full: True
+
 ohmyzsh:
   theme: steeef

@@ -84,10 +84,11 @@ plugin:
   - distrho-ports
   - dpf-plugins-vst3
   - guitarix
-  - intersect.lv2-git
   - ingen-git
+  - intersect.lv2-git
   - ir.lv2
   - jalv-select-git
+  - kxstudio-lv2-extensions
   - ladspa
   - lsp-plugins
   - lv2
