@@ -55,13 +55,8 @@ echo "You entered: $userid"
 pacman -Scc --noconfirm > /dev/null
 
 say "-----------------------------------------------" $BLUE
-say "installing ssh, fd, ruby along with" $BLUE
-say "gcc, g++, make, and other essential build tools" $BLUE
-say "ssh will also be enabled and started." $BLUE
+say "enabling ssh" $BLUE
 say "-----------------------------------------------\n" $BLUE
-
-pacman -Syu --noconfirm --quiet
-pacman -S --noconfirm openssh base-devel fd ruby-bundler rubygems
 
 systemctl enable sshd
 
@@ -87,35 +82,15 @@ case $COPY_KEYS in
 		;;
 esac
 
-if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
-say "\n-----------------------------------------------" $BLUE
-say "installing additional support packages..." $BLUE
-say "-----------------------------------------------\n" $BLUE
-
-BOOTSTRAP_PKGS=(
-  'aria2'
-  'bat'
-  'bc'
-  'cargo'
-  'ccache'
-  'cmake'
-  'dialog'
-  'git'
-  'git-lfs'
-  'htop'
-  'lnav'
-  'neovim'
-  'net-tools'
-  'unzip'
-  'x11-ssh-askpass'
-  'zsh'
-)
-
-pacman -Sy --noconfirm --needed "${BOOTSTRAP_PKGS[@]}"
-
 # Install oh-my-zsh
 export ZSH="/usr/local/share/oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
+say "\n-----------------------------------------------" $BLUE
+say "running ansible-pull" $BLUE
+say "-----------------------------------------------\n" $BLUE
+
 
 ansible-pull -U https://gitlab.com/b08x/ohmannium.git -C development -i "$(hostnamectl --static)"
 
