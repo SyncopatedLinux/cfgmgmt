@@ -4,7 +4,7 @@
 all:
   vars:
     ansible_user: "{{ lookup('env','USER') }}"
-    ansible_connection: ssh
+    ansible_connection: local
 
   children:
     # automationcontroller:
