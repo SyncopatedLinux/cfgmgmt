@@ -1,9 +1,6 @@
-- hosts: all
-  tasks:
-    - name: add hosts to inventory groups
-      add_host:
-        name: "{{ inventory_hostname }}"
-        groups: "{{ hostvars[inventory_hostname].workstation }}"
-      changed_when: False
+---
+
+- hosts: localhost
+  connection: local
 
 - import_playbook: base.yml
