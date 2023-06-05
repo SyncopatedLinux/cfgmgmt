@@ -40,18 +40,6 @@ cup 1
 
 wipe="false"
 
-distro=""
-
-# Determine distribution
-if [ -f /etc/lsb-release ]; then
-	. /etc/lsb-release
-	distro=$DISTRIB_ID
-elif [ -f /etc/debian_version ]; then
-	distro="debian"
-elif [ -f /etc/redhat-release ]; then
-	distro="redhat"
-fi
-
 # and so it begins...
 wipe && say "hello!\n" $GREEN && sleep 0.5
 
@@ -63,46 +51,8 @@ function prompt_for_userid() {
 userid=$(prompt_for_userid)
 echo "You entered: $userid"
 
-
-say "-----------------------------------------------\n" $BLUE
-say "installing third party repoistory keys" $BLUE
-say "-----------------------------------------------\n" $BLUE
-
 # clean cache
 pacman -Scc --noconfirm > /dev/null
-
-
-# install_cachyos_repo() {
-#   pacman -Sy --noconfirm --needed wget
-#   cd /tmp && wget https://mirror.cachyos.org/cachyos-repo.tar.xz
-#   tar -xvf cachyos-repo.tar.xz
-#   cd cachyos-repo && ./cachyos-repo.sh --install
-# }
-
-# install_cachyos_repo
-
-# install repository keys
-if [[ ! -z "$(pacman-key --list-keys | grep syncopated 2>/dev/null)" ]];
-then
-  printf "key already installed"
-else
-  printf "adding syncopated gpg to pacman db"
-  sleep 0.5
-  curl -s http://syncopated.hopto.org/syncopated.gpg | sudo pacman-key --add -
-  sudo pacman-key --lsign-key 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A > /dev/null
-  sudo pacman -Sy --noconfirm > /dev/null
-fi
-
-if [[ ! -z "$(pacman-key --list-keys | grep proaudio 2>/dev/null)" ]];
-then
-  printf "key already installed"
-else
-  printf "adding OSAMC gpg to pacman db"
-  sleep 0.5
-  curl -s https://arch.osamc.de/proaudio/osamc.gpg | sudo pacman-key --add -
-  sudo pacman-key --lsign-key 762AE5DB2B38786364BD81C4B9141BCC62D38EE5 > /dev/null
-  sudo pacman -Sy --noconfirm > /dev/null
-fi
 
 say "-----------------------------------------------" $BLUE
 say "installing ssh, fd, ruby along with" $BLUE
@@ -114,7 +64,6 @@ pacman -Syu --noconfirm --quiet
 pacman -S --noconfirm openssh base-devel fd ruby-bundler rubygems
 
 systemctl enable sshd
-# systemctl start sshd
 
 sleep 0.5
 
@@ -138,61 +87,10 @@ case $COPY_KEYS in
 		;;
 esac
 
-say "-----------------------------------------------\n" $BLUE
-
-# if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
-# say "\n-----------------------------------------------" $BLUE
-# say "enable and start firewall service" $BLUE
-# say "set defaults to deny inbound and allow outbound" $BLUE
-# say "add rule to allow ssh traffic" $BLUE
-# say "-----------------------------------------------\n" $BLUE
-
-# # Set firewall rules
-
-# pacman -S --noconfirm firewalld
-# systemctl enable firewalld
-# systemctl start firewalld
-# firewall-cmd --zone=public --add-service=ssh --permanent
-# firewall-cmd --reload
-
-# sleep 0.5
-
-# if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
-# say "\n-----------------------------------------------" $BLUE
-# say "check for ansible installations..." $BLUE
-# say "if installed with a system package," $BLUE
-# say "remove the system package and install with pip" $BLUE
-# say "as of date, pip will install ansible 2.14.5" $BLUE
-# say "-----------------------------------------------\n" $BLUE
-
-# if [ -x "$(command -v ansible)" ]; then
-# 	if pacman -Rdd ansible --noconfirm; then
-# 		echo "Ansible has been removed successfully."
-# 	else
-# 		echo "Failed to remove Ansible."
-# 	fi
-# fi
-
-# if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
-# say "\n-----------------------------------------------" $BLUE
-# say "installing pip...." $BLUE && sleep 0.5
-# say "-----------------------------------------------\n" $BLUE
-
-
-# pacman -S --noconfirm python-pip
-
-# say "\n-----------------------------------------------" $BLUE
-# say "installing ansible with pip..." $BLUE
-# say "-----------------------------------------------\n" $BLUE
-
-# pip install ansible
-
-
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
 say "\n-----------------------------------------------" $BLUE
 say "installing additional support packages..." $BLUE
 say "-----------------------------------------------\n" $BLUE
-
 
 BOOTSTRAP_PKGS=(
   'aria2'
@@ -215,8 +113,10 @@ BOOTSTRAP_PKGS=(
 
 pacman -Sy --noconfirm --needed "${BOOTSTRAP_PKGS[@]}"
 
-
 # Install oh-my-zsh
 export ZSH="/usr/local/share/oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+ansible-pull -U https://gitlab.com/b08x/ohmannium.git -C development -i "$(hostnamectl --static)"
+
+# yadm clone git@github.com:b08x/dots.git
