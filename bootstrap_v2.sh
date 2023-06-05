@@ -92,6 +92,6 @@ say "running ansible-pull" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
 
-ansible-pull -U https://gitlab.com/b08x/ohmannium.git -C development -i "$(hostnamectl --static)"
+ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)"
 
 # yadm clone git@github.com:b08x/dots.git

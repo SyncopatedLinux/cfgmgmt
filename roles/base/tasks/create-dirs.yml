@@ -33,7 +33,7 @@
     - /usr/local/share/pixmaps/
     - /usr/local/share/themes/
     - /usr/local/share/vamp/
-    - /usr/share/backgrounds/ohmannium/
+    - /usr/share/backgrounds/syncopated/
 
 - name: Ensure these directories also exist
   file:
