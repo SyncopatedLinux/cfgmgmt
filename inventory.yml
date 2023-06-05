@@ -21,6 +21,7 @@ all:
     workstation:
       hosts:
         archlabs:
+        syncopated:
         avlinux:
         ninjabot:
         soundbot:
