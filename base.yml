@@ -56,7 +56,9 @@
         - name: Print keyserver hostname
           ansible.builtin.debug:
             msg: "{{ keyserver }}"
-          when: ( debugging is defined or keyserver is defined )
+          when:
+            - debugging is defined
+            - keyserver is defined
 
         - name: Check if keys are present
           ansible.builtin.stat:

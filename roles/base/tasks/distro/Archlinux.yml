@@ -31,7 +31,7 @@
     then
       echo "key already installed"
     else
-      curl http://soundbot.hopto.org/syncopated/syncopated.gpg | pacman-key --add -
+      curl http://syncopated.hopto.org/syncopated.gpg | pacman-key --add -
       pacman-key --lsign-key 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A
     fi
   register: syncopated_keys
@@ -205,19 +205,20 @@
       ansible.builtin.debug:
         msg: "{{ action_output }}"
       when: debugging is defined
-  #
+
   # rescue:
-  #
-  #   - name: Ensure at least these packages are installed
-  #     pacman:
-  #       name: "{{ item }}"
-  #       state: present
-  #       force: yes
-  #       extra_args: --noconfirm
+  #   # usually this fails because of: jack2 and jack are in conflict. Remove jack? [y/N]
+  #   - name: Remove jack and nitrogen
+  #     ansible.builtin.shell:
+  #       paru -Rdd {{ item }} --noconfirm
   #     with_items:
-  #       - autofs
-  #       - sxhkd
+  #       - jack
+  #       - nitrogen
   #     tags: ['packages']
+
+  #   - name: Install packages
+  #     action: ohmannium packages="{{ packages | to_json }}"
+  #     register: action_output
 
   become: False
   tags: ['packages']
