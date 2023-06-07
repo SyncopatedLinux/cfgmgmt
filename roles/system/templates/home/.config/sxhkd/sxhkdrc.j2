@@ -2,10 +2,13 @@ super + Menu
 	cat ~/.config/jgmenu/apps.csv | jgmenu --simple
 
 super + o ; {g,a,k,v}
-	{guake,alacritty,jack-keyboard,vmpk}
+	{htop,alacritty,jack-keyboard,vmpk}
 
 control + Menu
   wmfocus
+
+XF86Launch4
+  kitty --class "notepad" $HOME/Workspace/scriber/bin/scriber.rb
 
 Menu
   ~/.config/rofi/scripts/launcher_t1.sh

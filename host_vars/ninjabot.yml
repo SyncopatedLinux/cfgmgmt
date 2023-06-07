@@ -9,7 +9,7 @@ use_zen_kernel: false
 use_rt_kernel: false
 
 install_pulsar: False
-install_vscode: true
+install_vscode: True
 
 install:
   docker: true

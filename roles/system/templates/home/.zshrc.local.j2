@@ -12,13 +12,13 @@ export ANSIBLE_CONFIG="$ANSIBLE_HOME/ansible.cfg"
 export INVENTORY="$ANSIBLE_HOME/inventory.yml"
 export PLAYBOOKS="$ANSIBLE_HOME"
 
-export PKGBUILDS="$WORKSPACE/pkgrr/pkgbuilds"
+export PKGBUILDS="$SYNCOPATED/pkgrr/pkgbuilds"
 export PACKAGES="$HOME/Packages"
 
 export CHROOT="/mnt/chroots/arch"
-export DEVTOOLS="${WORKSPACE}/pkgrr/devtools"
-export pacman_conf="${DEVTOOLS}/pacman-x86_64.conf"
-export makepkg_conf="${DEVTOOLS}/makepkg-x86_64.conf"
+export DEVTOOLS="$WORKSPACE/pkgrr/devtools"
+export pacman_conf="$DEVTOOLS/pacman-x86_64.conf"
+export makepkg_conf="$DEVTOOLS/makepkg-x86_64.conf"
 
 export REPOSITORY_LOCAL="$HOME/Repository"
 export REPOSITORY_MIRRORS=("ec2-user@syncopated.hopto.org" "bender.syncopated.net")
