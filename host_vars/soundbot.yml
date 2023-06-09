@@ -22,14 +22,12 @@ i3:
     # - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
   tray_output: "primary"
   assignments:
-    - '[class="Jalv.gtk" title="Helm"] $ws6'
-    - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws8'
-    - '[class="Qsampler"] $ws1'
-    - '[class="^Patchage"] $ws10'
-    - '[class="Jalv.select"] $ws1'
-    - '[class="^RaySession$"] $ws1'
-    - '[class="Pulsar"] $ws2'
+    - '[class="Jalv.gtk" title="Helm"] $ws8'
+    - '[class="qmidiarp"] $ws8'
+    - '[class="Qsampler"] $ws9'
+    - '[class="^Patchage"] $ws9'
+    - '[class="Jalv.select"] $ws9'
+    - '[class="^RaySession$"] $ws9'
   workspaces:
     - "$ws1 output DP1-1"
     - "$ws2 output DP1-1"
