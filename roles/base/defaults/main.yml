@@ -1,7 +1,5 @@
 ---
 
-distrib_id: Arch
-
 autologin: False
 shell_login: False
 

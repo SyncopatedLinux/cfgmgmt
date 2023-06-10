@@ -6,6 +6,7 @@
     - hardware
     - network
   vars:
+    distrib_id: Arch
     path:
       - "{{ lookup('env','HOME') }}/.local/bin"
       - "{{ lookup('env','HOME') }}/.local/share/gem/ruby/3.0.0/bin"
@@ -18,40 +19,7 @@
     DISPLAY: ":0"
 
   pre_tasks:
-
-    - name: Include distro vars
-      ansible.builtin.include_vars:
-        file: vars/{{ ansible_distribution }}.yml
-      tags: ['base']
-
-    - name: Symlink /etc/os-release to /etc/system-release
-      ansible.builtin.file:
-        src: /etc/os-release
-        dest: /etc/system-release
-        state: link
-      tags: ['base']
-
-    - name: Get the distrib_id
-      ansible.builtin.shell: |
-        cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
-      register: distrib_id
-      tags: ['facts', 'base', 'system', 'user']
-
-    - name: Set distrib_id as a fact
-      ansible.builtin.set_fact:
-        distrib_id: "{{ distrib_id.stdout }}"
-      tags: ['facts', 'base', 'system', 'user']
-
-    - name: Set ansible_home
-      ansible.builtin.set_fact:
-        ansible_home: "{{ lookup('env','HOME') }}/Workspace/syncopated/cfgmgmt"
-      tags: ['base']
-
-    - name: Set admin_group variable
-      ansible.builtin.set_fact:
-        admin_group: "{{ admin_group }}"
-      tags: ['base']
-
+    
     - block:
         - name: Print keyserver hostname
           ansible.builtin.debug:
@@ -88,6 +56,38 @@
       ignore_errors: "{{ ansible_check_mode }}"
       tags: ['ssh']
 
+    - name: Symlink /etc/os-release to /etc/system-release
+      ansible.builtin.file:
+        src: /etc/os-release
+        dest: /etc/system-release
+        state: link
+      tags: ['base']
+
+    - name: Get the distrib_id
+      ansible.builtin.shell: |
+        cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
+      register: distrib_id
+      tags: ['facts', 'base', 'system', 'user']
+
+    - name: Set distrib_id as a fact
+      ansible.builtin.set_fact:
+        distrib_id: "{{ distrib_id.stdout }}"
+      tags: ['facts', 'base', 'system', 'user']
+
+    - name: Include distro vars
+      ansible.builtin.include_vars:
+        file: vars/{{ ansible_distribution }}.yml
+      tags: ['base']
+
+    - name: Set ansible_home
+      ansible.builtin.set_fact:
+        ansible_home: "{{ lookup('env','HOME') }}/Workspace/syncopated/cfgmgmt"
+      tags: ['base']
+
+    - name: Set admin_group variable
+      ansible.builtin.set_fact:
+        admin_group: "{{ admin_group }}"
+      tags: ['base']
 
   roles:
 
