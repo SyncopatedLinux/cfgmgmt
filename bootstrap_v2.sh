@@ -95,6 +95,6 @@ say "running ansible-pull" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
 
-ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)" -e "ansible_connection=local"
+ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "inventory/local.yml"
 
 # yadm clone git@github.com:b08x/dots.git
