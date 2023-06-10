@@ -1,0 +1,14 @@
+---
+
+use_rt_kernel: false
+use_zen_kernel: false
+
+install:
+  docker: True
+  libvirt:
+    qemu_full: False
+
+install_pulsar: False
+
+ohmyzsh:
+  theme: kphoen

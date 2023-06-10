@@ -9,10 +9,10 @@ use_zen_kernel: false
 use_rt_kernel: false
 
 install_pulsar: False
-install_vscode: true
+install_vscode: True
 
 install:
-  docker: true
+  docker: True
 
 ohmyzsh:
   theme: sonicradish
@@ -27,12 +27,6 @@ i3:
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
     - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws8'
-    # - '[class="Qsampler"] $ws1'
-    - '[class="^Patchage"] $ws10'
-    - '[class="Pulsar"] $ws2'
-    - '[class="Jalv.select"] $ws1'
-    - '[class="^RaySession$"] $ws1'
   workspaces:
     - "$ws1 output DVI-D-0"
     - "$ws2 output DVI-D-0"

@@ -1,5 +1,7 @@
 ---
-#TODO: add task to install rubygems, ruby-devel, git
+#FIXME: For some reason, some gems were installed to /root/.local/....
+# removing /etc/gemrc and ~/.gemrc allowed for gems to be install to ~/.local
+# not sure why
 - block:
     - name: Set --no-user-install in gemrc
       ansible.builtin.copy:
