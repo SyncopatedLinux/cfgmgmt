@@ -6,7 +6,7 @@
 
 - name: Include tasks based on distribution
   ansible.builtin.include_tasks: "distro/{{ ansible_distribution }}.yml"
-  tags: ['packages']
+  tags: ['packages', 'mirrors']
 
 - name: Include distro vars
   ansible.builtin.include_vars:
