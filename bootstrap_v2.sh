@@ -53,6 +53,7 @@ echo "You entered: $userid"
 
 # clean cache
 pacman -Scc --noconfirm > /dev/null
+pacman -Syu paru-bin --noconfirm > /dev/null
 
 say "-----------------------------------------------" $BLUE
 say "enabling ssh" $BLUE
@@ -83,8 +84,10 @@ case $COPY_KEYS in
 esac
 
 # Install oh-my-zsh
-export ZSH="/usr/local/share/oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if [ ! -d "/usr/local/share/oh-my-zsh" ]; then
+  export ZSH="/usr/local/share/oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
 say "\n-----------------------------------------------" $BLUE
@@ -92,6 +95,6 @@ say "running ansible-pull" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
 
-ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)"
+ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)" -e "ansible_connection=local"
 
 # yadm clone git@github.com:b08x/dots.git
