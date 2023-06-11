@@ -16,21 +16,21 @@
     - save.sh
   tags: ['raysession']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: pulsar.yml
-  when: install_pulsar|default(false)|bool == true
+  when: install.pulsar|default(false)|bool == true
   tags: ['pulsar']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: vscode.yml
-  when: install_vscode|default(false)|bool == true
+  when: install.vscode|default(false)|bool == true
   tags: ['vscode']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: vamp.yml
   tags: ['vamp']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: mixxx.yml
   tags: ['mixxx']
 
@@ -41,27 +41,27 @@
     mode: '0644'
   tags: ['vmpk']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: reaper.yml
   when: install_reaper|default(true)|bool == true
   tags: ['reaper']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: sonicannotator.yml
   when: install_annotator|default(true)|bool == true
   tags: ['sonicannotator']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: soniclineup.yml
   when: install_soniclineup|default(true)|bool == true
   tags: ['soniclineup']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: tony.yml
   when: install_tony|default(true)|bool == true
   tags: ['tony']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: touchosc.yml
   when: install_touchosc|default(true)|bool == true
   tags: ['touchosc']

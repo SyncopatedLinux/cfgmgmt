@@ -42,12 +42,12 @@
 
 - ansible.builtin.import_tasks:
     file: autologin.yml
-  when: autologin|bool
+  when: login.auto|bool
   tags: ['autologin']
 
 - ansible.builtin.import_tasks:
     file: nvidia.yml
-  when: use_nvidia|default(false)|bool == true
+  when: nvidia|default(false)|bool == True
   tags: ['nvidia']
 
 - ansible.builtin.import_tasks:

@@ -3,7 +3,7 @@
 # Requires: rofi, devdocs, i3-sensible-terminal, qutebrowser nerdfonts
 files=~/.cache/rofi-search_term_list
 
-BROWSER="qutebrowser"
+BROWSER="firefox"
 GOOGLE_SEARCH_URL="https://google.com/search?q"
 NEEVA_SEARCH_URL="https://neeva.com/search?q"
 

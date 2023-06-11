@@ -1,18 +1,20 @@
 ---
 
-autologin: False
-shell_login: False
+login:
+  auto: False
+  shell: False
+  lightdm: False
 
-use_nvidia: true
+nvidia: True
 
-use_zen_kernel: false
-use_rt_kernel: false
-
-install_pulsar: False
-install_vscode: True
+kernel:
+  zen: False
+  rt: False
 
 install:
   docker: True
+  pulsar: True
+  vscode: False
 
 ohmyzsh:
   theme: sonicradish

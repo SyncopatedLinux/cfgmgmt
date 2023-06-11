@@ -5,7 +5,6 @@
   register: desired_version
   changed_when: false
 
-
 - name: Get installed application version
   ansible.builtin.shell: "pulsar -v | head -1 | awk -F ':' '{ print $2 }' | xargs"
   register: current_version
