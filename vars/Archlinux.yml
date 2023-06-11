@@ -3,6 +3,7 @@
 admin_group: wheel
 
 packages:
+  - firefox
   - network-manager-applet
   - networkmanager
   - nm-connection-editor

@@ -159,11 +159,6 @@
   ignore_errors: True
   tags: ['packages']
 
-- name: Include package vars
-  ansible.builtin.include_vars:
-    file: packages/{{ ansible_distribution }}/packages.yml
-  tags: ['packages']
-
 - name: install packages
   aur:
     use: paru
