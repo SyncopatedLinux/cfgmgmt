@@ -16,6 +16,13 @@
     - save.sh
   tags: ['raysession']
 
+- name: Install vmpk keymap
+  ansible.builtin.copy:
+    src: usr/share/vmpk/qwerty_extended.xml
+    dest: /usr/share/vmpk/qwerty_extended.xml
+    mode: '0644'
+  tags: ['vmpk']
+
 - ansible.builtin.import_tasks:
     file: pulsar.yml
   when: install.pulsar|default(false)|bool == true
@@ -33,13 +40,6 @@
 - ansible.builtin.import_tasks:
     file: mixxx.yml
   tags: ['mixxx']
-
-- name: Install vmpk keymap
-  ansible.builtin.copy:
-    src: usr/share/vmpk/qwerty_extended.xml
-    dest: /usr/share/vmpk/qwerty_extended.xml
-    mode: '0644'
-  tags: ['vmpk']
 
 - ansible.builtin.import_tasks:
     file: reaper.yml

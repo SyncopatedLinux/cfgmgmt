@@ -3,6 +3,7 @@
 admin_group: wheel
 
 packages:
+  - yt-dlp
   - firefox
   - network-manager-applet
   - networkmanager
