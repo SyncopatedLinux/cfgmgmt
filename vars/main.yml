@@ -1,0 +1,24 @@
+---
+
+install:
+  docker: False
+  libvirt:
+    qemu_full: False
+  pulsar: False
+  syncthing: True
+  vscode: False
+
+login:
+  auto: False
+  shell: False
+  lightdm: False
+
+repo:
+  chaotic: False
+  cachy: False
+
+nvidia: False
+
+kernel:
+  zen: False
+  rt: False
