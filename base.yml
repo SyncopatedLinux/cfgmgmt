@@ -11,6 +11,8 @@
       - "{{ lookup('env','HOME') }}/.local/bin"
       - "{{ lookup('env','HOME') }}/.local/share/gem/ruby/3.0.0/bin"
       - "{{ lookup('env','HOME') }}/.cargo/bin"
+  vars_files:
+    - main.yml
 
   environment:
     PATH: "{{ ansible_env.PATH }}:/sbin:/bin:{{ path|join(':') }}"
@@ -108,6 +110,9 @@
 
     - role: applications
       tags: ['applications']
+
+    - role: virt
+      tags: ['virt']
 
   post_tasks:
 

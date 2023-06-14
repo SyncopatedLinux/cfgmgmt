@@ -2,10 +2,6 @@
 
 backgrounds: /usr/share/backgrounds/syncopated
 
-autologin: False
-shell_login: False
-use_nvidia: False
-
 font:
   primary:
     name: Hack Nerd Font

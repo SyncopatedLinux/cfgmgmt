@@ -27,9 +27,3 @@
     file: nas/musikcube.yml
   when: musikcube_host|bool
   tags: ['musikcube']
-
-#TODO: add task file
-# - ansible.builtin.import_tasks:
-#     file: syncthing.yml
-#   when: syncthing_client|bool
-#   tags: ['syncthing']

@@ -36,7 +36,7 @@ CheckSpace
 VerbosePkgLists
 ParallelDownloads = 5
 
-{% if use_cachy == 'true' %}
+{% if repo.cachy == True %}
 [cachyos]
 SigLevel = Optional TrustAll
 Server = https://mirror.cachyos.org/repo/$arch/$repo
@@ -70,7 +70,7 @@ Include = /etc/pacman.d/mirrorlist
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 
-{% if use_chaotic == 'true' %}
+{% if repo.chaotic == True %}
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 {% endif %}

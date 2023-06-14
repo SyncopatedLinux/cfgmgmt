@@ -1,13 +1,8 @@
 ---
 
-use_rt_kernel: true
-use_zen_kernel: false
-
 install:
   libvirt:
     qemu_full: True
-
-install_pulsar: false
 
 ohmyzsh:
   theme: kphoen

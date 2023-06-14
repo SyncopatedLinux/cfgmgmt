@@ -53,3 +53,8 @@
 - ansible.builtin.import_tasks:
     file: grub.yml
   tags: ['grub']
+
+- ansible.builtin.import_tasks:
+    file: syncthing.yml
+  when: install.syncthing|bool
+  tags: ['syncthing']
