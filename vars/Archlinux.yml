@@ -8,8 +8,6 @@ packages:
   - network-manager-applet
   - networkmanager
   - nm-connection-editor
-  - bluez-utils
-  - bluetooth-autoconnect
   # - lightdm
   - aria2
   - aribb24
@@ -21,7 +19,6 @@ packages:
   - bc
   - bibtool
   - bind
-  - bluez-utils
   - boost
   - brightnessctl
   - ccache
@@ -214,7 +211,6 @@ packages:
   - x42-plugins
   - pavucontrol
   - pulseaudio-alsa
-  - pulseaudio-bluetooth
   - pulseaudio-jack
   - pulsemixer
   - dragonfly-reverb
@@ -376,6 +372,4 @@ packages:
   - moc
   - mpv
   - mpv-plugin-excerpt-git
-  - youtube-dl
-  - syncthing
   - obsidian

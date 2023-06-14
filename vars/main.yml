@@ -22,3 +22,5 @@ nvidia: False
 kernel:
   zen: False
   rt: False
+
+use_bluetooth: False

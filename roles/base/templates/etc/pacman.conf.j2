@@ -36,10 +36,11 @@ CheckSpace
 VerbosePkgLists
 ParallelDownloads = 5
 
+{% if architecture == 'x86-64' %}
 {% if repo.cachy == True %}
 [cachyos]
-SigLevel = Optional TrustAll
 Server = https://mirror.cachyos.org/repo/$arch/$repo
+{% endif %}
 {% endif %}
 
 {% if architecture == 'x86-64-v3' %}
