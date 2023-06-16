@@ -1,27 +1,34 @@
 ---
 
-autologin: False
-shell_login: False
+login:
+  auto: False
+  shell: False
+  lightdm: False
 
-use_nvidia: true
+nvidia: True
 
-use_zen_kernel: false
-use_rt_kernel: false
+repo:
+  cachy: True
+  chaotic: False
 
-install_pulsar: False
-install_vscode: True
+kernel:
+  zen: False
+  rt: False
 
 install:
   docker: True
+  pulsar: True
+  vscode: False
 
 ohmyzsh:
   theme: sonicradish
 
 i3:
   autostart:
-    - "/usr/bin/barriers -f --no-tray --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
-    - "jacktrip -s -z -q auto -b 24 -D --udprt"
-    # - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
+    - "jacktrip -s -n 4 -q auto -b 24 -D --udprt"
+    # - "/usr/bin/barriers -f --no-tray --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
+    - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
+    - "guake"
     # - "hexchat --minimize=2"
   tray_output: "DVI-I-1"
   assignments:

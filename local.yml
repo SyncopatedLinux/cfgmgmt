@@ -3,4 +3,20 @@
 - hosts: localhost
   connection: local
 
+  # pre_tasks:
+  #   #TODO: adjust inventory.yml to use local connection instead of ssh
+  #   - name: Create inventory.yml
+  #     ansible.builtin.copy:
+  #       dest: "inventory_local.yml"
+  #       content: |
+  #         ---
+  #
+  #         all:
+  #           hosts:
+  #             localhost:
+  #           vars:
+  #             ansible_user: "{{ lookup('env','USER') }}"
+  #             ansible_connection: local
+  #       mode: '0644'
+
 - import_playbook: base.yml

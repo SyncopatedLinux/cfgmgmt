@@ -1,4 +1,4 @@
-{% if btrfs_exists|default(false)|bool == true %}
+{% if btrfs_exists|default(false)|bool == True %}
 {% if ansible_hostname == 'ninjabot' %}
 MODULES=(crc32c-intel btrfs intel_agp i915 nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 {% else %}

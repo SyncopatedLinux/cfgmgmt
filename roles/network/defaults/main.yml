@@ -5,8 +5,6 @@ nfs_host: False
 rsyncd_host: False
 musikcube_host: False
 
-syncthing_client: False
-
 autofs_dir: /etc/autofs
 
 lan:

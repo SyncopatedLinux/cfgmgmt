@@ -1,15 +1,17 @@
 ---
 
-use_rt_kernel: true
-
-install_pulsar: true
-install_vscode: true
-
-use_chaotic: false
-
 install:
+  docker: True
   libvirt:
     qemu_full: True
+  pulsar: True
+  rvm: True
+
+repo:
+  chaotic: False
+  cachy: False
 
 ohmyzsh:
   theme: steeef
+
+use_bluetooth: True

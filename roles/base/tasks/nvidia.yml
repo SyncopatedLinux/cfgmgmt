@@ -1,5 +1,7 @@
 ---
 
+#TODO: detect card
+
 - block:
     # - name: install nvidia drivers
     #   aur:

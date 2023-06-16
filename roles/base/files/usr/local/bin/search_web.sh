@@ -3,10 +3,8 @@
 # Requires: rofi, devdocs, i3-sensible-terminal, qutebrowser nerdfonts
 files=~/.cache/rofi-search_term_list
 
-BROWSER="qutebrowser"
+BROWSER="firefox"
 GOOGLE_SEARCH_URL="https://google.com/search?q"
-NEEVA_SEARCH_URL="https://neeva.com/search?q"
-
 BRAVE_SEARCH_URL="https://search.brave.com/search?q"
 
 append_new_term() {
@@ -57,17 +55,15 @@ case "$(echo $input | cut -d " " -f 1)" in
 	  query=$(echo "$input" | cut -c 1- | xargs -0)
 		if ! [[ -z $query ]]
 		then
-			exec $BROWSER "$BRAVE_SEARCH_URL=$query" &> /dev/null &
-			sleep 0.25
-			exec $BROWSER "$NEEVA_SEARCH_URL=$query" &> /dev/null &
-			sleep 0.25
 			exec $BROWSER "$GOOGLE_SEARCH_URL=site+stackoverflow.com+$query" &> /dev/null &
 			sleep 0.25
-			exec $BROWSER "$GOOGLE_SEARCH_URL=site+%22unix.stackexchange.com%22+$query" &> /dev/null &
+			exec $BROWSER "$GOOGLE_SEARCH_URL=site+%22unix.stackexchange.com%22+$query&sort=date-sdate" &> /dev/null &
 			sleep 0.25
-			exec $BROWSER "$GOOGLE_SEARCH_URL=site+gist.github.com+$query" &> /dev/null &
+			exec $BROWSER "$GOOGLE_SEARCH_URL=site+gist.github.com+$query&source=lnt&tbs=qdr:y" &> /dev/null &
 			sleep 0.25
-			exec $BROWSER "$GOOGLE_SEARCH_URL=$query" &> /dev/null &
+			exec $BROWSER "$GOOGLE_SEARCH_URL=$query&source=lnt&tbs=qdr:y" &> /dev/null &
+			sleep 0.25
+			exec $BROWSER "$BRAVE_SEARCH_URL=$query&tf=py" &> /dev/null &
 		fi
 	  ;;
 

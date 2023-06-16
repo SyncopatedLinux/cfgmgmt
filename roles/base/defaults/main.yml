@@ -1,26 +1,6 @@
 ---
 
-autologin: False
-shell_login: False
-
 journal_level: notice
-
-use_chaotic: False
-use_cachy: False
-
-kernel:
-  mainline:
-    - linux
-    - linux-headers
-    - dkms
-  zen:
-    - linux-zen
-    - linux-zen-headers
-    - dkms
-  rt:
-    - linux-rt-lts
-    - linux-rt-lts-headers
-    - dkms
 
 gems:
   - activesupport
