@@ -1,9 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -e
 
-# PS4='LINENO:'
-VER=0.5-beta
-
+# set a trap to exit with CTRL+C
 ctrl_c() {
         echo "** End."
         sleep 1
@@ -11,19 +9,13 @@ ctrl_c() {
 
 trap ctrl_c INT SIGINT SIGTERM ERR EXIT
 
-tput reset
-
-if [[ "${EUID}" -eq 0 ]]; then
-  echo "please run as user. exiting"
-  exit
+# Check if the user is root
+if [[ $(id -u) -ne 0 ]]; then
+   echo "This script must be run with sudo"
+   exit 1
 fi
 
-declare -rx dotsrepo="git@github.com:b08x/dots.git"
-
-#########################################################################
-#                             set colors                                #
-#########################################################################
-
+# declare colors!
 declare -rx ALL_OFF="\e[1;0m"
 declare -rx BBOLD="\e[1;1m"
 declare -rx BLUE="${BOLD}\e[1;34m"
@@ -31,10 +23,7 @@ declare -rx GREEN="${BOLD}\e[1;32m"
 declare -rx RED="${BOLD}\e[1;31m"
 declare -rx YELLOW="${BOLD}\e[1;33m"
 
-#########################################################################
-#                             functions                                 #
-#########################################################################
-
+# cli display functions
 say () {
   local statement=$1
   local color=$2
@@ -42,115 +31,68 @@ say () {
   echo -e "${color}${statement}${ALL_OFF}"
 }
 
-clone () {
-  local repo=$1
-  local dest=$2
-  git clone --recursive $repo $dest
-  git config --global --add safe.directory $dest
-}
-
 wipe() {
 tput -S <<!
 clear
-cup 20
+cup 1
 !
 }
 
-wipe="true"
+wipe="false"
 
-#########################################################################
-#                        install dependencies                           #
-#########################################################################
+# and so it begins...
+wipe && say "hello!\n" $GREEN && sleep 0.5
 
-BOOTSTRAP_PKGS=(
-  'aria2'
-  'bat'
-  'bc'
-  'cargo'
-  'ccache'
-  'cmake'
-  'dialog'
-  'git'
-  'git-lfs'
-  'htop'
-  'lnav'
-  'neovim'
-  'net-tools'
-  'unzip'
-  'wget'
-  'zsh'
-)
+function prompt_for_userid() {
+    read -p "Please enter the user id: " userid
+    echo $userid
+}
 
-say "hello.\n" $GREEN
+userid=$(prompt_for_userid)
+echo "You entered: $userid"
 
 # clean cache
-sudo pacman -Scc --noconfirm > /dev/null
+pacman -Scc --noconfirm > /dev/null
+pacman -Syu paru-bin --noconfirm > /dev/null
 
-# install repository keys
-if [[ ! -z "$(pacman-key --list-keys | grep syncopated 2>/dev/null)" ]];
-then
-  printf "key already installed"
-else
-  printf "adding syncopated gpg to pacman db"
-  sleep 0.5
-  curl -s http://syncopated.hopto.org/syncopated.gpg | sudo pacman-key --add -
-  sudo pacman-key --lsign-key 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A > /dev/null
-  sudo pacman -Sy --noconfirm > /dev/null
-fi
+say "-----------------------------------------------" $BLUE
+say "enabling ssh" $BLUE
+say "-----------------------------------------------\n" $BLUE
 
-if [[ ! -z "$(pacman-key --list-keys | grep proaudio 2>/dev/null)" ]];
-then
-  printf "key already installed"
-else
-  printf "adding OSAMC gpg to pacman db"
-  sleep 0.5
-  curl -s https://arch.osamc.de/proaudio/osamc.gpg | sudo pacman-key --add -
-  sudo pacman-key --lsign-key 762AE5DB2B38786364BD81C4B9141BCC62D38EE5 > /dev/null
-  sudo pacman -Sy --noconfirm > /dev/null
-fi
+systemctl enable sshd
 
-# install pre-requisite packages
-sudo pacman -Sy --noconfirm --needed "${BOOTSTRAP_PKGS[@]}"
-
-# install oh-my-zsh
-if [ -d "/usr/local/share/oh-my-zsh" ]; then
-  echo "oh-my-zsh already installed"
-else
-  cd /tmp
-  git clone --recursive https://github.com/ohmyzsh/ohmyzsh.git
-  sudo env ZSH="/usr/local/share/oh-my-zsh" /tmp/ohmyzsh/tools/install.sh --unattended
-fi
-
-sudo curl -fLo /usr/local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
-sudo chmod a+x /usr/local/bin/yadm
-
-export PATH+=":/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+sleep 0.5
 
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
-say "--------------------------------------------------------------------" $YELLOW
+say "\n-----------------------------------------------" $BLUE
 
-gum confirm "copy ssh keys from a remote host?" && say "ok" $GREEN
+read -p "Do you want to copy ssh keys from a remote host? (y/n) " COPY_KEYS
 
-if [ $? = '0' ]; then
-  say "Enter the fqdn or ip of the remote host" $GREEN
+case $COPY_KEYS in
+	[Yy]* )
+		read -p "Enter the username and hostname of the remote host (e.g. user@example.com): " REMOTE_HOST
+    # TODO: running as sudo, installs this in /root/.ssh
+		cd /home/$userid && scp -r $REMOTE_HOST:~/.ssh .
+    chown -R $userid:$userid /home/$userid/
+		;;
+	[Nn]* )
+		echo "Skipping ssh key copy."
+		;;
+	* )
+		echo "Invalid input. Skipping ssh key copy."
+		;;
+esac
 
-  read -e KEYSERVER
-
-  say "setting ${KEYSERVER} as remote host keyserver\n"
-
-  rsync -avP $KEYSERVER:~/.ssh $HOME/
-
-  if [ ! $? = 0 ]; then
-    say "key copy failed....do something about it."
-    exit
-  fi
-else
-  say "ok then" $RED
+# Install oh-my-zsh
+if [ ! -d "/usr/local/share/oh-my-zsh" ]; then
+  export ZSH="/usr/local/share/oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-# if [ ! -d $HOME/.local/share/yadm/repo.git ]; then
-#   cd $HOME && yadm clone $dotsrepo
-# else
-#   cd $HOME && yadm fetch && yadm pull
-#   yadm bootstrap
-# fi
+if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
+say "\n-----------------------------------------------" $BLUE
+say "running ansible-pull" $BLUE
+say "-----------------------------------------------\n" $BLUE
+
+ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)"
+

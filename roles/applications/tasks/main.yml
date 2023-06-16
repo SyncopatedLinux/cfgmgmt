@@ -16,24 +16,6 @@
     - save.sh
   tags: ['raysession']
 
-- ansible.builtin.include_tasks:
-    file: pulsar.yml
-  when: install_pulsar|default(false)|bool == true
-  tags: ['pulsar']
-
-- ansible.builtin.include_tasks:
-    file: vscode.yml
-  when: install_vscode|default(false)|bool == true
-  tags: ['vscode']
-
-- ansible.builtin.include_tasks:
-    file: vamp.yml
-  tags: ['vamp']
-
-- ansible.builtin.include_tasks:
-    file: mixxx.yml
-  tags: ['mixxx']
-
 - name: Install vmpk keymap
   ansible.builtin.copy:
     src: usr/share/vmpk/qwerty_extended.xml
@@ -41,27 +23,45 @@
     mode: '0644'
   tags: ['vmpk']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
+    file: pulsar.yml
+  when: install.pulsar|default(false)|bool == True
+  tags: ['pulsar']
+
+- ansible.builtin.import_tasks:
+    file: vscode.yml
+  when: install.vscode|default(false)|bool == True
+  tags: ['vscode']
+
+- ansible.builtin.import_tasks:
+    file: vamp.yml
+  tags: ['vamp']
+
+- ansible.builtin.import_tasks:
+    file: mixxx.yml
+  tags: ['mixxx']
+
+- ansible.builtin.import_tasks:
     file: reaper.yml
-  when: install_reaper|default(true)|bool == true
+  when: install_reaper|default(true)|bool == True
   tags: ['reaper']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: sonicannotator.yml
-  when: install_annotator|default(true)|bool == true
+  when: install_annotator|default(true)|bool == True
   tags: ['sonicannotator']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: soniclineup.yml
-  when: install_soniclineup|default(true)|bool == true
+  when: install_soniclineup|default(true)|bool == True
   tags: ['soniclineup']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: tony.yml
-  when: install_tony|default(true)|bool == true
+  when: install_tony|default(true)|bool == True
   tags: ['tony']
 
-- ansible.builtin.include_tasks:
+- ansible.builtin.import_tasks:
     file: touchosc.yml
-  when: install_touchosc|default(true)|bool == true
+  when: install_touchosc|default(true)|bool == True
   tags: ['touchosc']

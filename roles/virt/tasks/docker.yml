@@ -51,3 +51,19 @@
 
     dest: "/etc/modprobe.d/disable-overlay-redirect-dir.conf"
     owner: root
+
+# Reset is not implemented local connection
+- name: Reboot host
+  ansible.builtin.reboot:
+  async: 1
+  poll: 0
+  ignore_errors: True
+  when: reboot is defined
+
+- name: Wait for host to reboot
+  ansible.builtin.wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 120
+  when: reboot is defined

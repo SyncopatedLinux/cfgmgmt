@@ -2,10 +2,10 @@
 
 - ansible.builtin.include_tasks:
     file: docker.yml
-  when: install.docker is defined
+  when: install.docker|default(false)|bool == True
   tags: ['docker']
 
 - ansible.builtin.include_tasks:
     file: libvirt.yml
-  when: install.libvirt is defined
+  when: install.libvirt|default(false)|bool == True
   tags: ['libvirt']

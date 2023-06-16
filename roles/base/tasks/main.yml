@@ -6,7 +6,7 @@
 
 - name: Include tasks based on distribution
   ansible.builtin.include_tasks: "distro/{{ ansible_distribution }}.yml"
-  tags: ['packages']
+  tags: ['packages', 'mirrors']
 
 - name: Include distro vars
   ansible.builtin.include_vars:
@@ -42,14 +42,19 @@
 
 - ansible.builtin.import_tasks:
     file: autologin.yml
-  when: autologin|bool
+  when: login.auto|bool
   tags: ['autologin']
 
 - ansible.builtin.import_tasks:
     file: nvidia.yml
-  when: use_nvidia|default(false)|bool == true
+  when: nvidia|default(false)|bool == True
   tags: ['nvidia']
 
 - ansible.builtin.import_tasks:
     file: grub.yml
   tags: ['grub']
+
+- ansible.builtin.import_tasks:
+    file: syncthing.yml
+  when: install.syncthing|default(false)|bool == True
+  tags: ['syncthing']

@@ -373,3 +373,4 @@ packages:
   - mpv
   - mpv-plugin-excerpt-git
   - youtube-dl
+  - syncthing

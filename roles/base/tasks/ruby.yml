@@ -2,33 +2,56 @@
 #FIXME: For some reason, some gems were installed to /root/.local/....
 # removing /etc/gemrc and ~/.gemrc allowed for gems to be install to ~/.local
 # not sure why
+
+- name: remove gemrc configurations
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ user.home }}/.gemrc"
+    - /etc/gemrc
+
+- name: Gather list of installed gems
+  ansible.builtin.shell: "gem list | awk '{ print $1 }'"
+  register: gemlist
+  changed_when: gemlist.rc != 0
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Set list of gems to install
+  ansible.builtin.set_fact:
+    _gems: "{{ gems|difference(gemlist.stdout) }}"
+
+- name: Install ruby gems
+  ansible.builtin.shell: "gem install {{ item }}"
+  with_items:
+    - "{{ _gems }}"
+  when: _gems | length > 0
+
+#TODO: check if rvm and rubies are already installed
 - block:
-    - name: Set --no-user-install in gemrc
-      ansible.builtin.copy:
-        content: |
-          gem: --user-install --no-document
+    - name: checking test
+      debug:
+        msg: "heyo!"
+    # - name: install rvm and ruby 3
+    #   ansible.builtin.shell: |
+    #     gpg2 --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    #
+    #     \curl -sSL https://get.rvm.io | bash -s stable
+    #
+    #     source /home/b08x/.rvm/scripts/rvm
+    #
+    #     rvm pkg install openssl
+    #
+    #     rvm install 3.0.0 --with-openssl-dir=$HOME/.rvm/usr
+    #
+    #     rvm install 3.2.0
 
-        dest: "{{ user.home }}/.gemrc"
-        owner: "{{ user.name }}"
+    #     rvm use 3.2.0 && rvm gemset global && gem install pry pry-doc logging openai
+    #
+    #     rvm 1.9.2 --default
+    #   args:
+    #     chdir: "{{ user.home }}"
 
-    - name: Gather list of installed gems
-      ansible.builtin.shell: "gem list | awk '{ print $1 }'"
-      register: gemlist
-      changed_when: gemlist.rc != 0
-      ignore_errors: "{{ ansible_check_mode }}"
-
-    - name: Set list of gems to install
-      ansible.builtin.set_fact:
-        _gems: "{{ gems|difference(gemlist.stdout) }}"
-
-    - name: Install ruby gems
-      become_user: "{{ user.name }}"
-      ansible.builtin.shell: "gem install {{ item }}"
-      with_items:
-        - "{{ _gems }}"
-      when: _gems | length > 0
-
-  tags: ['ruby']
-  become: false
-  become_user: " {{ user.name }}"
-
+  when: install.rvm|default(false)|bool == True
+  become: False
+  tags: ['rvm']

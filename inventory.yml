@@ -1,6 +1,6 @@
 ---
 # "hybrids" act as a controller and an execution node
-
+#TODO: https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html#developing-inventory-plugins
 all:
   vars:
     ansible_user: "{{ lookup('env','USER') }}"
