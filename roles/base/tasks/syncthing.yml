@@ -1,0 +1,22 @@
+---
+#TODO: migrate docker service to systemd service on bender
+
+- block:
+    - name: install syncthing
+      aur:
+        use: auto
+        name: syncthing
+        state: present
+      tags: ['packages']
+
+    - name: enable syncthing service
+      ansible.builtin.systemd:
+        name: syncthing
+        state: started
+        enabled: True
+        scope: user
+      ignore_errors: "{{ ansible_check_mode }}"
+
+  become: False
+  become_user: "{{ user.name }}"
+  tags: ['packages']

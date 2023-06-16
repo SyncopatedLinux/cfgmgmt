@@ -107,7 +107,6 @@
     - .config/qutebrowser/config.py
     - .config/qutebrowser/quickmarks
     - .config/zim/accelmap
-    - .config/zim/notebooks.list
     - .config/zim/preferences.conf
     - .config/zim/quicknote.conf
     - .config/zim/style.conf

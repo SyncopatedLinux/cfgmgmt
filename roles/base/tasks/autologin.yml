@@ -17,7 +17,7 @@
         mode: '0644'
         backup: yes
 
-  when: shell_login|bool
+  when: login.shell|bool
 
 - block:
     - name: Install lightdm
@@ -70,7 +70,7 @@
       tags: ['pam']
 
   notify: "enable and restart lightdm service"
-  when: shell_login == False
+  when: login.lightdm|bool"
   tags: ['lightdm']
 
 # if this file does not exist, lightdm will fail to start

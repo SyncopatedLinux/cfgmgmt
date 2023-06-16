@@ -12,7 +12,7 @@
     enabled: yes
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: restart pulseAudio
+- name: restart pulseaudio
   ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted

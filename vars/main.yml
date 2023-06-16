@@ -1,0 +1,32 @@
+---
+
+# vars/main.yml
+# primary vars file
+# variables set here will override those set in host_vars
+#
+
+install:
+  docker: False
+  libvirt:
+    qemu_full: False
+  pulsar: False
+  syncthing: True
+  vscode: False
+
+
+login:
+  auto: False
+  shell: False
+  lightdm: False
+
+repo:
+  chaotic: False
+  cachy: False
+
+nvidia: False
+
+kernel:
+  zen: False
+  rt: False
+
+use_bluetooth: False

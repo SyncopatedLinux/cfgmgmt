@@ -1,0 +1,14 @@
+---
+
+# Setting variables here will override variables set in host_vars, group_vars
+# defaults/main.yml as well as the vars/main.yml in the root folder
+
+
+
+# for example,
+# in host_vars/lapbot.yml install.rvm is set to True, however setting
+# install.rvm to False in base/vars/main.yml (this file) will result in the task
+# being skipped
+
+# install:
+#   rvm: False

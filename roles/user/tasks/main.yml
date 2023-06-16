@@ -36,6 +36,8 @@
 
 - ansible.builtin.import_tasks:
     file: create-dirs.yml
+  tags: ['theme']
+
 - ansible.builtin.import_tasks:
     file: sudoers.yml
   tags: ['polkit']

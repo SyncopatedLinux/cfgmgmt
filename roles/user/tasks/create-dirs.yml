@@ -44,6 +44,9 @@
     mode: '0755'
     recurse: False
   with_items:
+    - .icons/
+    - .themes/
+    - .local/share/fonts/
     - .config/Debauchee/
     - .config/Kvantum/
     - .config/Thunar/

@@ -1,13 +1,10 @@
 ---
 
-use_rt_kernel: true
-use_zen_kernel: false
-
 install:
+  docker: True
   libvirt:
     qemu_full: True
-
-install_pulsar: false
+  pulsar: True
 
 ohmyzsh:
   theme: kphoen
@@ -15,21 +12,22 @@ ohmyzsh:
 nas_host: True
 nfs_host: True
 
+use_bluetooth: True
+
 i3:
   autostart:
-    - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
-    - "jacktrip -c 192.168.36.1 -q auto -b 24 -D --udprt"
-    # - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
+    - "jacktrip -c ninjabot -n 4 -q auto -b 24 -D --udprt"
+    # - "barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
+    - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
+    - "guake"
   tray_output: "primary"
   assignments:
-    - '[class="Jalv.gtk" title="Helm"] $ws6'
-    - '[class="qmidiarp"] $ws6'
-    - '[class="REAPER"] $ws8'
-    - '[class="Qsampler"] $ws1'
-    - '[class="^Patchage"] $ws10'
-    - '[class="Jalv.select"] $ws1'
-    - '[class="^RaySession$"] $ws1'
-    - '[class="Pulsar"] $ws2'
+    - '[class="Jalv.gtk" title="Helm"] $ws8'
+    - '[class="qmidiarp"] $ws8'
+    - '[class="Qsampler"] $ws9'
+    - '[class="^Patchage"] $ws9'
+    - '[class="Jalv.select"] $ws9'
+    - '[class="^RaySession$"] $ws9'
   workspaces:
     - "$ws1 output DP1-1"
     - "$ws2 output DP1-1"

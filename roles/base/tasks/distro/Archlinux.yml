@@ -39,7 +39,7 @@
   retries: 10
   delay: 10
   check_mode: False
-  tags: ['repo']
+  tags: ['repo', 'packages']
 
 - name: Add archaudio repo key
   ansible.builtin.shell: |
@@ -55,7 +55,7 @@
   retries: 10
   delay: 10
   check_mode: False
-  tags: ['repo']
+  tags: ['repo', 'packages']
 
 - name: Adjust pacman, paru and makepkg configs
   ansible.builtin.template:
@@ -66,8 +66,9 @@
     mode: '0644'
     backup: yes
   with_items:
-    - paru.conf
     - makepkg.conf
+    - pacman.conf
+    - paru.conf
   tags: ['makepkg', 'pacman', 'paru', 'packages', 'repo']
   ignore_errors: "{{ ansible_check_mode }}"
 
@@ -154,71 +155,15 @@
     state: absent
     force: yes
     extra_args: --noconfirm
-  when: use_jack|default(true)|bool == true
+  when: use_jack|default(true)|bool == True
   ignore_errors: True
   tags: ['packages']
 
-- block:
-
-    # - name: install mainline kernel and headers
-    #   aur:
-    #     use: paru
-    #     name: "{{ kernel.mainline }}"
-    #     state: present
-    #   when:
-    #     - use_rt_kernel|default(false)|bool == false
-    #     - use_zen_kernel|default(false)|bool == false
-
-    - name: install zen kernel and headers
-      aur:
-        use: paru
-        name: "{{ kernel.zen }}"
-        state: present
-      when: use_zen_kernel|default(false)|bool == true
-
-    - name: install realtime kernel and headers
-      aur:
-        use: paru
-        name: "{{ kernel.rt }}"
-        state: present
-      when: use_rt_kernel|default(false)|bool == true
-
-    - name: Include package vars
-      ansible.builtin.include_vars:
-        dir: packages/{{ ansible_distribution }}
-        name: packages
-
-    - name: Installing packages
-      ansible.builtin.debug:
-        msg: "Installing packages...."
-
-    - name: Print package list
-      ansible.builtin.debug:
-        msg: "{{ packages  | to_json }}"
-      when: debugging is defined
-
-    - name: Install packages
-      action: ohmannium packages="{{ packages | to_json }}"
-      register: action_output
-
-    - name: Print results
-      ansible.builtin.debug:
-        msg: "{{ action_output }}"
-      when: debugging is defined
-
-  # rescue:
-  #   # usually this fails because of: jack2 and jack are in conflict. Remove jack? [y/N]
-  #   - name: Remove jack and nitrogen
-  #     ansible.builtin.shell:
-  #       paru -Rdd {{ item }} --noconfirm
-  #     with_items:
-  #       - jack
-  #       - nitrogen
-  #     tags: ['packages']
-
-  #   - name: Install packages
-  #     action: ohmannium packages="{{ packages | to_json }}"
-  #     register: action_output
-
-  become: False
+- name: install packages
+  aur:
+    use: paru
+    name: "{{ packages }}"
+    state: present
+  become: True
+  become_user: "{{ user.name }}"
   tags: ['packages']

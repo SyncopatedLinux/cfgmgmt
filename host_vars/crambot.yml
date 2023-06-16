@@ -1,0 +1,10 @@
+---
+
+install:
+  docker: True
+  libvirt:
+    qemu_full: False
+  pulsar: False
+
+ohmyzsh:
+  theme: kphoen
