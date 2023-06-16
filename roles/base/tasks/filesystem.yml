@@ -19,7 +19,7 @@
     state: present
   become: True
   become_user: "{{ user.name }}"
-  when: btrfs_exists|default(false)|bool == true
+  when: btrfs_exists|default(false)|bool == True
   tags: ['btrfs']
 
 - block:
@@ -48,7 +48,7 @@
         enabled: 'yes'
         name: btrfs-scrub.timer
         state: started
-      when: btrfs_exists|default(false)|bool == true
+      when: btrfs_exists|default(false)|bool == True
       tags: ['btrfs']
 
   ignore_errors: "{{ ansible_check_mode }}"

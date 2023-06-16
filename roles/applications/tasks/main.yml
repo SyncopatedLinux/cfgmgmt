@@ -25,12 +25,12 @@
 
 - ansible.builtin.import_tasks:
     file: pulsar.yml
-  when: install.pulsar|default(false)|bool == true
+  when: install.pulsar|default(false)|bool == True
   tags: ['pulsar']
 
 - ansible.builtin.import_tasks:
     file: vscode.yml
-  when: install.vscode|default(false)|bool == true
+  when: install.vscode|default(false)|bool == True
   tags: ['vscode']
 
 - ansible.builtin.import_tasks:
@@ -43,25 +43,25 @@
 
 - ansible.builtin.import_tasks:
     file: reaper.yml
-  when: install_reaper|default(true)|bool == true
+  when: install_reaper|default(true)|bool == True
   tags: ['reaper']
 
 - ansible.builtin.import_tasks:
     file: sonicannotator.yml
-  when: install_annotator|default(true)|bool == true
+  when: install_annotator|default(true)|bool == True
   tags: ['sonicannotator']
 
 - ansible.builtin.import_tasks:
     file: soniclineup.yml
-  when: install_soniclineup|default(true)|bool == true
+  when: install_soniclineup|default(true)|bool == True
   tags: ['soniclineup']
 
 - ansible.builtin.import_tasks:
     file: tony.yml
-  when: install_tony|default(true)|bool == true
+  when: install_tony|default(true)|bool == True
   tags: ['tony']
 
 - ansible.builtin.import_tasks:
     file: touchosc.yml
-  when: install_touchosc|default(true)|bool == true
+  when: install_touchosc|default(true)|bool == True
   tags: ['touchosc']

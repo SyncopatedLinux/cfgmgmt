@@ -36,13 +36,18 @@ CheckSpace
 VerbosePkgLists
 ParallelDownloads = 5
 
-{% if architecture == 'x86-64' %}
-{% if repo.cachy == True %}
+{% if architecture == 'x86-64-v3' %}
+[cachyos-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+[cachyos-core-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+[cachyos-extra-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+{% endif %}
 [cachyos]
 Server = https://mirror.cachyos.org/repo/$arch/$repo
-{% endif %}
-{% endif %}
-
 {% if architecture == 'x86-64-v3' %}
 [syncopated-v3]
 Server = http://syncopated.hopto.org/packages/archlinux/x86_64_v3/

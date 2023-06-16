@@ -5,6 +5,7 @@ install:
   libvirt:
     qemu_full: True
   pulsar: True
+  rvm: True
 
 repo:
   chaotic: False

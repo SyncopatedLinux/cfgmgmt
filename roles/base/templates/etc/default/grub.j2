@@ -10,7 +10,7 @@ GRUB_CMDLINE_LINUX="efi=runtime crashkernel=auto threadirqs modprobe.blacklist=n
 GRUB_CMDLINE_LINUX="efi=runtime crashkernel=auto threadirqs quiet rhgb audit=0 delayacct"
 {% endif %}
 # Preload both GPT and MBR modules so that they are not missed
-{% if btrfs_exists|default(false)|bool == true %}
+{% if btrfs_exists|default(false)|bool == True %}
 GRUB_PRELOAD_MODULES="btrfs zstd part_gpt part_msdos"
 {% else %}
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"

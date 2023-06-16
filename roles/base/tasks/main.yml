@@ -56,5 +56,5 @@
 
 - ansible.builtin.import_tasks:
     file: syncthing.yml
-  when: install.syncthing|bool
+  when: install.syncthing|default(false)|bool == True
   tags: ['syncthing']

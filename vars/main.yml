@@ -1,5 +1,10 @@
 ---
 
+# vars/main.yml
+# primary vars file
+# variables set here will override those set in host_vars
+#
+
 install:
   docker: False
   libvirt:
@@ -7,6 +12,7 @@ install:
   pulsar: False
   syncthing: True
   vscode: False
+
 
 login:
   auto: False
