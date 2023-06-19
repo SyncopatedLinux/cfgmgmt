@@ -1,0 +1,120 @@
+Package,Description
+network-manager-applet,Applet for managing network connections
+networkmanager,Network connection manager and user applications
+nm-connection-editor,NetworkManager GUI connection editor and widgets
+bluez-utils,Development and debugging utilities for the bluetooth protocol stack
+bluetooth-autoconnect,A service to automatically connect to all paired and trusted bluetooth devices
+aria2,"Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink"
+aribb24,"Library for ARIB STD-B24, decoding JIS 8 bit characters and parsing MPEG-TS stream"
+atool,A script for managing file archives of various types
+autofs,A kernel-based automounter for Linux
+autojump,A faster way to navigate your filesystem from the command line
+base-devel,Basic tools to build Arch Linux packages
+bat,Cat clone with syntax highlighting and git integration
+bc,An arbitrary precision calculator language
+bibtool,A tool for manipulating BibTeX files
+bind,"A complete, highly portable implementation of the DNS protocol"
+boost,Free peer-reviewed portable C++ source libraries (development headers)
+brightnessctl,Lightweight brightness control tool
+ccache,Compiler cache that speeds up recompilation by caching previous compilations
+cmake,A cross-platform open-source make system
+cppunit,A C++ unit testing framework
+cpupower,Linux kernel tool to examine and tune power saving related features of your processor
+dialog,A tool to display dialog boxes from shell scripts
+dmidecode,Desktop Management Interface table related utilities
+exa,ls replacement
+faad2,Freeware Advanced Audio (AAC) Decoder
+fasd,"Command-line productivity booster, offers quick access to files and directories"
+fd,"Simple, fast and user-friendly alternative to find"
+firewalld,Firewall daemon with D-Bus interface
+fwupd,Simple daemon to allow session software to update firmware
+fzf,Command-line fuzzy finder
+gcc-libs,Runtime libraries shipped by GCC
+gendesk,Utility for generating desktop files
+git,the fast distributed version control system
+git-filter-repo,Quickly rewrite git repository history (filter-branch replacement)
+git-lfs,Git extension for versioning large files
+glibc,GNU C Library
+glow,Command-line markdown renderer
+gnu-netcat,"GNU rewrite of netcat, the network piping application"
+graphicsmagick,Image processing system
+gtkmm,C++ bindings for GTK+ 2
+gum,A tool for glamorous shell scripts
+help2man,Conversion tool to create man files
+htop,Interactive process viewer
+hunspell,Spell checker and morphological analyzer library and program
+iftop,Display bandwidth usage on an interface
+imlib2,"Library that does image file loading and saving as well as rendering, manipulation, arbitrary polygon support"
+inetutils,A collection of common network programs
+iotop,View I/O usage of processes
+jansson,"C library for encoding, decoding and manipulating JSON data"
+jq,Command-line JSON processor
+kitty,"A modern, hackable, featureful, OpenGL-based terminal emulator"
+kitty-terminfo,"Terminfo for kitty, an OpenGL-based terminal emulator"
+libbluray,Library to access Blu-Ray disks for video playback
+libev,A full-featured and high-performance event loop
+libgit2,A linkable library for Git
+libgme,Video game music file emulation/playback library
+libmad,A high-quality MPEG audio decoder
+libnm,NetworkManager client library
+libnma,NetworkManager GUI client library (GTK3)
+libopusenc,High-level API for encoding .opus files
+libsamplerate,An audio sample rate conversion library
+libtool,A generic library support script
+libunistring,Library for manipulating Unicode strings and C strings
+libvdpau-va-gl,VDPAU driver with OpenGL/VAAPI backend
+libxcrypt-compat,Modern library for one-way hashing of passwords - legacy API functions
+libxml2,XML C parser and toolkit
+libzip,"A C library for reading, creating, and modifying zip archives"
+lnav,A curses-based tool for viewing and analyzing log files
+lsof,Lists open files for running Unix processes
+lua,Powerful lightweight programming language designed for extending applications
+lzip,A lossless file compressor based on the LZMA algorithm
+man-db,A utility for reading man pages
+man-pages,Linux man pages
+mdadm,"A tool for managing/monitoring Linux md device arrays, also known as Software RAID"
+mediainfo,Supplies technical and tag information about media files (CLI interface)
+mlocate,Merging locate/updatedb implementation
+mkinitcpio,Modular initramfs image creation utility
+most,A terminal pager similar to more and less
+ncdu,Disk usage analyzer with an ncurses interface
+ncurses,System V Release 4.0 curses emulation library
+net-tools,Configuration tools for Linux networking
+nfs-utils,Support programs for Network File Systems
+npm,A package manager for javascript
+numlockx,Turns on the numlock key in X11.
+openssl,The Open Source toolkit for Secure Sockets Layer and Transport Layer Security
+openssl-1.1,The Open Source toolkit for Secure Sockets Layer and Transport Layer Security
+pandoc-cli,Conversion between documentation formats
+pcsclite,PC/SC Architecture smartcard middleware library
+poppler,PDF rendering library based on xpdf 3.0
+python-i3ipc,An improved Python library to control i3wm
+python-pip,The PyPA recommended tool for installing Python packages
+python-setuptools,"Easily download, build, install, upgrade, and uninstall Python packages"
+r,Language and environment for statistical computing and graphics
+ranger,"Simple, vim-like file manager"
+ripgrep-all,rga
+rsync,A fast and versatile file copying tool for remote and local files
+rtirq,Realtime IRQ thread system tuning.
+rtkit,Realtime Policy and Watchdog Daemon
+rubygems,Package management framework for Ruby
+smartmontools,Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives
+sndio,A small audio and MIDI framework part of the OpenBSD project
+sqlite,A C library that implements an SQL database engine
+stunnel,A program that allows you to encrypt arbitrary TCP connections inside SSL
+suil,A lightweight C library for loading and wrapping LV2 plugin UIs
+taglib,A Library for reading and editing the meta-data of several popular audio formats
+tesseract,An OCR program
+timeshift,A system restore utility for Linux
+tuned,Daemon that performs monitoring and adaptive configuration of devices in the system
+udisks2,"Disk Management Service, version 2"
+ueberzug,Command line util which allows to display images in combination with X11
+usbutils,A collection of USB tools to query connected USB devices
+w3m,Text-based Web browser as well as pager
+waf,General-purpose build system modelled after Scons
+wget,Network utility to retrieve files from the Web
+wol,Wake On LAN functionality in a small program. It wakes up hardware that is Magic Packet compliant
+xdg-user-dirs,Manage user directories like ~/Desktop and ~/Music
+xz,Library and command line tools for XZ and LZMA compressed files
+zlib,Compression library implementing the deflate compression method found in gzip and PKZIP
+zoxide,A smarter cd command for your terminal

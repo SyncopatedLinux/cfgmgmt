@@ -1,0 +1,106 @@
+Package,Description
+a2jmidid,A daemon for exposing legacy ALSA sequencer applications in JACK MIDI system.
+alsa-lib,An alternative implementation of Linux sound support
+alsa-plugins,Additional ALSA plugins
+alsa-tools,Advanced tools for certain sound cards
+alsa-utils,Advanced Linux Sound Architecture - Utilities
+zita-alsa-pcmi,"The successor of clalsadrv, provides easy access to ALSA PCM devices."
+ambix-o1,"FOA Ambix VST, LV2 Plug-ins"
+ambix-o3,"3rd Order Ambix VST, LV2 Plug-ins"
+ambix-o5,"5th Order Ambix VST, LV2 Plug-ins"
+iempluginsuite-git,Plug-in suite including Ambisonic plug-ins up to 7th order
+mcfx-o1,FOA Ambix Plug-in Suite
+mcfx-o3,3rd Order Ambix Plug-in Suite
+mcfx-o5,5th Order Ambix Plug-in Suite
+sparta-plugins,AALTO vst plugins for Spatial Audio Real-time Applications
+baudline-bin,Time-frequency browser designed for scientific visualization of the spectral domain.
+jaaa,JACK and ALSA Audio Analyser
+japa,A perceptual or psychoacoustic audio spectrum analyser
+sonic-visualiser-git,A viewer and analyser of music audio files.
+vamp-plugin-sdk,The Vamp audio analysis plug-in system
+gst-libav,Multimedia graph framework - libav plugin
+gst-plugins-bad,Multimedia graph framework - bad plugins
+opus,"Totally open, royalty-free, highly versatile audio codec"
+opusfile,"Library for opening, seeking, and decoding .opus files"
+vorbis-tools,Extra tools for Ogg-Vorbis
+wavpack,"Audio compression format with lossless, lossy and hybrid compression modes"
+bipscript,""
+bipscript-ide,""
+audacity,A program that lets you manipulate digital audio waveforms
+ecasound,Command-line multitrack audio processor
+gigedit,Gigasampler instrument editor
+ocenaudio-bin,"Cross-platform, easy to use, fast and functional audio editor"
+polyphone,A soundfont editor for quickly designing musical instruments
+sound-gambit,Audio File Peak Limiter
+sox,The Swiss Army knife of sound processing tools
+zita-dpl1,A look-ahead digital peak level limiter
+zita-lrx,"Command line JACK application providing 2, 3, or 4-band, 4th order crossover filters"
+jack2-dbus,The JACK low-latency audio server (dbus integration)
+jack-example-tools,Official JACK example clients and tools
+jack_capture,Simple command line tool to record JACK audio output to a file
+jack_utils,Useful command line programs for JACK
+sooperlooper-git,Live looping sampler capable of immediate loop recording. Built from git.
+jkmeter,A horizontal or vertical bargraph level meter based on the ideas of mastering guru Bob Katz.
+jmeters,Various analog-style audio level meters for JACK
+jnoisemeter,Measure audio test signals and in particular noise signals
+jack-keyboard,Virtual MIDI keyboard that uses JACK MIDI.
+non-sequencer,"A powerful, lightweight, real-time, pattern-based MIDI sequencer"
+osc2midi,A highly flexible and configurable OSC to JACK MIDI (and back) bridge
+qmidiarp,"A MIDI arpeggiator, phrase generator and controller LFO for the ALSA sequencer."
+rtmidi,A set of C++ classes that provides a common API for realtime MIDI input/output.
+sendmidi,Multi-platform command-line tool to send out MIDI messages
+stochas,A probabilistic polyrhythmic sequencer
+timidity++,A MIDI to WAVE converter and player
+tonespace,chord generator and visualizer
+vmpk,Virtual MIDI Piano Keyboard
+jack_mixer,Jack desktop mixer application
+non-mixer-lv2-git,Jack audio mixer from the NON DAW + LV2 plugin patch by falkTX and others
+jacktrip,Multi-machine audio network performance over the Internet
+qmidinet,A MIDI Network Gateway via UDP/IP Multicast
+njconnect,Curses Jack connection manager
+patchage,A modular patch bay for audio and MIDI systems based on Jack and Alsa
+ams-lv2,A port of the internal modules found in Alsa Modular Synth
+calf,LV2 plug-in suite and standalone Jack host
+caps-lv2-git,The LADSPA C* Audio Plugin Suite (LV2 port)
+carla,Audio Plugin Host
+cmt,LADSPA plugins for use with software synthesis and recording packages on Linux
+distrho-ports,Linux audio plugins and LV2 ports
+dpf-plugins-vst3,Collection of DPF-based plugins - VST3 plugins
+guitarix,A simple mono guitar amplifier and FX for JACK using Faust
+intersect.lv2-git,LV2 plugin to split 2 audio channels into 3.
+ingen-git,A modular plugin host for JACK and LV2 (git version)
+ir.lv2,"No-latency/low-latency, realtime, high performance signal convolver for reverb effects"
+jalv-select-git,A little GUI to select installed lv2 plug-ins and run them with jalv.
+lsp-plugins,Collection of open-source plugins
+lv2,Plugin standard for audio systems
+lv2-c++-tools,Tools and libraries that may come in handy when writing LV2 plugins.
+lv2file,A simple program which you can use to apply effects to your audio files
+noise-repellent,An lv2 plug-in for broadband noise reduction
+x42-plugins,Professional audio processing units available as LV2-plugin and JACK-application
+pavucontrol,PulseAudio Volume Control
+pulseaudio-alsa,ALSA Configuration for PulseAudio
+pulseaudio-bluetooth,Bluetooth support for PulseAudio
+pulseaudio-jack,Jack support for PulseAudio
+pulsemixer,CLI and curses mixer for pulseaudio
+dragonfly-reverb,A concert hall reverb and a room reverb
+jconvolver,A real-time convolution engine
+zita-rev1,A reworked jack version of the reverb originally developed for Aeolus.
+linuxsampler,Professional-grade audio sampler alternative to Gigasampler
+qsampler,A LinuxSampler Qt GUI Interface
+mixxx,"Free, open source software for digital DJing"
+sfizz,SFZ library and LV2 plugin
+hydrogen-git,An advanced drum machine (git version)
+jack_snapshot,stores and restores a set of JACK connections
+raysession-git,Session manager for audio programs using the Non Session Manager (NSM) API
+zita-ajbridge,Jack client to use additional ALSA devices.
+zita-mu1,A simple JACK app used to organise stereo monitoring
+ams,A real-time modular synthesizer and effect processor
+espeak-ng,Multi-lingual software speech synthesizer
+helm-synth,"A cross-platform, polyphonic synthesizer, available standalone and as an LV2 plugin"
+sonic-pi-git,The Live Coding Music Synth for Everyone
+spectmorph,Analyze samples of musical instruments and combine them (morphing)
+vital-synth,Spectral warping wavetable synth.
+wolf-shaper,A waveshaper plugin with a graph editor
+scala-music,Music software for experimentation with tunings and different kind of scales
+scala-music-scales,Collection of scales to be used with the Scala music software
+fmit,Free Music Instrument Tuner

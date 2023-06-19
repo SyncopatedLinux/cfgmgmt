@@ -1,0 +1,82 @@
+Package,Description
+i3-wm,Improved dynamic tiling window manager
+i3status-rust,"Resourcefriendly and feature-rich replacement for i3status, written in pure Rust"
+wmctrl,Control your EWMH compliant window manager from command line
+dunst,Customizable and lightweight notification-daemon
+nitrogen-git,""
+perl-anyevent-i3,Communicate with the i3 window manager
+picom,X compositor that may fix tearing issues
+rofi,"A window switcher, application launcher and dmenu replacement"
+sxhkd,Simple X hotkey daemon
+wmfocus,""
+gtk-engines,Theme engines for GTK+ 2
+gtk-engine-murrine,"GTK2 engine to make your desktop look like a murrina, an italian word meaning the art glass works done by Venicians glass blowers."
+gnu-free-fonts,A free family of scalable outline fonts
+noto-fonts-emoji,Google Noto emoji fonts
+ttf-devicons,An iconic font for developers
+ttf-firacode-nerd,Patched font Fira (Fura) Code from nerd fonts library
+ttf-font-awesome,Iconic font designed for Bootstrap
+ttf-input,Fonts for code from DJR & Font Bureau
+ttf-jetbrains-mono,"Typeface for developers, by JetBrains"
+ttf-liberation,"Font family which aims at metric compatibility with Arial, Times New Roman, and Courier New"
+ttf-opensans,Sans-serif typeface commissioned by Google
+ttf-ubuntu-font-family,Ubuntu font family
+kvantum,SVG-based theme engine for Qt5/6 (including config tool and extra themes)
+qt5-base,A cross-platform application and UI framework
+qt5-graphicaleffects,Graphical effects for use with Qt Quick 2
+qt5-quickcontrols2,Next generation user interface controls based on Qt Quick
+qt5-tools,"A cross-platform application and UI framework (Development Tools, QtHelp)"
+qt5ct,Qt5 Configuration Utility
+qt6-base,A cross-platform application and UI framework
+qt6-declarative,Classes for QML and JavaScript languages
+qt6-multimedia,"Classes for audio, video, radio and camera functionality"
+qt6-tools,"A cross-platform application and UI framework (Development Tools, QtHelp)"
+qt6ct,Qt 6 Configuration Utility
+xdotool,Command-line X11 automation tool
+arandr,Provide a simple visual front end for XRandR 1.2.
+xf86-input-libinput,Generic input driver for the X.Org server based on libinput
+xf86-input-wacom,X.Org Wacom tablet driver
+xf86-video-intel,X.org Intel i810/i830/i915/945G/G965+ video drivers
+xkill-shortcut,Provides a shortcut to access xkill from the applications menu.
+xorg-bdftopcf,Convert X font from Bitmap Distribution Format to Portable Compiled Format
+xorg-fonts-alias-75dpi,X.org font alias files - 75dpi font familiy
+xorg-fonts-alias-100dpi,X.org font alias files - 100dpi font familiy
+xorg-fonts-alias-cyrillic,X.org font alias files - cyrillic font familiy
+xorg-fonts-alias-misc,X.org font alias files - misc font familiy
+xorg-fonts-misc,X.org misc fonts
+xorg-iceauth,ICE authority file utility
+xorg-mkfontscale,Create an index of scalable font files for X
+xorg-server,Xorg X server
+xorg-sessreg,Register X sessions in system utmp/utmpx databases
+xorg-setxkbmap,Set the keyboard using the X Keyboard Extension
+xorg-smproxy,Allows X applications that do not support X11R6 session management to participate in an X11R6 session
+xorg-x11perf,Simple X server performance benchmarker
+xorg-xauth,X.Org authorization settings program
+xorg-xbacklight,RandR-based backlight control application
+xorg-xcmsdb,Device Color Characterization utility for X Color Management System
+xorg-xcursorgen,Create an X cursor file from PNG images
+xorg-xdpyinfo,Display information utility for X
+xorg-xdriinfo,Query configuration information of DRI drivers
+xorg-xev,Print contents of X events
+xorg-xhost,Server access control program for X
+xorg-xinit,X.Org initialisation program
+xorg-xinput,Small commandline tool to configure devices
+xorg-xkbcomp,X Keyboard description compiler
+xorg-xkbevd,XKB event daemon
+xorg-xkbutils,XKB utility demos
+xorg-xkill,Kill a client by its X resource
+xorg-xlsatoms,List interned atoms defined on server
+xorg-xlsclients,List client applications running on a display
+xorg-xlsfonts,List available X fonts
+xorg-xmodmap,Utility for modifying keymaps and button mappings
+xorg-xpr,Print an X window dump from xwd
+xorg-xprop,Property displayer for X
+xorg-xrandr,Primitive command line interface to RandR extension
+xorg-xrdb,X server resource database utility
+xorg-xrefresh,Refresh all or part of an X screen
+xorg-xset,User preference utility for X
+xorg-xsetroot,Classic X utility to set your root window background to a given pattern or color
+xorg-xvinfo,Prints out the capabilities of any video adaptors associated with the display that are accessible through the X-Video extension
+xorg-xwd,X Window System image dumping utility
+xorg-xwininfo,Command-line utility to print information about windows on an X server
+xorg-xwud,X Window System image undumping utility
