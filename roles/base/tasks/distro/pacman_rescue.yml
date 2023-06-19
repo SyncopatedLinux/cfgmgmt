@@ -1,0 +1,36 @@
+---
+- name: Install packages
+  pacman:
+    name: "{{ packages }}"
+    state: present
+  register: result
+  ignore_errors: True
+
+- name: print result
+  debug:
+    msg: "{{ result }}"
+
+- name: Extract package names from error message
+  set_fact:
+    new_package: "{{ (result.stdout_lines | join(' ') | regex_search(':: (\\w+) and', '\\1'))[0] }}"
+    installed_package: "{{ (result.stdout_lines | join(' ') | regex_search('and (\\w+) are in conflict. Remove', '\\1'))[0] }}"
+  when: result is failed
+
+- name: Handle package conflicts
+  block:
+    - pause:
+        prompt: "{{ new_package }} and {{ installed_package }} are in conflict. Do you want to remove {{ installed_package }}? (yes/no)"
+      register: prompt_result
+
+    - name: Remove conflicting package
+      pacman:
+        name: "{{ installed_package }}"
+        state: absent
+      when: prompt_result.user_input | lower == 'yes'
+
+    - name: Retry installing gpu packages
+      pacman:
+        name: "{{ gpu_packages }}"
+        state: present
+
+  when: result is failed

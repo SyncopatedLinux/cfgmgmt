@@ -55,3 +55,42 @@
   when: install.rvm|default(false)|bool == True
   become: False
   tags: ['rvm']
+
+#TODO: add shell configurations based on conditional
+
+#
+#
+# TASK [system : Syncronize templates - shell] ********************************************************************************************************************************
+# ok: [lapbot] => (item=['/home/b08x', '.aliases'])
+# --- before: /home/b08x/.profile
+# +++ after: /tmp/ansible-local-33217cieosbfq/tmparef0h5b/.profile.j2
+# @@ -39,8 +39,3 @@
+#  if [ -x $(command -v hostname) ]; then
+#  export HOSTNAME=$(hostname)
+#  fi
+# -
+# -# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# -export PATH="$PATH:$HOME/.rvm/bin"
+# -
+# -[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#
+# changed: [lapbot] => (item=['/home/b08x', '.profile'])
+# ok: [lapbot] => (item=['/home/b08x', '.ualiases'])
+# --- before: /home/b08x/.zlogin
+# +++ after: /tmp/ansible-local-33217cieosbfq/tmpw6xm0rcq/.zlogin.j2
+# @@ -1,2 +0,0 @@
+# -
+# -[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#
+# changed: [lapbot] => (item=['/home/b08x', '.zlogin'])
+# ok: [lapbot] => (item=['/home/b08x', '.zprofile'])
+# ok: [lapbot] => (item=['/home/b08x', '.zshenv'])
+# --- before: /home/b08x/.zshrc
+# +++ after: /tmp/ansible-local-33217cieosbfq/tmp3ra2zvfh/.zshrc.j2
+# @@ -104,6 +104,3 @@
+#
+#  # additional aliases
+#  [[ -f ~/.ualiases ]] && source ~/.ualiases
+# -
+# -# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# -export PATH="$PATH:$HOME/.rvm/bin"
