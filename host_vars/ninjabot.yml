@@ -23,6 +23,11 @@ install:
 ohmyzsh:
   theme: sonicradish
 
+devices:
+  dicatphone_powermicII: "Dictaphone Corporation PowerMicII-NS"
+  logitech_mouse_g403: "Logitech G403 HERO Gaming Mouse"
+  daskeyboard: "daskeyboard"
+
 i3:
   autostart:
     - "jacktrip -s -n 4 -q auto -b 24 -D --udprt"
