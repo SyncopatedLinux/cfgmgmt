@@ -28,7 +28,8 @@ i3:
     - "jacktrip -s -n 4 -q auto -b 24 -D --udprt"
     - "/usr/bin/barriers -f --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
     # - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
-    - "guake"
+    - "terminator"
+    - "zita-mu1"
     # - "hexchat --minimize=2"
   tray_output: "DVI-I-1"
   assignments:
@@ -39,7 +40,7 @@ i3:
     - "$ws2 output DVI-D-0"
     - "$ws3 output DVI-D-0"
     - "$ws4 output DVI-D-0"
-    - "$ws5 output DVI-I-1"
+    - "$ws5 output DVI-D-0"
     - "$ws6 output DVI-I-1"
     - "$ws7 output DVI-I-1"
     - "$ws8 output DVI-I-1"

@@ -4,75 +4,72 @@
 
 bindsym $mod+Shift+m sticky toggle
 
-# toggle tiling / floating
+### toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+bindsym $mod+XF86LaunchB move scratchpad
+bindsym $alt+grave scratchpad show
 
-#bindsym $mod+Shift+grave move scratchpad
-bindsym Shift+F8 move scratchpad
-bindsym XF86Launch1 scratchpad show
 bindsym Control+XF86Launch1 floating disable, focus
 
-
 bindsym XF86Launch2 [class="(?i)pulsar"] focus
-# bindsym XF86Launch3 [class="Sonic\ Pi"] focus
-# bindsym XF86Launch4
-# bindsym XF86Launch5
-# bindsym XF86Launch6
-# bindsym XF86Launch7
-# bindsym XF86Launch8
+##### bindsym XF86Launch3 [class="Sonic\ Pi"] focus
+##### bindsym XF86Launch4
+##### bindsym XF86Launch5
+##### bindsym XF86Launch6
+##### bindsym XF86Launch7
+##### bindsym XF86Launch8
+bindsym $alt+XF86LaunchB [class="(?i)terminator"] scratchpad show
 bindsym $mod+F7 [title="^jack-keyboard"] scratchpad show
 bindsym $mod+F8 [class="^VMPK"] scratchpad show
 
-
-#bindsym <var> focus output HDMI-1
-#bindsym <var> focus output HDMI-2
-#bindsym XF86LaunchB nop dropdown
+##### bindsym <var> focus output HDMI-1
+##### bindsym <var> focus output HDMI-2
+##### bindsym XF86LaunchB nop dropdown
 
 bindsym $mod+Return $exec "kitty"
 
 #############################
 #### ---{ navigation }--- ###
 #############################
-# The right button toggles floating
-# bindsym button2 --release --whole-window floating toggle
-# bindsym $mod+button2 --release --whole-window floating toggle
+
+#### The right button toggles floating
+##### bindsym button2 --release --whole-window floating toggle
+##### bindsym $mod+button2 --release --whole-window floating toggle
 
 bindsym XF86Back workspace prev
 bindsym XF86Forward workspace next
 
-# kill focused window
+### kill focused window
 bindsym F1 kill
 bindsym $mod+q kill
 bindsym $mod+KP_Subtract kill
 
-
-
-# change focus
+### change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
-# alternatively, you can use the cursor keys:
+### alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+### move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
-# alternatively, you can use the cursor keys:
+### alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# container layout
+### container layout
 bindsym $mod+v split h
 bindsym $mod+h split v
 bindsym $mod+Shift+t layout tabbed
@@ -80,20 +77,21 @@ bindsym $mod+Shift+s layout stacking
 bindsym $mod+Shift+h layout splitv
 bindsym $mod+Shift+v layout splith
 
-# enter fullscreen mode for the focused container
+### enter fullscreen mode for the focused container
 bindsym F11 fullscreen toggle
-# bindsym XF86Launch1 fullscreen toggle
 
-# change focus between tiling / floating windows
+#### bindsym XF86Launch1 fullscreen toggle
+
+### change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+### focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
+### focus the child container
 bindsym $mod+c focus child
 
-# switch to workspace
+### switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -116,7 +114,7 @@ bindcode $mod+Mod2+$KP_8 workspace $ws8
 bindcode $mod+Mod2+$KP_9 workspace $ws9
 bindcode $mod+Mod2+$KP_0 workspace $ws10
 
-# move focused container to workspace
+### move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -139,9 +137,11 @@ bindcode $mod+Shift+Mod2+$KP_8 move container to workspace $ws8
 bindcode $mod+Shift+Mod2+$KP_9 move container to workspace $ws9
 bindcode $mod+Shift+Mod2+$KP_0 move container to workspace $ws10
 
-# reload the configuration file
+### reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
+### restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
+
+### exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"

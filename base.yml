@@ -26,12 +26,12 @@
     - name: Include group variables
       include_vars:
         dir: group_vars
-      tags: always
+      tags: common
 
     - name: Include host variables
       include_vars:
         file: host_vars/{{ inventory_hostname }}.yml
-      tags: always
+      tags: common
 
     - block:
         - name: Print keyserver hostname
@@ -80,22 +80,22 @@
       ansible.builtin.shell: |
         cat /etc/lsb-release | grep DISTRIB_ID | awk -F '=' '{print $2}'
       register: distrib_id
-      tags: ['facts', 'base', 'system', 'user']
+      tags: ['facts', 'base', 'system', 'user', 'common']
 
     - name: Set distrib_id as a fact
       ansible.builtin.set_fact:
         distrib_id: "{{ distrib_id.stdout }}"
-      tags: ['facts', 'base', 'system', 'user']
+      tags: ['facts', 'base', 'system', 'user', 'common']
 
     - name: Include distro vars
       ansible.builtin.include_vars:
         file: vars/{{ ansible_distribution }}.yml
-      tags: ['base']
+      tags: ['base', 'common']
 
     - name: Set ansible_home
       ansible.builtin.set_fact:
         ansible_home: "{{ lookup('env','HOME') }}/Workspace/syncopated/cfgmgmt"
-      tags: ['base']
+      tags: ['base', 'common']
 
     - name: Set admin_group variable
       ansible.builtin.set_fact:

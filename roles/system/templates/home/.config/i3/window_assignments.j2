@@ -20,7 +20,7 @@ assign [title="VU\ Meter\ \(Stereo\)"] $ws1
 # assign [title="^EBU R128 Meter$"] $ws8
 assign [title="^x42-dpl"] $ws1
 assign [title="jkmeter"] $ws1
-# assign [title="zita-mu1-0.3.3"] $ws1
+
 assign [title="zita-rev1"] $ws1
 
 
@@ -110,10 +110,13 @@ for_window [class="weather"] floating enable, resize set 834 627, move output DV
 ######################################
 #       ---{ scratchpad }---
 ######################################
+for_window [class="(?i)terminator"] floating enable, border normal, resize set 1974 1129, move position center, move to scratchpad
+
 for_window [title="(?i)Artha"] floating enable, move position center, resize set 837 755, move to scratchpad
 
 for_window [class="(?i)jack-keyboard"] border normal, floating enable, move to scratchpad
 for_window [title="(?i)Mamba"] floating enable, move position center, resize set 640 480
+
 for_window [class="^VMPK"] border normal, floating enable
 
 for_window [class="Zim" title="^Insert"] move position center, focus
@@ -176,7 +179,7 @@ for_window [title="(?i)EBU R128 Meter"] border normal, floating enable, move pos
 for_window [title="(?i)x42-comp"] border normal, floating enable, resize set 358 504, move position 658px 46
 for_window [title="(?i)x42-dpl"] border normal, floating enable, move position 261px 1807
 for_window [title="(?i)Luftikus"] border normal, floating enable, move position 192px 619
-for_window [class="(?i)zita-mu1"] border normal, floating enable, resize set 980 90, move position 1951px 906
+for_window [class="(?i)zita-mu1"] border normal, floating enable, resize set 980 90, move position center, move to scratchpad
 for_window [title="(?i)x42-eq"] floating disable
 for_window [title="^zita-rev1"] border normal, floating enable
 

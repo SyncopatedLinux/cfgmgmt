@@ -19,7 +19,7 @@ i3:
     - "jacktrip -c ninjabot -n 4 -q auto -b 24 -D --udprt"
     - "/usr/bin/barrierc -f --debug INFO --name soundbot --disable-crypto [ninjabot]:24800"
     # - "/usr/bin/barriers -f --debug INFO --name soundbot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/soundbot.conf --address :24800"
-    - "guake"
+    - "terminator"
   tray_output: "primary"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws8'
