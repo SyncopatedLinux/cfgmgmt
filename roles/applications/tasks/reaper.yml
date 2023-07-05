@@ -12,8 +12,23 @@
   args:
     chdir: /opt/REAPER
   register: if_installed_version
-  changed_when: false
-  failed_when: "'No such file or directory' not in if_installed_version.msg and if_installed_version.rc != 0"
+  changed_when: if_installed_version.stdout == ''
+  failed_when: "'No such file or directory' in if_installed_version.msg and if_installed_version.rc != 0"
+
+- name: debug msg
+  debug:
+    msg: "{{ if_installed_version }}"
+
+- name: backup reaper home config
+  shell: |
+    /usr/local/bin/backup_reaper.sh
+  register: reaper_backup
+  become_user: "{{ user.name }}"
+  tags: ['backup']
+
+- name: debug msg
+  debug:
+    msg: "{{ reaper_backup }}"
 
 - block:
     - name: fetch reaper

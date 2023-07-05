@@ -346,7 +346,7 @@ packages:
   - imv
   - sxiv
   - antimicrox
-  - input-remapper-git
+  # - input-remapper-git
   # - obs-studio
   # - simplescreenrecorder
   - teiler-git
