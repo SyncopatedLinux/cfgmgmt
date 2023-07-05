@@ -4,7 +4,7 @@ TIMESTAMPE=$(date +%Y%m%d%H%M)
 
 TOPIC=$(gum input --placeholder='Topic' | sed 's/ /_/g')
 
-NOTESFOLDER="$HOME/Workspace/notepad"
+NOTESFOLDER="$HOME/Workspace/obsidian/notes"
 
 if [[ ! -d $NOTESFOLDER ]]; then
   mkdir -pv "$NOTESFOLDER"

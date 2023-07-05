@@ -1,0 +1,19 @@
+{% if ansible_facts['hostname'] == 'ninjabot' %}
+{
+    "version": "2.0.0",
+    "autoload": {
+        "daskeyboard": "daskeyboard",
+        "Logitech G403 HERO Gaming Mouse": "logitech_mouse_g403"
+    }
+}
+{% endif %}
+{% if ansible_facts['hostname'] == 'soundbot' %}
+{
+    "version": "2.0.0",
+    "autoload": {
+        "Dell KB216 Wired Keyboard": "dell_keyboard_kb216",
+        "SayoDevice SayoDevice 2x4F RGB": "sayo_keypad",
+        "Nuance PowerMicII-NS": "nuance_powermicIINS"
+    }
+}
+{% endif %}

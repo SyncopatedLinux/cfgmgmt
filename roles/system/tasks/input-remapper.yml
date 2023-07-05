@@ -6,46 +6,78 @@
 #     state: present
 #   when: "'Debian' in ansible_distribution"
 
-- name: check if input-remapper is already installed
-  ansible.builtin.stat:
-    path: /usr/bin/input-remapper-gtk
-  register: install_check
-  ignore_errors: "{{ ansible_check_mode }}"
-
 - block:
+    # - name: rsync input presets
+    #   synchronize:
+    #     src: home/.config/input-remapper-2/presets/
+    #     dest: "{{ user.home }}/.config/input-remapper-2/presets/"
+    #     recursive: yes
+    #     mode: push
+    #     delete: no
+    #     checksum: yes
+    #     perms: no
+    #     rsync_opts:
+    #       - "--update"
+    #       - "--omit-dir-times"
 
-    - name: Install evdev module
-      ansible.builtin.pip:
-        name: evdev
-        executable: pip3
-        state: present
-
-    - name: Remove key-mapper module
-      ansible.builtin.pip:
-        name: key-mapper
-        executable: pip3
-        state: absent
-
-    - name: Clone input-remapper repository
-      vars:
-        input_remapper_version: "2.0.0" # replace with desired version
-      ansible.builtin.git:
-        repo: https://github.com/sezanzeb/input-remapper.git
-        version: "{{ input_remapper_version }}"
-        dest: /tmp/input-remapper
-      register: git_clone_result
-
-    - name: Install input-remapper using python3 setup
-      ansible.builtin.command: >
-        sh -c 'cd /tmp/input-remapper &&
-               python3 setup.py install'
-
-    - name: Enable input-remapper service
-      ansible.builtin.systemd:
-        name: input-remapper
-        daemon_reload: yes
-        enabled: True
-        state: started
+    - name: install configs
+      template:
+        src: home/.config/input-remapper-2/{{ item }}.json.j2
+        dest: "{{ user.home }}/.config/input-remapper-2/{{ item }}.json"
+        owner:
+        group:
+        mode: '0600'
+        backup: True
+      loop:
+        - config
+        - xmodmap
 
 
-  when: not install_check.stat.exists
+  become_user: "{{ user.name }}"
+  tags: ['dots']
+
+#
+#
+# - name: check if input-remapper is already installed
+#   ansible.builtin.stat:
+#     path: /usr/bin/input-remapper-gtk
+#   register: install_check
+#   ignore_errors: "{{ ansible_check_mode }}"
+#
+# - block:
+#
+#     - name: Install evdev module
+#       ansible.builtin.pip:
+#         name: evdev
+#         executable: pip3
+#         state: present
+#
+#     - name: Remove key-mapper module
+#       ansible.builtin.pip:
+#         name: key-mapper
+#         executable: pip3
+#         state: absent
+#
+#     - name: Clone input-remapper repository
+#       vars:
+#         input_remapper_version: "2.0.0" # replace with desired version
+#       ansible.builtin.git:
+#         repo: https://github.com/sezanzeb/input-remapper.git
+#         version: "{{ input_remapper_version }}"
+#         dest: /tmp/input-remapper
+#       register: git_clone_result
+#
+#     - name: Install input-remapper using python3 setup
+#       ansible.builtin.command: >
+#         sh -c 'cd /tmp/input-remapper &&
+#                python3 setup.py install'
+#
+#     - name: Enable input-remapper service
+#       ansible.builtin.systemd:
+#         name: input-remapper
+#         daemon_reload: yes
+#         enabled: True
+#         state: started
+#
+#
+#   when: not install_check.stat.exists

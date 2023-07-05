@@ -24,8 +24,8 @@ all:
         syncopated:
         avlinux:
         ninjabot:
+          ansible_connection: local          
         soundbot:
-          ansible_connection: local
         lapbot:
         crambot:
     webhost:

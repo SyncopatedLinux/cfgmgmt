@@ -28,3 +28,14 @@ autofs_client:
     - Sessions
     - Videos
     - Workspace
+
+
+devices:
+  daskeyboard: 'ninjabot'
+  dell_keyboard_kb216: 'soundbot'
+  dictaphone_powermicII: 'ninjabot'
+  logitech_mouse_g403: 'soundbot'
+  logitech_mouse_g402: 'ninjabot'
+  nuance_hid_mouse: 'soundbot'
+  nuance_powermicIINS: 'soundbot'
+  sayo_keypad: 'soundbot'
