@@ -35,6 +35,8 @@ i3:
     # - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
     - "terminator"
     - "zita-mu1"
+    - "pulsar"
+    - "obsidian"
     # - "hexchat --minimize=2"
   tray_output: "DVI-I-1"
   assignments:
