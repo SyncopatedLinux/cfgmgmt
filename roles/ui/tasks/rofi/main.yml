@@ -1,0 +1,58 @@
+---
+
+- name: Install necessary packages for CentOS Stream 9 and Fedora
+  yum:
+    name: ['git', 'rofi']
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Install necessary packages for Arch Linux
+  pacman:
+    name: ['git', 'rofi']
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+# despite the extra_args this isn't more likely to break anything as any system update would.
+# Unsure as to why Arch is an exception to normal practice here by naming the cmake package something # other that `python-cmake`. I guess they still feel they're doing "their own thing"
+# This task listed ended up more complicateed than it needed to be.
+
+- name: install python cmake
+  pip:
+    name: cmake
+    state: present
+    extra_args: "--break-system-packages"
+  when: ansible_os_family == "Archlinux"
+
+- name: install python cmake
+  pip:
+    name: cmake
+    state: present
+  when: ansible_os_family != "Archlinux"
+
+- name: clone rofi-file-browser-extended repository
+  git:
+    repo: "https://github.com/marvinkreis/rofi-file-browser-extended.git"
+    dest: "/tmp/rofi-file-browser-extended"
+    recursive: yes
+    accept_hostkey: yes
+    update: no
+    force: no
+  check_mode: no
+
+- name: Build and install rofi-file-browser-extended
+  shell: |
+    cmake .
+    make
+    make install
+  args:
+    chdir: /tmp/rofi-file-browser-extended
+
+- block:
+    - name: install file-browser config
+      template:
+        src: home/.config/rofi/file-browser
+        dest: "{{ user.home }}/.config/rofi/file-browser"
+        mode: '0644'
+        backup: yes
+
+  become_user: "{{ user.name }}"
