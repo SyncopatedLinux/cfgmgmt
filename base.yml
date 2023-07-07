@@ -116,6 +116,9 @@
     - role: audio
       tags: ['audio']
 
+    - role: ui
+      tags: ['ui']
+
     - role: system
       tags: ['system']
 

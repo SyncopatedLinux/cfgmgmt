@@ -1,22 +1,26 @@
 ---
 
-- name: Sync folder syncopated utility scripts
-  ansible.posix.synchronize:
-    src: usr/local/bin/
-    dest: /usr/local/bin/
-    recursive: yes
-    mode: push
-    delete: no
-    checksum: yes
-    perms: no
-    rsync_opts:
-      - "--update"
-      - "--omit-dir-times"
-  tags: ['utils']
-
-- name: Ensure files in /usr/local/bin are executable
-  ansible.builtin.file:
-    path: /usr/local/bin
+- name: Add to RobotStuff to PATH
+  copy:
+    content: "export PATH=$PATH:{{ user.home }}/RobotStuff/bin"
+    dest: "/etc/profile.d/RobotStuff.sh"
     mode: '0755'
-    recurse: True
-  tags: ['utils']
+
+- block:
+    - name: clone RobotStuff repository
+      git:
+        repo: "https://github.com/b08x/RobotStuff.git"
+        dest: "{{ user.home }}/RobotStuff"
+        recursive: yes
+        accept_hostkey: yes
+        update: no
+        force: no
+      check_mode: no
+
+    - name: Ensure files in RobotStuff/bin are executable
+      ansible.builtin.file:
+        path: "{{ user.home }}/RobotStuff/bin"
+        mode: '0755'
+        recurse: True
+
+  become_user: "{{ user.name }}"
