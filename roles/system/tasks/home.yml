@@ -10,7 +10,7 @@
     backup: yes
   with_nested:
     - [ '{{ user.home }}', '/root' ]
-    - [ '.aliases', '.profile', '.ualiases', '.zlogin', '.zprofile', '.zshenv', '.zshrc', '.zshrc.local' ]
+    - [ '.aliases', '.profile', '.zlogin', '.zprofile', '.zshenv', '.zshrc', '.zshrc.local' ]
   tags: ['shell', 'profile', 'alias' ]
 
 - name: Synchronize templates - x11

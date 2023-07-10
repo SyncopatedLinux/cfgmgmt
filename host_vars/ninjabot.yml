@@ -21,7 +21,7 @@ install:
   vscode: False
 
 ohmyzsh:
-  theme: sonicradish
+  theme: kphoen
 
 devices:
   dicatphone_powermicII: "Dictaphone Corporation PowerMicII-NS"
@@ -34,9 +34,9 @@ i3:
     - "/usr/bin/barriers -f --debug INFO --name ninjabot --disable-crypto --disable-client-cert-checking -c ~/.config/Debauchee/ninjabot.conf --address :24800"
     # - "/usr/bin/barrierc -f --no-tray --debug INFO --name ninjabot --disable-crypto [soundbot]:24800"
     - "terminator"
-    - "zita-mu1"
-    - "pulsar"
-    - "obsidian"
+    - "pulsar;sleep 2"
+    - "obsidian;sleep 2"
+    - 'jack_load "deskmic" zalsa_in -i "-d hw:3,0"'
     # - "hexchat --minimize=2"
   tray_output: "DVI-I-1"
   assignments:
