@@ -135,6 +135,16 @@
         when: cleanup is defined
         tags: ['cleanup']
 
+      - name: run yadm bootstrap
+        ansible.builtin.script: |
+          /usr/bin/uxterm -class 'yadm' -e /usr/bin/env DISPLAY=:0 yes|yadm clone {{ user.dots }}
+        args:
+          chdir: "{{ user.home }}"
+        run_once: True
+        become_user: "{{ user.name }}"
+        ignore_errors: True
+        tags: ['dots']
+
       # Reset is not implemented local connection
       - name: Reboot host
         ansible.builtin.reboot:
