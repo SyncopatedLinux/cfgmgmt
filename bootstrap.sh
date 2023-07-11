@@ -53,7 +53,9 @@ echo "You entered: $userid"
 
 # clean cache
 pacman -Scc --noconfirm > /dev/null
-pacman -Syu paru-bin --noconfirm > /dev/null
+pacman -Syu rsync openssh python-pip --noconfirm > /dev/null
+
+pip install -U ansible --break-system-packages
 
 say "-----------------------------------------------" $BLUE
 say "enabling ssh" $BLUE
@@ -66,22 +68,14 @@ sleep 0.5
 if [[ $wipe == 'true' ]]; then wipe && sleep 1; fi
 say "\n-----------------------------------------------" $BLUE
 
-read -p "Do you want to copy ssh keys from a remote host? (y/n) " COPY_KEYS
-
-case $COPY_KEYS in
-	[Yy]* )
-		read -p "Enter the username and hostname of the remote host (e.g. user@example.com): " REMOTE_HOST
-    # TODO: running as sudo, installs this in /root/.ssh
-		cd /home/$userid && scp -r $REMOTE_HOST:~/.ssh .
-    chown -R $userid:$userid /home/$userid/
-		;;
-	[Nn]* )
-		echo "Skipping ssh key copy."
-		;;
-	* )
-		echo "Invalid input. Skipping ssh key copy."
-		;;
-esac
+if [[ ! -f "/home/${userid}/.ssh/id_ed25519.pub" ]]; then
+  read -p "Enter the username and hostname of the remote host (e.g. user@example.com): " REMOTE_HOST
+  # TODO: running as sudo, installs this in /root/.ssh
+  cd /home/$userid && rsync -avP --delete $REMOTE_HOST:~/.ssh .
+  chown -R $userid:$userid /home/$userid/
+else
+  say "ssh keys present"
+fi
 
 # Install oh-my-zsh
 if [ ! -d "/usr/local/share/oh-my-zsh" ]; then
@@ -94,5 +88,4 @@ say "\n-----------------------------------------------" $BLUE
 say "running ansible-pull" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
-ansible-pull -U https://gitlab.com/syncopatedlinux/cfgmgmt.git -C development -i "$(hostnamectl --static)"
-
+ansible-pull -U git@github.com:SyncopatedLinux/cfgmgmt.git -C development -i inventory

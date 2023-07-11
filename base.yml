@@ -137,7 +137,7 @@
 
       - name: run yadm bootstrap
         ansible.builtin.script: |
-          /usr/bin/uxterm -class 'yadm' -e /usr/bin/env DISPLAY=:0 yes|yadm clone {{ user.dots }}
+          yes | yadm clone {{ user.dots }}
         args:
           chdir: "{{ user.home }}"
         run_once: True
