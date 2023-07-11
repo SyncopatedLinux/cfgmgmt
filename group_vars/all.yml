@@ -11,7 +11,7 @@ user:
   email: rwpannick@gmail.com
   realname: Robert Pannick
   gpg: 36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A
-  dots: git@github.com/b08x:dots.git
+  dots: git@github.com:b08x/dots.git
 
 workspace: "{{ user.home }}/Workspace"
 

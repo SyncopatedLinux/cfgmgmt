@@ -24,6 +24,6 @@
         recurse: True
 
   become_user: "{{ user.name }}"
-  when: robotstuff is defined
+  tags: ['dots']
 
 #TODO: update tasks

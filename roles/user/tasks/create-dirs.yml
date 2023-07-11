@@ -58,6 +58,7 @@
     - .config/htop/
     - .config/i3/
     - .config/i3status-rust/themes/
+    - .config/input-remapper-2/
     - .config/jgmenu/
     - .config/kitty/
     - .config/nitrogen/

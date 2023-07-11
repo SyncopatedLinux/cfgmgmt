@@ -136,8 +136,8 @@
         tags: ['cleanup']
 
       - name: run yadm bootstrap
-        ansible.builtin.script: |
-          yes | yadm clone {{ user.dots }}
+        ansible.builtin.shell: |
+          /usr/bin/yes | yadm clone {{ user.dots }}
         args:
           chdir: "{{ user.home }}"
         run_once: True

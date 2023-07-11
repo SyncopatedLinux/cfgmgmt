@@ -36,7 +36,7 @@
 
 - ansible.builtin.import_tasks:
     file: create-dirs.yml
-  tags: ['theme']
+  tags: ['theme', 'dots']
 
 - ansible.builtin.import_tasks:
     file: sudoers.yml
