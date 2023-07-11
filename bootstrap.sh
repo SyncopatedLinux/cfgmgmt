@@ -88,4 +88,6 @@ say "\n-----------------------------------------------" $BLUE
 say "running ansible-pull" $BLUE
 say "-----------------------------------------------\n" $BLUE
 
-ansible-pull -U git@github.com:SyncopatedLinux/cfgmgmt.git -C development -i inventory
+echo "$(hostnamectl --static) ansible_connection=local" > /tmp/inventory
+
+ansible-pull -U git@github.com:SyncopatedLinux/cfgmgmt.git -C development -i /tmp/inventory

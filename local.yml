@@ -2,6 +2,7 @@
 
 - hosts: localhost
   connection: local
+  gather_facts: no
 
   # pre_tasks:
   #   #TODO: adjust inventory.yml to use local connection instead of ssh
