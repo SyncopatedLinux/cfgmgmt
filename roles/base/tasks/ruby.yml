@@ -11,27 +11,14 @@
     - "{{ user.home }}/.gemrc"
     - /etc/gemrc
 
-- name: Gather list of installed gems
-  ansible.builtin.shell: "gem list | awk '{ print $1 }'"
-  register: gemlist
-  changed_when: gemlist.rc != 0
-  ignore_errors: "{{ ansible_check_mode }}"
-
-- name: Set list of gems to install
-  ansible.builtin.set_fact:
-    _gems: "{{ gems|difference(gemlist.stdout) }}"
-
-- name: Install ruby gems
-  ansible.builtin.shell: "gem install {{ item }}"
-  with_items:
-    - "{{ _gems }}"
-  when: _gems | length > 0
-
-#TODO: check if rvm and rubies are already installed
 - block:
     - name: checking test
       debug:
         msg: "heyo!"
+
+    - name: check if rvm is install
+      ansible.builtin.shell: rvm version
+      register: rvm_installed
 
     - name: install rvm and ruby 3
       ansible.builtin.shell: |
@@ -47,51 +34,39 @@
 
         rvm install 3.2.0
 
-        rvm use 3.2.0 && rvm gemset global && gem install pry pry-doc logging openai
+        rvm use 3.2.0 && rvm gemset use global && gem install pry pry-doc logging openai
 
-        rvm 1.9.2 --default
+        rvm --default use 3.2.0
       args:
         chdir: "{{ user.home }}"
+      when: rvm_installed.rc != 0
+
+    #FIXME: RVM is not a function, selecting rubies with 'rvm use ...' will not work.
+
+
+    # - name: Gather list of installed gems
+    #   ansible.builtin.shell: |
+    #     source $HOME/.rvm/scripts/rvm && \
+    #     rvm gemset use global && gem list | awk '{ print $1 }'
+    #   args:
+    #     chdir: "{{ user.home }}"
+    #   register: gemlist
+    #   changed_when: gemlist.rc != 0
+    #   ignore_errors: "{{ ansible_check_mode }}"
+    #
+    # - name: Set list of gems to install
+    #   ansible.builtin.set_fact:
+    #     _gems: "{{ gems|difference(gemlist.stdout) }}"
+    #
+    # - name: install ruby gems
+    #   shell: |
+    #     source $HOME/.rvm/scripts/rvm && \
+    #     rvm gemset use global && gem install {{ item }}
+    #   args:
+    #     chdir: "{{ user.home }}"
+    #   loop:
+    #     - "{{ _gems }}"
 
   when: install.rvm|default(false)|bool == True
-  become: False
+  become_user: "{{ user.name }}"
   tags: ['rvm']
-
-#TODO: add shell configurations based on conditional
-
-#
-#
-# TASK [system : Syncronize templates - shell] ********************************************************************************************************************************
-# ok: [lapbot] => (item=['/home/b08x', '.aliases'])
-# --- before: /home/b08x/.profile
-# +++ after: /tmp/ansible-local-33217cieosbfq/tmparef0h5b/.profile.j2
-# @@ -39,8 +39,3 @@
-#  if [ -x $(command -v hostname) ]; then
-#  export HOSTNAME=$(hostname)
-#  fi
-# -
-# -# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# -export PATH="$PATH:$HOME/.rvm/bin"
-# -
-# -[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-#
-# changed: [lapbot] => (item=['/home/b08x', '.profile'])
-# ok: [lapbot] => (item=['/home/b08x', '.ualiases'])
-# --- before: /home/b08x/.zlogin
-# +++ after: /tmp/ansible-local-33217cieosbfq/tmpw6xm0rcq/.zlogin.j2
-# @@ -1,2 +0,0 @@
-# -
-# -[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-#
-# changed: [lapbot] => (item=['/home/b08x', '.zlogin'])
-# ok: [lapbot] => (item=['/home/b08x', '.zprofile'])
-# ok: [lapbot] => (item=['/home/b08x', '.zshenv'])
-# --- before: /home/b08x/.zshrc
-# +++ after: /tmp/ansible-local-33217cieosbfq/tmp3ra2zvfh/.zshrc.j2
-# @@ -104,6 +104,3 @@
-#
-#  # additional aliases
-#  [[ -f ~/.ualiases ]] && source ~/.ualiases
-# -
-# -# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# -export PATH="$PATH:$HOME/.rvm/bin"
