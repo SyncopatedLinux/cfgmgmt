@@ -114,3 +114,12 @@
     name: irqbalance
     enabled: False
   ignore_errors: True
+
+- name: Disable ananicy-cpp and bpftune
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: False
+  ignore_errors: True
+  loop:
+    - ananicy-cpp
+    - bpftune

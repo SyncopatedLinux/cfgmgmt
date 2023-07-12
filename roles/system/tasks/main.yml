@@ -64,6 +64,14 @@
     backup: yes
   tags: ['env']
 
+- name: Set lbiva env vars
+  ansible.builtin.template:
+    src: etc/profile.d/libva.sh.j2
+    dest: /etc/profile.d/libva.sh
+    mode: '0644'
+    backup: yes
+  tags: ['env']
+
 - name: Install Thunar actions
   ansible.builtin.copy:
     src: "files/etc/xdg/Thunar/{{ item }}"
