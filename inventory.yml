@@ -7,10 +7,6 @@ all:
     ansible_connection: ssh
 
   children:
-    # automationcontroller:
-    #   hosts:
-    #     soundbot.syncopated.net:
-    #       node_type: hybrid
     pi:
       hosts:
         pibot:
@@ -20,14 +16,16 @@ all:
         bender:
     workstation:
       hosts:
-        archlabs:
-        syncopated:
-        avlinux:
         ninjabot:
-          ansible_connection: local          
+          ansible_connection: local
         soundbot:
         lapbot:
         crambot:
+    vm:
+      hosts:
+        archlabs:
+        syncopated:
+        avlinux:
     webhost:
       vars:
         webroot: /usr/share/nginx/html

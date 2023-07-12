@@ -1,3 +1,4 @@
+{% if inventory_hostname in groups.get('workstation', []) %}
 {% if ansible_facts['hostname'] == 'ninjabot' %}
 {
     "version": "2.0.0",
@@ -21,6 +22,12 @@
 }
 {% endif %}
 {% if ansible_facts['hostname'] == 'lapbot' %}
+{
+    "version": "2.0.0",
+    "autoload": { }
+}
+{% endif %}
+{% else %}
 {
     "version": "2.0.0",
     "autoload": { }
