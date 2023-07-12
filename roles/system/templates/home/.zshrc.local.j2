@@ -1,8 +1,9 @@
-
+export NOTEBOOK="$HOME/Notebook"
+export STUDIO="$HOME/Studio"
 export WORKSPACE="$HOME/Workspace"
 
-export SOUNDS="$HOME/Library/sounds"
-export SOUNDFONTS="$HOME/Library/soundfonts"
+export SOUNDS="$STUDIO/Library/sounds"
+export SOUNDFONTS="$STUDIO/Library/soundfonts"
 
 {% if inventory_hostname in groups.get('workstation', []) %}
 export SYNCOPATED="$WORKSPACE/syncopated"

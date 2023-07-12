@@ -1,0 +1,8 @@
+{% if nvidia == true %}
+export VDPAU_DRIVER="nvidia"
+export LIBVA_DRIVER_NAME="vdpau"
+{% else %}
+{% if ansible_processor[1] == "GenuineIntel" %}
+export LIBVA_DRIVER_NAME="i965"
+{% endif %}
+{% endif %}
