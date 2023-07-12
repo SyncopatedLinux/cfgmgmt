@@ -143,6 +143,7 @@
         run_once: True
         become_user: "{{ user.name }}"
         ignore_errors: True
+        when: newInstall is defined
         tags: ['dots']
 
       # Reset is not implemented local connection

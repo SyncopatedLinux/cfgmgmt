@@ -90,4 +90,7 @@ say "-----------------------------------------------\n" $BLUE
 
 echo "$(hostnamectl --static) ansible_connection=local" > /tmp/inventory
 
-ansible-pull -U git@github.com:SyncopatedLinux/cfgmgmt.git -C development -i /tmp/inventory
+ansible-pull -U git@github.com:SyncopatedLinux/cfgmgmt.git \
+             -C development \
+             -i /tmp/inventory \
+             -e "newInstall=true"
