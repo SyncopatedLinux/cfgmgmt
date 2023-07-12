@@ -43,7 +43,6 @@
 
     #FIXME: RVM is not a function, selecting rubies with 'rvm use ...' will not work.
 
-
     # - name: Gather list of installed gems
     #   ansible.builtin.shell: |
     #     source $HOME/.rvm/scripts/rvm && \
@@ -60,13 +59,14 @@
     #
     # - name: install ruby gems
     #   shell: |
-    #     source $HOME/.rvm/scripts/rvm && \
     #     rvm gemset use global && gem install {{ item }}
     #   args:
     #     chdir: "{{ user.home }}"
     #   loop:
     #     - "{{ _gems }}"
 
+  environment:
+    PATH: "$HOME/.rvm/bin:{{ ansible_env.PATH }}"
   when: install.rvm|default(false)|bool == True
   become_user: "{{ user.name }}"
   tags: ['rvm']
