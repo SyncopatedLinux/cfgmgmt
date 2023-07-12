@@ -20,3 +20,9 @@
     }
 }
 {% endif %}
+{% if ansible_facts['hostname'] == 'lapbot' %}
+{
+    "version": "2.0.0",
+    "autoload": { }
+}
+{% endif %}
