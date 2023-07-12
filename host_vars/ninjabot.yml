@@ -36,8 +36,7 @@ i3:
     - "terminator"
     - "pulsar;sleep 2"
     - "obsidian;sleep 2"
-    - 'jack_load "deskmic" zalsa_in -i "-d hw:3,0"'
-    # - "hexchat --minimize=2"
+    - "jack_load 'deskmic' zalsa_in -i -d 'hw:3,0'"
   tray_output: "DVI-I-1"
   assignments:
     - '[class="Jalv.gtk" title="Helm"] $ws6'
